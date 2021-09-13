@@ -8,12 +8,12 @@ default: &default
 
 development: 
   <<: *default
-  database: fantasy_finder_dev
+  database: character_archiver_dev
 
 test:
   <<: *default
-  database: fantasy_finder_test
+  database: character_archiver_test
 
 production:
   <<: *default
-  database: fantasy_finder_prod
+  database: character_archiver_prod
