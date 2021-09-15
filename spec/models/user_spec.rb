@@ -8,6 +8,21 @@ RSpec.describe User, type: :model do
   end
 
   context 'with invalid attributes' do
+    it 'is not valid with duplicate username' do
+      create(:user, username: 'IAMLegend')
+      expect(build(:user, username: 'iamLEGEND')).not_to be_valid
+    end
+
+    it 'is not valid with username with invalid characters' do
+      user.username = 'Regina@George'
+      expect(user).not_to be_valid
+    end
+
+    it 'is not valid without a username' do
+      user.username = nil
+      expect(user).not_to be_valid
+    end
+
     it 'is not valid with duplicate email' do
       create(:user, email: '1234NewEmail@example.com')
       expect(build(:user, email: '1234NewEmail@example.com')).not_to be_valid
