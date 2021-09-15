@@ -8,4 +8,10 @@ class User < ApplicationRecord
 
   validates :email, presence: true,
                     uniqueness: true
+
+  attr_writer :login
+
+  def login
+    @login || username || email
+  end
 end
