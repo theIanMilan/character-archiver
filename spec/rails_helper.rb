@@ -65,4 +65,14 @@ RSpec.configure do |config|
 
   # FactoryBot
   config.include FactoryBot::Syntax::Methods
+
+  # Devise helper
+  # Allows sign_in and sign_out methods in controller tests
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Warden::Test::Helpers
+
+  config.after :each do
+    Warden.test_reset!
+  end
 end
