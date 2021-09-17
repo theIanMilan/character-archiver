@@ -1,10 +1,12 @@
 class User < ApplicationRecord
+  has_one :profile, dependent: :destroy
+
   # Other devise options:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: { admin: 0, basic: 1 }
+  enum role: { admin: 0, supermoderator: 1, moderator: 2, basic: 9 }
 
   validates :email, presence: true,
                     uniqueness: true

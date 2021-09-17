@@ -34,7 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
       # Added attributes
       t.string :username
-      t.integer :role, default: 1
+      t.integer :role, default: 9
 
       t.timestamps null: false
     end
