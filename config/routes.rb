@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 }
 
   root 'pages#welcome'
+  resources :profiles, only: %i[show edit update]
 end
