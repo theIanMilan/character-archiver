@@ -70,6 +70,7 @@ RSpec.configure do |config|
   # Allows sign_in and sign_out methods in controller tests
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Devise::Test::IntegrationHelpers, type: :request # to sign_in user by Devise
   config.include Warden::Test::Helpers
 
   config.after :each do
