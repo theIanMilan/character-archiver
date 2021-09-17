@@ -10,4 +10,11 @@ class Profile < ApplicationRecord
                                   format: { with: /[a-zA-Z0-9_]*/, multiline: false }
   validates :instagram_username,  length: { maximum: 30 },
                                   format: { with: /[a-zA-Z0-9_.]*/, multiline: false }
+
+  delegate :username, to: :user
+
+  # Override ActiveRecord method so routes will use username instead of id
+  def to_param
+    username
+  end
 end

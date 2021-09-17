@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if current_user.admin?
       rails_admin_path
     else
-      root
+      profile_path(current_user.username)
     end
   end
 
