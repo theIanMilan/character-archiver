@@ -15,6 +15,12 @@ class User < ApplicationRecord
                        # only allow letter, number, underscore and punctuation. i.e. prevent @
                        format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true }
 
+  after_create :create_user_profile
+
+  def create_user_profile
+    create_profile
+  end
+
   attr_writer :login
 
   def login
