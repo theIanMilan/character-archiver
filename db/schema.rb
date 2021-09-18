@@ -10,25 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_123344) do
+ActiveRecord::Schema.define(version: 2021_09_13_132347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "profiles", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "display_name"
-    t.string "avatar"
-    t.text "about_me"
-    t.date "date_of_birth"
-    t.string "location"
-    t.string "twitter_username"
-    t.string "instagram_username"
-    t.string "discord_username"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_profiles_on_user_id"
-  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -45,5 +30,4 @@ ActiveRecord::Schema.define(version: 2021_09_16_123344) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "profiles", "users"
 end
