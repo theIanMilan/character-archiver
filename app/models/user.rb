@@ -9,8 +9,8 @@ class User < ApplicationRecord
 
   enum role: { admin: 0, supermoderator: 1, moderator: 2, basic: 9 }
 
-  validates :email, presence: true,
-                    uniqueness: true
+  validates :email,    presence: true,
+                       uniqueness: true
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        # only allow letter, number, underscore and punctuation. i.e. prevent @

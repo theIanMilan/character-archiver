@@ -1,6 +1,7 @@
 class CreateCharacters < ActiveRecord::Migration[6.1]
   def change
     create_table :characters do |t|
+      t.belongs_to :user, index: true
       t.string :character_name
       t.string :chracter_portrait_URL
       t.string :portrait_credit_artist

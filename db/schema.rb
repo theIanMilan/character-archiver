@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2021_09_18_093623) do
   enable_extension "plpgsql"
 
   create_table "characters", force: :cascade do |t|
+    t.bigint "user_id"
     t.string "character_name"
     t.string "chracter_portrait_URL"
     t.string "portrait_credit_artist"
@@ -31,15 +32,18 @@ ActiveRecord::Schema.define(version: 2021_09_18_093623) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["background"], name: "index_characters_on_background"
     t.index ["race"], name: "index_characters_on_race"
+    t.index ["user_id"], name: "index_characters_on_user_id"
   end
 
   create_table "class_and_levels", force: :cascade do |t|
     t.bigint "character_id", null: false
-    t.string "character_class"
-    t.string "character_subclass"
-    t.integer "character_level"
+    t.string "character_class", null: false
+    t.string "character_subclass", null: false
+    t.integer "character_level", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_class", "character_id"], name: "index_class_and_levels_on_character_class_and_character_id", unique: true
+    t.index ["character_class", "character_subclass"], name: "idx_class_and_levels_on_char_class_and_char_subclass", unique: true
     t.index ["character_id"], name: "index_class_and_levels_on_character_id"
   end
 
