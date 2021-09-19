@@ -4,7 +4,7 @@ FactoryBot.define do
     character_name { Faker::Name.male_first_name }
     chracter_portrait_URL { Faker::LoremFlickr.image(size: '50x60') }
     portrait_credit_artist { Faker::Internet.username(specifier: 8..10) }
-    portrait_credit_link { "twitter.com/#{portrait_credit_artist}" }
+    portrait_credit_link { "http://www.twitter.com/#{portrait_credit_artist}" }
     background { 'acolyte' }
     alignment { rand(0..8) }
     race { %w[human dwarf gnome half-orc half-elf halfling].sample }

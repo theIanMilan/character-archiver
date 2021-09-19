@@ -41,7 +41,7 @@ RSpec.describe Profile, type: :model do
       expect(profile).not_to be_valid
     end
 
-    it 'is not valid with twitter_username of over 30 characters' do
+    it 'is not valid with instagram_username of over 30 characters' do
       profile.instagram_username = Faker::Internet.username(specifier: 31)
       expect(profile).not_to be_valid
     end
