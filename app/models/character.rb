@@ -8,18 +8,24 @@ class Character < ApplicationRecord
     lawful_evil:    6, neutral_evil: 7, chaotic_evil:    8
   }
 
-  validates :character_name,         presence: true
+  validates :character_name,         presence: true,
+                                     obscenity: { message: 'Obscene words are not allowed.' }
   validates :chracter_portrait_URL,  format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
   validates :portrait_credit_artist, length: { maximum: 50 }
   validates :portrait_credit_link,   format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
   validates :background,             presence: true,
-                                     length: { maximum: 50 }
+                                     length: { maximum: 50 },
+                                     obscenity: { message: 'Obscene words are not allowed.' }
   validates :alignment,              presence: true,
                                      inclusion: { in: alignments.keys }
   validates :race,                   presence: true,
-                                     length: { maximum: 30 }
+                                     length: { maximum: 30 },
+                                     obscenity: { message: 'Obscene words are not allowed.' }
   validates :sex,                    presence: true,
-                                     length: { maximum: 20 }
-  validates :gender,                 length: { maximum: 30 }
-  validates :sexual_orientation,     length: { maximum: 30 }
+                                     length: { maximum: 20 },
+                                     obscenity: { message: 'Obscene words are not allowed.' }
+  validates :gender,                 length: { maximum: 30 },
+                                     obscenity: { message: 'Obscene words are not allowed.' }
+  validates :sexual_orientation,     length: { maximum: 30 },
+                                     obscenity: { message: 'Obscene words are not allowed.' }
 end

@@ -14,7 +14,8 @@ class User < ApplicationRecord
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        # only allow letter, number, underscore and punctuation. i.e. prevent @
-                       format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true }
+                       format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true },
+                       obscenity: { message: 'Obscene words are not allowed.' }
 
   after_create :create_user_profile
 

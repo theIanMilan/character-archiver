@@ -30,6 +30,11 @@ RSpec.describe ClassAndLevel, type: :model do
       class_and_level.character_class = 'Fighter_!'
       expect(class_and_level).not_to be_valid
     end
+
+    it 'is not valid with obscene text in character_class' do
+      class_and_level.character_class = 'bimbo'
+      expect(class_and_level).not_to be_valid
+    end
   end
 
   context 'with invalid character_subclass' do
@@ -51,6 +56,11 @@ RSpec.describe ClassAndLevel, type: :model do
 
     it 'is not valid with invalid character_subclass format' do
       class_and_level.character_subclass = "Fighter_@'Hero'!"
+      expect(class_and_level).not_to be_valid
+    end
+
+    it 'is not valid with obscene text in character_subclass' do
+      class_and_level.character_subclass = 'bullshit'
       expect(class_and_level).not_to be_valid
     end
   end

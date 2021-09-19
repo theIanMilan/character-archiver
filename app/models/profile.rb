@@ -1,9 +1,12 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
-  validates :display_name,        length: { maximum: 50 }
-  validates :about_me,            length: { maximum: 500 }
-  validates :location,            length: { maximum: 50 }
+  validates :display_name,        length: { maximum: 50 },
+                                  obscenity: { message: 'Obscene words are not allowed.' }
+  validates :about_me,            length: { maximum: 500 },
+                                  obscenity: { message: 'Obscene words are not allowed.' }
+  validates :location,            length: { maximum: 50 },
+                                  obscenity: { message: 'Obscene words are not allowed.' }
   # Based on Documentation
   validates :twitter_username,    length: { maximum: 15 },
                                   format: { with: /\A[a-zA-Z0-9_]+\z/, multiline: false }

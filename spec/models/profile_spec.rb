@@ -13,6 +13,12 @@ RSpec.describe Profile, type: :model do
       profile.instagram_username = 'period_icity.lights'
       expect(profile).to be_valid
     end
+
+    it 'is valid with no profane words' do
+      expect(profile.display_name).not_to be_profane
+      expect(profile.about_me).not_to be_profane
+      expect(profile.location).not_to be_profane
+    end
   end
 
   context 'with invalid attributes' do

@@ -66,6 +66,38 @@ RSpec.describe Character, type: :model do
     end
   end
 
+  context 'with obscene text' do
+    it 'is not valid with obscene text in display_name' do
+      character.character_name = 'Mister.Shitface'
+      expect(character).not_to be_valid
+    end
+
+    it 'is not valid with obscene text in background' do
+      character.background = 'fucker'
+      expect(character).not_to be_valid
+    end
+
+    it 'is not valid with obscene text in race' do
+      character.race = 'tits'
+      expect(character).not_to be_valid
+    end
+
+    it 'is not valid with obscene text in sex' do
+      character.sex = 'bitch'
+      expect(character).not_to be_valid
+    end
+
+    it 'is not valid with obscene text in gender' do
+      character.gender = 'biatch'
+      expect(character).not_to be_valid
+    end
+
+    it 'is not valid with obscene text in sexual_orientation' do
+      character.sexual_orientation = 'faggot'
+      expect(character).not_to be_valid
+    end
+  end
+
   context 'with other invalid attributes' do
     it 'is not valid with invalid alignment' do
       expect { character.alignment = 'True Evil' }.to raise_error(ArgumentError)

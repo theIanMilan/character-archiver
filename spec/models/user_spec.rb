@@ -37,5 +37,10 @@ RSpec.describe User, type: :model do
       user.password = nil
       expect(user).not_to be_valid
     end
+
+    it 'is not valid with obscene text in username' do
+      user.username = 'blueballs'
+      expect(user).not_to be_valid
+    end
   end
 end
