@@ -4,11 +4,11 @@ class ClassAndLevel < ApplicationRecord
   validates :character_class,     presence: true,
                                   uniqueness: { scope: :character_id, message: 'Must be unique for the same character' },
                                   length: { maximum: 30 },
-                                  format: { with: /[a-zA-Z0-9_.]*/, multiline: false }
+                                  format: { with: /\A[a-zA-Z0-9_.]+\z/, multiline: false }
   validates :character_subclass,  presence: true,
-                                  uniqueness: { scope: :character_class, message: 'Must be unique for the same character' },
+                                  uniqueness: { scope: :character_id, message: 'Must be unique for the same character' },
                                   length: { maximum: 30 },
-                                  format: { with: /[a-zA-Z0-9_.]*/, multiline: false }
+                                  format: { with: /\A[a-zA-Z0-9_.]+\z/, multiline: false }
   validates :character_level,     presence: true,
                                   numericality: { greater_than: 0, less_than_or_equal_to: 30 }
   validate :total_level_less_than30

@@ -8,9 +8,10 @@ FactoryBot.define do
     background { 'acolyte' }
     alignment { rand(0..8) }
     race { %w[human dwarf gnome half-orc half-elf halfling].sample }
-    sex { %w[male female intersex].sample }
-    gender { %w[male female non-binary].sample }
-    sexual_orientation { %w[heterosexual homosexual bisexual asexual queer].sample }
+    sex { ['male', 'female', 'intersex', 'prefer not to say'].sample }
+    gender { ['male', 'female', 'non-binary', 'transgender', 'prefer not to say'].sample }
+    sexual_orientation { ['asexual', 'bisexual', 'gay or lesbian', 'straight', 'pansexual', 'queer', 'prefer not to say'].sample }
+    # https://www.surveymonkey.com/curiosity/ask-survey-questions-sexual-orientation-gender-identity/
     private? { false }
   end
 end

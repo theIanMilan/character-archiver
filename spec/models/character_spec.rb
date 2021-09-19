@@ -23,8 +23,8 @@ RSpec.describe Character, type: :model do
       expect(character).not_to be_valid
     end
 
-    it 'is not valid with sex of over 15 characters' do
-      character.sex = Faker::Internet.username(specifier: 16)
+    it 'is not valid with sex of over 20 characters' do
+      character.sex = Faker::Internet.username(specifier: 21)
       expect(character).not_to be_valid
     end
 

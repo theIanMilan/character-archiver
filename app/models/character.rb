@@ -19,7 +19,7 @@ class Character < ApplicationRecord
   validates :race,                   presence: true,
                                      length: { maximum: 30 }
   validates :sex,                    presence: true,
-                                     length: { maximum: 15 }
+                                     length: { maximum: 20 }
   validates :gender,                 length: { maximum: 30 }
   validates :sexual_orientation,     length: { maximum: 30 }
 end

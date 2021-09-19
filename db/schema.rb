@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 2021_09_18_093623) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["character_class", "character_id"], name: "index_class_and_levels_on_character_class_and_character_id", unique: true
-    t.index ["character_class", "character_subclass"], name: "idx_class_and_levels_on_char_class_and_char_subclass", unique: true
     t.index ["character_id"], name: "index_class_and_levels_on_character_id"
+    t.index ["character_subclass", "character_id"], name: "idx_class_and_levels_on_char_subclass_and_char_id", unique: true
   end
 
   create_table "profiles", force: :cascade do |t|

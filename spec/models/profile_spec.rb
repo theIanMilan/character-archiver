@@ -9,11 +9,6 @@ RSpec.describe Profile, type: :model do
       expect(profile).to be_valid
     end
 
-    it 'is valid with display_name using . and _' do
-      profile.display_name = 'period_icity.lights'
-      expect(profile).to be_valid
-    end
-
     it 'is valid with instagram_username using . and _' do
       profile.instagram_username = 'period_icity.lights'
       expect(profile).to be_valid
@@ -41,8 +36,18 @@ RSpec.describe Profile, type: :model do
       expect(profile).not_to be_valid
     end
 
+    it 'is not valid with invalid twitter_username format' do
+      profile.twitter_username = 'abacus.gregory'
+      expect(profile).not_to be_valid
+    end
+
     it 'is not valid with instagram_username of over 30 characters' do
       profile.instagram_username = Faker::Internet.username(specifier: 31)
+      expect(profile).not_to be_valid
+    end
+
+    it 'is not valid with invalid instagram_username format' do
+      profile.instagram_username = 'abacus.gregory!'
       expect(profile).not_to be_valid
     end
   end
