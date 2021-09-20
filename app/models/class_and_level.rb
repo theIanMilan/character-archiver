@@ -26,10 +26,15 @@ class ClassAndLevel < ApplicationRecord
   end
 
   # Querying the database
-  # Singel class
-  # ClassAndLevel.where(character_class: ['fighter'])
+  # Single class
+  # a = ClassAndLevel.where(character_class: ['fighter'])
 
   # Multiple classes
-  # a = ClassAndLevel.select('character_id').where(character_class: ['f
-  #   ighter', 'wizard']).group('character_id').having('COUNT(character_id)=2')
+  # a = ClassAndLevel.select('character_id')
+  #                  .where(character_class: ['fighter', 'wizard'])
+  #                  .group('character_id')
+  #                  .having('COUNT(character_id)=2')
+
+  # In the views:
+  # a.each { |record| p record.character }
 end
