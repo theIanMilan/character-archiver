@@ -79,7 +79,7 @@ RSpec.describe ClassAndLevel, type: :model do
     end
 
     it 'is not valid when addtl character_level makes total level over 30' do
-      multiclass_char = character_with_multiple_classes(classes_count: 4)
+      multiclass_char = create(:character_with_multiple_classes, classes_count: 4)
       over30 = build(:class_and_level, character: multiclass_char, character_level: 29)
       expect(over30).not_to be_valid
     end

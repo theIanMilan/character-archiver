@@ -21,6 +21,23 @@ RSpec.describe Profile, type: :model do
     end
   end
 
+  context 'with nil attributes' do
+    it 'is valid with nil display_name' do
+      profile.display_name = nil
+      expect(profile).to be_valid
+    end
+
+    it 'is valid with nil twitter_username' do
+      profile.twitter_username = nil
+      expect(profile).to be_valid
+    end
+
+    it 'is valid with nil instagram_username' do
+      profile.instagram_username = nil
+      expect(profile).to be_valid
+    end
+  end
+
   context 'with invalid attributes' do
     it 'is not valid with display name of over 50 characters' do
       profile.display_name = Faker::Internet.username(specifier: 51..51)

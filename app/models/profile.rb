@@ -9,7 +9,7 @@ class Profile < ApplicationRecord
                                   obscenity: { message: 'Obscene words are not allowed.' }
   # Based on Documentation
   validates :twitter_username,    length: { maximum: 15 },
-                                  format: { with: /\A[a-zA-Z0-9_]+\z/, multiline: false }
+                                  format: { with: /\A[a-zA-Z0-9_]*\z/, multiline: false }
   validates :instagram_username,  length: { maximum: 30 },
                                   format: { with: /\A[a-zA-Z0-9_.]*\z/, multiline: false }
 
