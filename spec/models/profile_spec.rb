@@ -49,8 +49,8 @@ RSpec.describe Profile, type: :model do
       expect(profile).not_to be_valid
     end
 
-    it 'is not valid with location of over 50 characters' do
-      profile.location = Faker::Internet.username(specifier: 51)
+    it 'is not valid with location of over 75 characters' do
+      profile.location = Faker::Internet.username(specifier: 76)
       expect(profile).not_to be_valid
     end
 

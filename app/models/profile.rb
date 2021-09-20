@@ -5,7 +5,7 @@ class Profile < ApplicationRecord
                                   obscenity: { message: 'Obscene words are not allowed.' }
   validates :about_me,            length: { maximum: 500 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
-  validates :location,            length: { maximum: 50 },
+  validates :location,            length: { maximum: 75 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
   # Based on Documentation
   validates :twitter_username,    length: { maximum: 15 },
