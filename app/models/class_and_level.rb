@@ -24,4 +24,12 @@ class ClassAndLevel < ApplicationRecord
 
     errors.add(:character_level, 'Total character levels cannot exceed 30')
   end
+
+  # Querying the database
+  # Singel class
+  # ClassAndLevel.where(character_class: ['fighter'])
+
+  # Multiple classes
+  # a = ClassAndLevel.select('character_id').where(character_class: ['f
+  #   ighter', 'wizard']).group('character_id').having('COUNT(character_id)=2')
 end
