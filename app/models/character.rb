@@ -1,6 +1,8 @@
 class Character < ApplicationRecord
   belongs_to :user
   has_many :class_and_levels, dependent: :destroy
+  has_one :search, dependent: :destroy
+  has_one :physical_attribute, dependent: :destroy
 
   enum alignment: {
     lawful_good:    0, neutral_good: 1, chaotic_good:    2,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_20_105959) do
+ActiveRecord::Schema.define(version: 2021_09_20_114338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(version: 2021_09_20_105959) do
     t.index ["character_class", "character_id"], name: "index_class_and_levels_on_character_class_and_character_id", unique: true
     t.index ["character_id"], name: "index_class_and_levels_on_character_id"
     t.index ["character_subclass", "character_id"], name: "idx_class_and_levels_on_char_subclass_and_char_id", unique: true
+  end
+
+  create_table "physical_attributes", force: :cascade do |t|
+    t.bigint "character_id"
+    t.integer "age"
+    t.string "height"
+    t.string "weight"
+    t.string "eyes"
+    t.string "skin"
+    t.string "hair"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_physical_attributes_on_character_id"
   end
 
   create_table "profiles", force: :cascade do |t|
