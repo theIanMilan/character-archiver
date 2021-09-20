@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_20_114338) do
+ActiveRecord::Schema.define(version: 2021_09_20_140754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "backstories", force: :cascade do |t|
+    t.bigint "character_id"
+    t.text "body"
+    t.text "personality"
+    t.text "ideals"
+    t.text "bonds"
+    t.text "flaws"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_backstories_on_character_id"
+  end
 
   create_table "characters", force: :cascade do |t|
     t.bigint "user_id"
