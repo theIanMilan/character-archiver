@@ -1,5 +1,5 @@
 {
-  "name": "fantasy-finder",
+  "name": "character-archiver",
   "private": true,
   "dependencies": {
     "@popperjs/core": "^2.10.1",
@@ -7,7 +7,11 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.2",
+    "ansi-regex": "^6.0.1",
     "bootstrap": "^5.1.1",
+    "glob-parent": "^5.1.2",
+    "nth-check": "^2.0.1",
+    "set-value": "^4.0.1",
     "toastr": "^2.1.4",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
