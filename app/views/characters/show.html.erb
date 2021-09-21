@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+  <%= @character.character_name %>
+  <img src="<%= @character.character_portrait_URL %>">
+  <%= @character.portrait_credit_artist %>
+  <%= @character.portrait_credit_URL %>
+  <%= @character.background %>
+  <%= @character.alignment %>
+  <%= @character.race %>
+  <%= @character.sex %>
+  <%= @character.gender %>
+  <%= @character.sexual_orientation %>
+</div>
+
+<%= link_to 'Edit', edit_character_path(@character) %> |
+<%= link_to 'Back', :back %>

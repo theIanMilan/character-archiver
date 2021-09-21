@@ -9,7 +9,7 @@
 <%= @profile.discord_username %>
 
 <%= link_to 'Edit', edit_profile_path(@profile.username) %> |
-<%= link_to 'Back', profile_path(@profile.username) %>
+<%= link_to 'Back', :back %>
 
 <br>
 <%= link_to "#{@profile.username}'s Characters", user_characters_path(@profile.username) %>

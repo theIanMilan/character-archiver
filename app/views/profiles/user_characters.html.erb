@@ -1,17 +1,5 @@
 <p><%= @user.profile.display_name %>'s characters</p>
 
-<% @user_characters.each do |char| %>
-  <%= char.character_name %>
-  <img src="<%= char.character_portrait_URL %>">
-  <%= char.portrait_credit_artist %>
-  <%= char.portrait_credit_URL %>
-  <%= char.background %>
-  <%= char.alignment %>
-  <%= char.race %>
-  <%= char.sex %>
-  <%= char.gender %>
-  <%= char.sexual_orientation %>
-  <br>
-<% end %>
+<%= render partial: "characters/character_cards", locals: {characters: @user_characters} %>
 
 <%= link_to 'Back to User Profile', profile_path(@user.username) %>
