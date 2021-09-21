@@ -16,6 +16,11 @@ RSpec.describe Backstory, type: :model do
   end
 
   context 'with invalid attributes' do
+    it 'is not valid with no body' do
+      backstory.body = nil
+      expect(backstory).not_to be_valid
+    end
+
     it 'is not valid with body of over 4_000 characters' do
       backstory.body = Faker::Lorem.paragraph_by_chars(number: 4_001, supplemental: false)
       expect(backstory).not_to be_valid

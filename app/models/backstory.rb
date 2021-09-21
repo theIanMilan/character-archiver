@@ -1,7 +1,8 @@
 class Backstory < ApplicationRecord
   belongs_to :character
 
-  validates :body,          length: { maximum: 4_000 },
+  validates :body,          presence: true,
+                            length: { maximum: 4_000 },
                             obscenity: { message: 'Obscene words are not allowed.' }
   validates :personality,   length: { maximum: 500 },
                             obscenity: { message: 'Obscene words are not allowed.' }

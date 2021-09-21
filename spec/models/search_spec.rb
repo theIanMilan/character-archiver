@@ -17,6 +17,11 @@ RSpec.describe Search, type: :model do
       expect(search).not_to be_valid
     end
 
+    it 'is not valid with no search_message' do
+      search.search_message = nil
+      expect(search).not_to be_valid
+    end
+
     it 'is not valid with search_message of over 500 characters' do
       search.search_message = Faker::Lorem.paragraph_by_chars(number: 501, supplemental: false)
       expect(search).not_to be_valid
