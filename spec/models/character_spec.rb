@@ -104,8 +104,13 @@ RSpec.describe Character, type: :model do
       expect { character.alignment = '10' }.to raise_error(ArgumentError)
     end
 
-    it 'is not valid with invalid http URL' do
-      character.portrait_credit_link = 'twitter.com/dungeonMaster'
+    it 'is not valid with invalid http portrait_credit_URL' do
+      character.portrait_credit_URL = 'twitter.com/dungeonMaster'
+      expect(character).not_to be_valid
+    end
+
+    it 'is not valid with invalid http in character_portrait_URL' do
+      character.character_portrait_URL = 'twitter.com/dungeonMaster'
       expect(character).not_to be_valid
     end
   end

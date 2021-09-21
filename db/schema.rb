@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(version: 2021_09_20_140754) do
   create_table "characters", force: :cascade do |t|
     t.bigint "user_id"
     t.string "character_name"
-    t.string "chracter_portrait_URL"
+    t.string "character_portrait_URL"
     t.string "portrait_credit_artist"
-    t.string "portrait_credit_link"
+    t.string "portrait_credit_URL"
     t.string "background"
     t.integer "alignment"
     t.string "race"

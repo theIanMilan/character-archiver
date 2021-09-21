@@ -1,9 +1,9 @@
 <p>My characters</p>
 <% @user_characters.each do |char| %>
   <%= char.character_name %>
-  <img src="<%= char.chracter_portrait_URL %>">
+  <img src="<%= char.character_portrait_URL %>">
   <%= char.portrait_credit_artist %>
-  <%= char.portrait_credit_link %>
+  <%= char.portrait_credit_URL %>
   <%= char.background %>
   <%= char.alignment %>
   <%= char.race %>

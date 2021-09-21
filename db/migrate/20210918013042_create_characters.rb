@@ -3,9 +3,9 @@ class CreateCharacters < ActiveRecord::Migration[6.1]
     create_table :characters do |t|
       t.belongs_to :user, index: true
       t.string :character_name
-      t.string :chracter_portrait_URL
+      t.string :character_portrait_URL
       t.string :portrait_credit_artist
-      t.string :portrait_credit_link
+      t.string :portrait_credit_URL
       t.string :background, index: true
       t.integer :alignment
       t.string :race, index: true

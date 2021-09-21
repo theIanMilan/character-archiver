@@ -47,9 +47,9 @@ class CharactersController < ApplicationController
 
   def character_params
     params.require(:character).permit(:character_name,
-                                      :chracter_portrait_URL,
+                                      :character_portrait_URL,
                                       :portrait_credit_artist,
-                                      :portrait_credit_link,
+                                      :portrait_credit_URL,
                                       :background,
                                       :alignment,
                                       :race,
