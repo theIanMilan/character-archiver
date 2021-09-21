@@ -1,0 +1,17 @@
+<% characters.each do |char| %>
+  <%= link_to character_path(char) do %>
+    <div>
+      <%= char.character_name %>
+      <img src="<%= char.character_portrait_URL %>">
+      <%= char.portrait_credit_artist %>
+      <%= char.portrait_credit_URL %>
+      <%= char.background %>
+      <%= char.alignment %>
+      <%= char.race %>
+      <%= char.sex %>
+      <%= char.gender %>
+      <%= char.sexual_orientation %>
+    </div>
+  <% end %>
+  <br>
+<% end %>

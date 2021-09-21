@@ -1,0 +1,5 @@
+<p><%= @user.profile.display_name %>'s characters</p>
+
+<%= render partial: "characters/character_cards", locals: {characters: @user_characters} %>
+
+<%= link_to 'Back to User Profile', profile_path(@user.username) %>

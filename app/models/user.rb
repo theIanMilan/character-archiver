@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one :profile, dependent: :destroy
+  has_many :characters, dependent: :destroy
 
   # Other devise options:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -8,17 +9,18 @@ class User < ApplicationRecord
 
   enum role: { admin: 0, supermoderator: 1, moderator: 2, basic: 9 }
 
-  validates :email, presence: true,
-                    uniqueness: true
+  validates :email,    presence: true,
+                       uniqueness: true
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        # only allow letter, number, underscore and punctuation. i.e. prevent @
-                       format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true }
+                       format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true },
+                       obscenity: { message: 'Obscene words are not allowed.' }
 
   after_create :create_user_profile
 
   def create_user_profile
-    create_profile
+    create_profile(display_name: username)
   end
 
   attr_writer :login

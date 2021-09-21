@@ -9,13 +9,31 @@ RSpec.describe Profile, type: :model do
       expect(profile).to be_valid
     end
 
-    it 'is valid with display_name using . and _' do
-      profile.display_name = 'period_icity.lights'
+    it 'is valid with instagram_username using . and _' do
+      profile.instagram_username = 'period_icity.lights'
       expect(profile).to be_valid
     end
 
-    it 'is valid with instagram_username using . and _' do
-      profile.instagram_username = 'period_icity.lights'
+    it 'is valid with no profane words' do
+      expect(profile.display_name).not_to be_profane
+      expect(profile.about_me).not_to be_profane
+      expect(profile.location).not_to be_profane
+    end
+  end
+
+  context 'with nil attributes' do
+    it 'is not valid with nil display_name' do
+      profile.display_name = nil
+      expect(profile).not_to be_valid
+    end
+
+    it 'is valid with nil twitter_username' do
+      profile.twitter_username = nil
+      expect(profile).to be_valid
+    end
+
+    it 'is valid with nil instagram_username' do
+      profile.instagram_username = nil
       expect(profile).to be_valid
     end
   end
@@ -31,8 +49,8 @@ RSpec.describe Profile, type: :model do
       expect(profile).not_to be_valid
     end
 
-    it 'is not valid with location of over 50 characters' do
-      profile.location = Faker::Internet.username(specifier: 51)
+    it 'is not valid with location of over 75 characters' do
+      profile.location = Faker::Internet.username(specifier: 76)
       expect(profile).not_to be_valid
     end
 
@@ -41,8 +59,18 @@ RSpec.describe Profile, type: :model do
       expect(profile).not_to be_valid
     end
 
-    it 'is not valid with twitter_username of over 30 characters' do
+    it 'is not valid with invalid twitter_username format' do
+      profile.twitter_username = 'abacus.gregory'
+      expect(profile).not_to be_valid
+    end
+
+    it 'is not valid with instagram_username of over 30 characters' do
       profile.instagram_username = Faker::Internet.username(specifier: 31)
+      expect(profile).not_to be_valid
+    end
+
+    it 'is not valid with invalid instagram_username format' do
+      profile.instagram_username = 'abacus.gregory!'
       expect(profile).not_to be_valid
     end
   end

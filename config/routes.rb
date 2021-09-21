@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   get   '/profiles/:username/edit', to: 'profiles#edit',    as: 'edit_profile'
   put   '/profiles/:username',      to: 'profiles#update'
   patch '/profiles/:username',      to: 'profiles#update'
+  get   '/profiles/:username/characters', to: 'profiles#user_characters', as: 'user_characters'
+
+  resources :characters
 end

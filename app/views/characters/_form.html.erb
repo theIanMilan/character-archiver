@@ -1,0 +1,77 @@
+<%= form_with(model: character) do |form| %>
+  <% if character.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(character.errors.count, "error") %> prohibited this character from being saved:</h2>
+
+      <ul>
+        <% character.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :character_name %>
+    <%= form.text_field :character_name %>
+  </div>
+
+  <div>
+    <%= form.label :character_portrait_URL %>
+    <%= form.text_field :character_portrait_URL %>
+  </div>
+
+  <div>
+    <%= form.label :portrait_credit_artist %>
+    <%= form.text_field :portrait_credit_artist %>
+  </div>
+
+  <div>
+    <%= form.label :portrait_credit_URL %>
+    <%= form.text_field :portrait_credit_URL %>
+  </div>
+
+  <div>
+    <%= form.label :background %>
+    <%= form.text_field :background %>
+  </div>
+
+  <div>
+    <%= form.label :alignment %>
+    <%= form.select :alignment, 
+      [["Lawful Good", 0], ["Neutral Good", 1], ["Chaotic Good", 2], 
+      ["Lawful Neutral", 3], ["True Neutral", 4], ["Chaotic Neutral", 5], 
+      ["Lawful Evil", 6], ["Neutral Evil", 7], ["Chaotic Evil", 8]] %>
+  </div>
+
+  <div>
+    <%= form.label :race %>
+    <%= form.text_field :race %>
+  </div>
+
+  <div>
+    <%= form.label :sex %>
+    <%= form.text_field :sex %>
+  </div>
+
+  <div>
+    <%= form.label :gender %>
+    <%= form.text_field :gender %>
+  </div>
+
+  <div>
+    <%= form.label :sexual_orientation %>
+    <%= form.text_field :sexual_orientation %>
+  </div>
+
+  <div>
+    <%= form.label :private? %>
+    <%= form.select :private?, [["yes", true], ["no", false]] %>
+  </div>
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

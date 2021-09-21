@@ -10,15 +10,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_123344) do
+ActiveRecord::Schema.define(version: 2021_09_20_140754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "backstories", force: :cascade do |t|
+    t.bigint "character_id"
+    t.text "body"
+    t.text "personality"
+    t.text "ideals"
+    t.text "bonds"
+    t.text "flaws"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_backstories_on_character_id"
+  end
+
+  create_table "characters", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "character_name"
+    t.string "character_portrait_URL"
+    t.string "portrait_credit_artist"
+    t.string "portrait_credit_URL"
+    t.string "background"
+    t.integer "alignment"
+    t.string "race"
+    t.string "sex"
+    t.string "gender"
+    t.string "sexual_orientation"
+    t.boolean "private?", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["background"], name: "index_characters_on_background"
+    t.index ["race"], name: "index_characters_on_race"
+    t.index ["user_id"], name: "index_characters_on_user_id"
+  end
+
+  create_table "class_and_levels", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.string "character_class", null: false
+    t.string "character_subclass", null: false
+    t.integer "character_level", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_class", "character_id"], name: "index_class_and_levels_on_character_class_and_character_id", unique: true
+    t.index ["character_id"], name: "index_class_and_levels_on_character_id"
+    t.index ["character_subclass", "character_id"], name: "idx_class_and_levels_on_char_subclass_and_char_id", unique: true
+  end
+
+  create_table "physical_attributes", force: :cascade do |t|
+    t.bigint "character_id"
+    t.integer "age"
+    t.string "height"
+    t.string "weight"
+    t.string "eyes"
+    t.string "skin"
+    t.string "hair"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_physical_attributes_on_character_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id"
     t.string "display_name"
-    t.string "avatar"
+    t.string "avatar_URL"
     t.text "about_me"
     t.date "date_of_birth"
     t.string "location"
@@ -28,6 +85,15 @@ ActiveRecord::Schema.define(version: 2021_09_16_123344) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.boolean "searching_for_connections?", default: true, null: false
+    t.text "search_message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_id"], name: "index_searches_on_character_id"
   end
 
   create_table "users", force: :cascade do |t|
