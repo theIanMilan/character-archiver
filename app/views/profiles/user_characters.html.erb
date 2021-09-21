@@ -1,0 +1,14 @@
+<p>My characters</p>
+<% @user_characters.each do |char| %>
+  <%= char.character_name %>
+  <img src="<%= char.chracter_portrait_URL %>">
+  <%= char.portrait_credit_artist %>
+  <%= char.portrait_credit_link %>
+  <%= char.background %>
+  <%= char.alignment %>
+  <%= char.race %>
+  <%= char.sex %>
+  <%= char.gender %>
+  <%= char.sexual_orientation %>
+  <br>
+<% end %>

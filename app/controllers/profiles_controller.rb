@@ -3,6 +3,11 @@ class ProfilesController < ApplicationController
 
   def show; end
 
+  def user_characters
+    @user = User.find_by(username: params[:username])
+    @user_characters = @user.characters
+  end
+
   def new
     @profile = Profile.new
   end
