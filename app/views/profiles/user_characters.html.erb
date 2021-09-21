@@ -1,4 +1,5 @@
-<p>My characters</p>
+<p><%= @user.profile.display_name %>'s characters</p>
+
 <% @user_characters.each do |char| %>
   <%= char.character_name %>
   <img src="<%= char.character_portrait_URL %>">
@@ -12,3 +13,5 @@
   <%= char.sexual_orientation %>
   <br>
 <% end %>
+
+<%= link_to 'Back to User Profile', profile_path(@user.username) %>

@@ -22,9 +22,9 @@ RSpec.describe Profile, type: :model do
   end
 
   context 'with nil attributes' do
-    it 'is valid with nil display_name' do
+    it 'is not valid with nil display_name' do
       profile.display_name = nil
-      expect(profile).to be_valid
+      expect(profile).not_to be_valid
     end
 
     it 'is valid with nil twitter_username' do

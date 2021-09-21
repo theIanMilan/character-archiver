@@ -20,7 +20,7 @@ class User < ApplicationRecord
   after_create :create_user_profile
 
   def create_user_profile
-    create_profile
+    create_profile(display_name: username)
   end
 
   attr_writer :login

@@ -1,4 +1,12 @@
-<p id="notice"><%= notice %></p>
+<h1>User Profile</h1>
+
+<%= @profile.display_name %>
+<img src="<%= @profile.avatar_URL %>">
+<%= @profile.about_me %>
+<%= @profile.location %>
+<%= @profile.twitter_username %>
+<%= @profile.instagram_username %>
+<%= @profile.discord_username %>
 
 <%= link_to 'Edit', edit_profile_path(@profile.username) %> |
 <%= link_to 'Back', profile_path(@profile.username) %>

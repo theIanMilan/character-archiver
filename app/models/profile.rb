@@ -1,7 +1,8 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
-  validates :display_name,        length: { maximum: 50 },
+  validates :display_name,        presence: true,
+                                  length: { maximum: 50 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
   validates :about_me,            length: { maximum: 500 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
