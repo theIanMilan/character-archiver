@@ -56,6 +56,8 @@ class CharactersController < ApplicationController
                                       :sex,
                                       :gender,
                                       :sexual_orientation,
-                                      :private?)
+                                      :private_character,
+                                      search_attributes: %i[searching_for_connections
+                                                            search_message])
   end
 end

@@ -33,7 +33,7 @@ User: <%= link_to @character.user.username, profile_path(@character.user.usernam
 
 <h5>Connections</h5>
 <% if @search = @character.search %>
-  <% if @search.searching_for_connections? %>
+  <% if @search.searching_for_connections %>
     <h6>Currently looking for connections</h6>
     <%= @search.search_message %>
   <% else %>

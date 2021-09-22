@@ -12,7 +12,7 @@ FactoryBot.define do
     gender { Faker::Gender.type }
     sexual_orientation { ['asexual', 'bisexual', 'gay or lesbian', 'straight', 'pansexual', 'queer', 'prefer not to say'].sample }
     # https://www.surveymonkey.com/curiosity/ask-survey-questions-sexual-orientation-gender-identity/
-    private? { false }
+    private_character { false }
 
     factory :character_with_multiple_classes do
       # create(:character_with_multiple_classes, classes_count: 2).class_and_levels.count # 2

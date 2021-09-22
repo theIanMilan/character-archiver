@@ -5,6 +5,11 @@ RSpec.describe Character, type: :model do
 
   context 'with valid attributes' do
     it { is_expected.to be_valid }
+
+    it 'is valid with integers 0-8 for alignment' do
+      character.alignment = 0
+      expect(character).to be_valid
+    end
   end
 
   context 'with invalid length attributes' do

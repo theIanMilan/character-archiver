@@ -13,7 +13,7 @@ RSpec.describe Search, type: :model do
 
   context 'with invalid attributes' do
     it 'is not valid with no searching_for_connections' do
-      search['searching_for_connections?'] = nil
+      search.searching_for_connections = nil
       expect(search).not_to be_valid
     end
 
