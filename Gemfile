@@ -21,6 +21,7 @@ gem 'rails_admin', '~> 2.0'
 # Profanity filter gem. Ceased development in 2016
 gem 'obscenity'
 gem "auto_strip_attributes", "~> 2.6"
+gem 'aes'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
