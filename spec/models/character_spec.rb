@@ -114,4 +114,33 @@ RSpec.describe Character, type: :model do
       expect(character).not_to be_valid
     end
   end
+
+  describe '#classes_string' do
+    it 'returns comma separated list with and if 3+ elements' do
+      create(:class_and_level, character: character,
+        character_class: 'Artificer', character_subclass: 'Armorer', character_level: 10)
+      create(:class_and_level, character: character,
+        character_class: 'Blood Hunter', character_subclass: 'Mutant', character_level: 1)
+      create(:class_and_level, character: character,
+        character_class: 'Sage', character_subclass: 'Abnormal', character_level: 9)
+
+      expect(character.classes_string).to eq('Armorer Artificer 10, Abnormal Sage 9, and Mutant Blood Hunter 1')
+    end
+
+    it 'returns simple string if 1 element' do
+      create(:class_and_level, character: character,
+        character_class: 'Sage', character_subclass: 'Abnormal', character_level: 9)
+
+      expect(character.classes_string).to eq('Abnormal Sage 9')
+    end
+
+    it 'returns string with and if 2 elements' do
+      create(:class_and_level, character: character,
+        character_class: 'Artificer', character_subclass: 'Armorer', character_level: 10)
+      create(:class_and_level, character: character,
+        character_class: 'Sage', character_subclass: 'Abnormal', character_level: 9)
+
+      expect(character.classes_string).to eq('Armorer Artificer 10 and Abnormal Sage 9')
+    end
+  end
 end

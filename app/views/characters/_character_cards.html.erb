@@ -1,7 +1,8 @@
 <% characters.each do |char| %>
   <%= link_to character_path(char) do %>
     <div>
-      <%= char.character_name %>
+      <%= char.character_name %>,
+      <%= char.classes_string %>
       <img src="<%= char.character_portrait_URL %>">
       <%= char.portrait_credit_artist %>
       <%= char.portrait_credit_URL %>
