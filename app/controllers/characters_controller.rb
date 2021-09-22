@@ -18,16 +18,17 @@ class CharactersController < ApplicationController
 
     if @character.save
       flash.notice = 'Character was successfully created.'
-      redirect_to my_characters_path(current_user)
+      redirect_to user_characters_path(current_user.username)
     else
       flash.alert = 'Failed: Error in creating Character.'
+      render 'new'
     end
   end
 
   def update
     if @character.update(character_params)
       flash.notice = 'Character was successfully updated.'
-      redirect_to my_characters_path(current_user)
+      redirect_to user_characters_path(current_user.username)
     else
       flash.alert = 'Failed: Error in updating Character.'
     end
@@ -36,7 +37,7 @@ class CharactersController < ApplicationController
   def destroy
     @character.destroy
     flash[:notice] = 'Task successfully deleted!'
-    redirect_to my_characters_path(current_user)
+    redirect_to user_characters_path(current_user.username)
   end
 
   private

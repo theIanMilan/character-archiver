@@ -1,9 +1,18 @@
 class Character < ApplicationRecord
+  include ActiveModel::Validations
+  include ActiveModel::Validations::Callbacks
+  extend AutoStripAttributes
+
   belongs_to :user
   has_many :class_and_levels, dependent: :destroy
   has_one :search, dependent: :destroy
   has_one :physical_attribute, dependent: :destroy
   has_one :backstory, dependent: :destroy
+
+  accepts_nested_attributes_for :search
+  accepts_nested_attributes_for :physical_attribute
+  accepts_nested_attributes_for :backstory
+  accepts_nested_attributes_for :class_and_levels
 
   enum alignment: {
     lawful_good:    0, neutral_good: 1, chaotic_good:    2,
@@ -11,11 +20,24 @@ class Character < ApplicationRecord
     lawful_evil:    6, neutral_evil: 7, chaotic_evil:    8
   }
 
+  # Squeezes spaces inside the string: "James     Bond  " => "James Bond"
+  auto_strip_attributes :character_name,         squish: true
+  auto_strip_attributes :character_portrait_URL, squish: true
+  auto_strip_attributes :portrait_credit_artist, squish: true
+  auto_strip_attributes :portrait_credit_URL,    squish: true
+  auto_strip_attributes :background,             squish: true
+  auto_strip_attributes :race,                   squish: true
+  auto_strip_attributes :sex,                    squish: true
+  auto_strip_attributes :gender,                 squish: true
+  auto_strip_attributes :sexual_orientation,     squish: true
+
   validates :character_name,         presence: true,
                                      obscenity: { message: 'Obscene words are not allowed.' }
-  validates :character_portrait_URL, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
+  validates :character_portrait_URL, format: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+                                     allow_nil: true
   validates :portrait_credit_artist, length: { maximum: 50 }
-  validates :portrait_credit_URL,    format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
+  validates :portrait_credit_URL,    format: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+                                     allow_nil: true
   validates :background,             presence: true,
                                      length: { maximum: 50 },
                                      obscenity: { message: 'Obscene words are not allowed.' }
@@ -31,6 +53,7 @@ class Character < ApplicationRecord
                                      obscenity: { message: 'Obscene words are not allowed.' }
   validates :sexual_orientation,     length: { maximum: 30 },
                                      obscenity: { message: 'Obscene words are not allowed.' }
+  validates :private_character,                inclusion: [true, false]
 
   def classes_string
     str = ''

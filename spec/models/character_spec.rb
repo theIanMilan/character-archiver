@@ -45,6 +45,16 @@ RSpec.describe Character, type: :model do
   end
 
   context 'with nil attributes' do
+    it 'is valid with no character_portrait_URL' do
+      character.character_portrait_URL = nil
+      expect(character).to be_valid
+    end
+
+    it 'is valid with no portrait_credit_URL' do
+      character.portrait_credit_URL = nil
+      expect(character).to be_valid
+    end
+
     it 'is not valid with no character_name' do
       character.character_name = nil
       expect(character).not_to be_valid
