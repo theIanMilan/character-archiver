@@ -16,6 +16,10 @@ class Profile < ApplicationRecord
 
   delegate :username, to: :user
 
+  def display_avatar
+    avatar_URL.nil? ? "https://avatar.oxro.io/avatar.svg?name=#{username}" : avatar_URL
+  end
+
   # Override ActiveRecord method so routes will use username instead of id
   def to_param
     username

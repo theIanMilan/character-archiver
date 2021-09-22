@@ -1,7 +1,7 @@
 <h1>User Profile</h1>
 
 <%= @profile.display_name %>
-<img src="<%= @profile.avatar_URL %>">
+<%= image_tag @profile.display_avatar, class: 'profile-avatar' %>
 <%= @profile.about_me %>
 <%= @profile.location %>
 <%= @profile.twitter_username %>
