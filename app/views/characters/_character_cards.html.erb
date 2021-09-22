@@ -14,4 +14,17 @@
     </div>
   <% end %>
   <br>
+  <% if local_assigns[:backstory] %>
+    <h6>Backstory:</h6>
+    <div><%= char.backstory.body %></div>
+  <% end %>
+
+  <% if local_assigns[:search] %>
+    <h6>Looking for connections:</h6>
+    <div><%= char.search.search_message %></div>
+  <% end %>
+<% end %>
+
+<% if characters.count.zero? %>
+  <p> No Characters available.</p>
 <% end %>

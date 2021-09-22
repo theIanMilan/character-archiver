@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   get   '/profiles/:username/characters', to: 'profiles#user_characters', as: 'user_characters'
 
   resources :characters
+
+  get   '/search_board',            to: 'searches#index',   as: 'search_board'
 end

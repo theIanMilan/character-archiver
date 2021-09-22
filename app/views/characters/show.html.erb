@@ -1,4 +1,5 @@
-<p id="notice"><%= notice %></p>
+<h1>Character</h1>
+User: <%= link_to @character.user.username, profile_path(@character.user.username) %>
 
 <div>
   <%= @character.character_name %>
@@ -12,6 +13,47 @@
   <%= @character.gender %>
   <%= @character.sexual_orientation %>
 </div>
+
+<br>
+
+<h5>Backstory</h5>
+<% if @backstory = @character.backstory %>
+  <%= @backstory.body %>
+  <br>
+  <%= @backstory.personality %>
+  <%= @backstory.ideals %>
+  <%= @backstory.bonds %>
+  <%= @backstory.flaws %>
+<% else %>
+  <p><i>No information available</i></p>
+<% end %>
+
+<br>
+
+<h5>Connections</h5>
+<% if @search = @character.search %>
+  <% if @search.searching_for_connections? %>
+    <h6>Currently looking for connections</h6>
+    <%= @search.search_message %>
+  <% else %>
+    <h5>Not currently looking for connections</h5>
+  <% end %>
+<% else %>
+  <p><i>No information available</i></p>
+<% end %>
+
+<br>
+<h5>Physical Attributes</h5>
+<% if @physical_attribute = @character.physical_attribute %>
+    <%= @physical_attribute.age %>
+    <%= @physical_attribute.height %>
+    <%= @physical_attribute.weight %>
+    <%= @physical_attribute.eyes %>
+    <%= @physical_attribute.skin %>
+    <%= @physical_attribute.hair %>
+<% else %>
+  <p><i>No information available</i></p>
+<% end %>
 
 <%= link_to 'Edit', edit_character_path(@character) %> |
 <%= link_to 'Back', :back %>
