@@ -78,6 +78,10 @@ class Character < ApplicationRecord
     end
   end
 
+  def alignment_formatted
+    alignment.sub('_', ' ').titlecase
+  end
+
   private
 
   def classes_string_substring(record)
