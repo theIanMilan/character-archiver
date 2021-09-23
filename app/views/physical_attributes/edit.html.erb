@@ -40,7 +40,7 @@
 <%= link_to 'Back', :back %>
 
 <% if @physical_attribute.persisted? %>
-  <%= link_to 'Delete all Physical Attributes',  character_physical_attributes_path(@physical_attribute),
+  <%= link_to 'Delete all Physical Attributes',  character_physical_attributes_path(@character),
       method: :delete, data: {confirm: "Are you sure you want to delete this Character's Physical Attributes?"},
       class: 'button-delete' %>
 <% end %>
