@@ -16,15 +16,14 @@ User: <%= link_to @character.user.username, profile_path(@character.user.usernam
 </div>
 
 <br>
-
-<h5>Backstory</h5>
-<% if @backstory = @character.backstory %>
-  <%= @backstory.body %>
-  <br>
-  <%= @backstory.personality %>
-  <%= @backstory.ideals %>
-  <%= @backstory.bonds %>
-  <%= @backstory.flaws %>
+<h5>Physical Attributes</h5> | <%= link_to 'Edit', edit_character_physical_attributes_path(@character) %> 
+<% if @physical_attribute = @character.physical_attribute %>
+    <%= @physical_attribute.age %>
+    <%= @physical_attribute.height %>
+    <%= @physical_attribute.weight %>
+    <%= @physical_attribute.eyes %>
+    <%= @physical_attribute.skin %>
+    <%= @physical_attribute.hair %>
 <% else %>
   <p><i>No information available</i></p>
 <% end %>
@@ -44,17 +43,20 @@ User: <%= link_to @character.user.username, profile_path(@character.user.usernam
 <% end %>
 
 <br>
-<h5>Physical Attributes</h5>
-<% if @physical_attribute = @character.physical_attribute %>
-    <%= @physical_attribute.age %>
-    <%= @physical_attribute.height %>
-    <%= @physical_attribute.weight %>
-    <%= @physical_attribute.eyes %>
-    <%= @physical_attribute.skin %>
-    <%= @physical_attribute.hair %>
+
+<h5>Backstory</h5>
+<% if @backstory = @character.backstory %>
+  <%= @backstory.body %>
+  <br>
+  <%= @backstory.personality %>
+  <%= @backstory.ideals %>
+  <%= @backstory.bonds %>
+  <%= @backstory.flaws %>
 <% else %>
   <p><i>No information available</i></p>
 <% end %>
+
+<br>
 
 <%= link_to 'Edit', edit_character_path(@character) %> |
 <%= link_to 'Back', :back %>
