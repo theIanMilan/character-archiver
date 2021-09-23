@@ -4,15 +4,14 @@ class Character < ApplicationRecord
   extend AutoStripAttributes
 
   belongs_to :user
-  has_many :class_and_levels, dependent: :destroy
-  has_one :search, dependent: :destroy
+  has_many :class_and_levels,  dependent: :destroy
+  has_one :search,             dependent: :destroy
   has_one :physical_attribute, dependent: :destroy
-  has_one :backstory, dependent: :destroy
+  has_one :backstory,          dependent: :destroy
 
-  accepts_nested_attributes_for :search
-  accepts_nested_attributes_for :physical_attribute
-  accepts_nested_attributes_for :backstory
-  accepts_nested_attributes_for :class_and_levels
+  accepts_nested_attributes_for :class_and_levels,
+                                allow_destroy: true,
+                                reject_if: :all_blank
 
   enum alignment: {
     lawful_good:    0, neutral_good: 1, chaotic_good:    2,
@@ -53,7 +52,7 @@ class Character < ApplicationRecord
                                      obscenity: { message: 'Obscene words are not allowed.' }
   validates :sexual_orientation,     length: { maximum: 30 },
                                      obscenity: { message: 'Obscene words are not allowed.' }
-  validates :private_character,                inclusion: [true, false]
+  validates :private_character,      inclusion: [true, false]
 
   def classes_string
     str = ''

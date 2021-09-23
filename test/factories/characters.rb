@@ -8,9 +8,9 @@ FactoryBot.define do
     background { Faker::Games::DnD.background }
     alignment { rand(0..8) }
     race { Faker::Games::DnD.race }
-    sex { ['male', 'female', 'intersex', 'prefer not to say'].sample }
+    sex { ['Male', 'Female', 'Intersex', 'Prefer not to say'].sample }
     gender { Faker::Gender.type }
-    sexual_orientation { ['asexual', 'bisexual', 'gay or lesbian', 'straight', 'pansexual', 'queer', 'prefer not to say'].sample }
+    sexual_orientation { ['Asexual', 'Bisexual', 'Gay or Lesbian', 'Straight', 'Pansexual', 'Queer', 'Prefer not to say'].sample }
     # https://www.surveymonkey.com/curiosity/ask-survey-questions-sexual-orientation-gender-identity/
     private_character { false }
 

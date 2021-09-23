@@ -9,6 +9,10 @@ class CharactersController < ApplicationController
 
   def new
     @character = current_user.characters.new
+    @character.class_and_levels.build
+    # For adding fields on the fly, use JS. No built-in Rails support
+    # When generating new fields, remember to ensure keys of the associated array
+    # is unique - current JS date is a commond choice.
   end
 
   def edit; end
@@ -18,7 +22,7 @@ class CharactersController < ApplicationController
 
     if @character.save
       flash.notice = 'Character was successfully created.'
-      redirect_to user_characters_path(current_user.username)
+      redirect_to character_path(@character)
     else
       flash.alert = 'Failed: Error in creating Character.'
       render 'new'
@@ -28,7 +32,7 @@ class CharactersController < ApplicationController
   def update
     if @character.update(character_params)
       flash.notice = 'Character was successfully updated.'
-      redirect_to user_characters_path(current_user.username)
+      redirect_to character_path(@character)
     else
       flash.alert = 'Failed: Error in updating Character.'
     end
@@ -37,7 +41,7 @@ class CharactersController < ApplicationController
   def destroy
     @character.destroy
     flash[:notice] = 'Task successfully deleted!'
-    redirect_to user_characters_path(current_user.username)
+    redirect_to character_path(@character)
   end
 
   private
@@ -58,7 +62,11 @@ class CharactersController < ApplicationController
                                       :gender,
                                       :sexual_orientation,
                                       :private_character,
-                                      search_attributes: %i[searching_for_connections
-                                                            search_message])
+                                      class_and_levels_attributes: %i[id
+                                                                      character_id
+                                                                      character_class
+                                                                      character_subclass
+                                                                      character_level
+                                                                      _destroy])
   end
 end
