@@ -81,6 +81,10 @@ class Character < ApplicationRecord
     alignment.sub('_', ' ').titlecase
   end
 
+  def display_character_portrait
+    character_portrait_URL || 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Unknown-human-picture.png'
+  end
+
   private
 
   def classes_string_substring(record)

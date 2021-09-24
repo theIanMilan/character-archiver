@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :character do
     association :user
     character_name { Faker::Games::ElderScrolls.name }
-    character_portrait_URL { Faker::LoremFlickr.image(size: '50x60') }
+    character_portrait_URL { nil } # { Faker::LoremFlickr.image(size: '50x60') }
     portrait_credit_artist { Faker::Twitter.screen_name }
     portrait_credit_URL { "http://www.twitter.com/#{portrait_credit_artist}" }
     background { Faker::Games::DnD.background }

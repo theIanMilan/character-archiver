@@ -4,7 +4,7 @@ User: <%= link_to @character.user.username, profile_path(@character.user.usernam
 <div>
   <%= @character.character_name %>,
   <%= @character.classes_string %>
-  <img src="<%= @character.character_portrait_URL %>">
+  <img src="<%= @character.display_character_portrait %>">
   <%= @character.portrait_credit_artist %>
   <%= @character.portrait_credit_URL %>
   <%= @character.background %>
