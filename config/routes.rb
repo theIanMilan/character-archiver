@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :characters do
     resource :physical_attributes, only: %i[edit update destroy]
     resource :searches, only: %i[edit update destroy]
+    resource :backstories, only: %i[edit update destroy]
   end
 
   get   '/search_board',            to: 'searches#index',   as: 'search_board'
