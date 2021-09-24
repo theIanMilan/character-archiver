@@ -20,5 +20,6 @@ Rails.application.routes.draw do
     resource :backstories, only: %i[edit update destroy]
   end
 
-  get   '/search_board',            to: 'searches#index',   as: 'search_board'
+  get   '/search_board',            to: 'searches#search_board',     as: 'search_board'
+  get   '/folklore',                to: 'backstories#folklore',      as: 'folklore'
 end

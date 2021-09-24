@@ -2,8 +2,8 @@ class BackstoriesController < ApplicationController
   before_action :set_character, only: %i[edit update destroy]
   before_action :set_backstory, only: %i[edit update destroy]
 
-  def index
-    array_of_ids = Backstory.all
+  def folklore
+    array_of_ids = Backstory.all.pluck(:character_id)
     @characters = Character.where(id: array_of_ids)
   end
 

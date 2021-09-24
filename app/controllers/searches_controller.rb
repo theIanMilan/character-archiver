@@ -2,7 +2,7 @@ class SearchesController < ApplicationController
   before_action :set_character, only: %i[edit update destroy]
   before_action :set_search, only: %i[edit update destroy]
 
-  def index
+  def search_board
     @searches = Search.where(searching_for_connections: true)
     array_of_ids = @searches.pluck(:character_id)
     @characters = Character.where(id: array_of_ids)
