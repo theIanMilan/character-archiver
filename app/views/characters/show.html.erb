@@ -1,5 +1,7 @@
 <h1>Character</h1>
 User: <%= link_to @character.user.username, profile_path(@character.user.username) %>
+<br> <%= link_to 'Edit Character', edit_character_path(@character) %> |
+<%= link_to 'Back', :back %>
 
 <div>
   <%= @character.character_name %>,
@@ -30,7 +32,7 @@ User: <%= link_to @character.user.username, profile_path(@character.user.usernam
 
 <br>
 
-<h5>Connections</h5>
+<h5>Connections</h5> | <%= link_to 'Edit', edit_character_searches_path(@character) %> 
 <% if @search = @character.search %>
   <% if @search.searching_for_connections %>
     <h6>Currently looking for connections</h6>
@@ -55,8 +57,3 @@ User: <%= link_to @character.user.username, profile_path(@character.user.usernam
 <% else %>
   <p><i>No information available</i></p>
 <% end %>
-
-<br>
-
-<%= link_to 'Edit', edit_character_path(@character) %> |
-<%= link_to 'Back', :back %>
