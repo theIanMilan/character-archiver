@@ -12,7 +12,7 @@ class CreateCharacters < ActiveRecord::Migration[6.1]
       t.string :sex
       t.string :gender
       t.string :sexual_orientation
-      t.boolean :private?, default: false
+      t.boolean :private_character, default: false
       t.timestamps
     end
   end

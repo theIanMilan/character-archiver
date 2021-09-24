@@ -1,12 +1,13 @@
 <% characters.each do |char| %>
   <%= link_to character_path(char) do %>
     <div>
-      <%= char.character_name %>
-      <img src="<%= char.character_portrait_URL %>">
+      <%= char.character_name %>,
+      <%= char.classes_string %>
+      <img src="<%= char.display_character_portrait %>" class="char-card-img">
       <%= char.portrait_credit_artist %>
       <%= char.portrait_credit_URL %>
       <%= char.background %>
-      <%= char.alignment %>
+      <%= char.alignment_formatted %>
       <%= char.race %>
       <%= char.sex %>
       <%= char.gender %>
@@ -14,4 +15,17 @@
     </div>
   <% end %>
   <br>
+  <% if local_assigns[:backstory] %>
+    <h6>Backstory:</h6>
+    <div><%= char.backstory.body %></div>
+  <% end %>
+
+  <% if local_assigns[:search] %>
+    <h6>Looking for connections:</h6>
+    <div><%= char.search.search_message %></div>
+  <% end %>
+<% end %>
+
+<% if characters.count.zero? %>
+  <p> No Characters available.</p>
 <% end %>

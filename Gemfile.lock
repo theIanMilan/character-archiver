@@ -74,7 +74,10 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    aes (0.5.1)
     ast (2.4.2)
+    auto_strip_attributes (2.6.0)
+      activerecord (>= 4.0)
     bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.8.1)
@@ -340,6 +343,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aes
+  auto_strip_attributes (~> 2.6)
   bootsnap (>= 1.4.4)
   byebug
   cancancan

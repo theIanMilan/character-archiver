@@ -14,5 +14,12 @@ Rails.application.routes.draw do
   patch '/profiles/:username',      to: 'profiles#update'
   get   '/profiles/:username/characters', to: 'profiles#user_characters', as: 'user_characters'
 
-  resources :characters
+  resources :characters do
+    resource :physical_attributes, only: %i[edit update destroy]
+    resource :searches, only: %i[edit update destroy]
+    resource :backstories, only: %i[edit update destroy]
+  end
+
+  get   '/search_board',            to: 'searches#search_board',     as: 'search_board'
+  get   '/folklore',                to: 'backstories#folklore',      as: 'folklore'
 end

@@ -2,11 +2,11 @@ FactoryBot.define do
   factory :class_and_level do
     association :character
     sequence :character_class,
-             %w[fighter wizard cleric rogue paladin monk ranger
-                druid sorcerer barbarian bard].cycle
+             %w[Fighter Wizard Cleric Rogue Paladin Monk Ranger Druid Sorcerer Barbarian Bard]
+               .cycle
     sequence :character_subclass,
-             %w[champion abjuration order thief devotion kensei beastmaster
-                land wild totem lore].cycle
+             %w[Champion Abjuration Order Thief Devotion Kensei Beastmaster Land Wild Totem Lore]
+               .cycle
     character_level { rand(3..5) }
   end
 end

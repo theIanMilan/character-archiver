@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_140754) do
     t.string "sex"
     t.string "gender"
     t.string "sexual_orientation"
-    t.boolean "private?", default: false
+    t.boolean "private_character", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["background"], name: "index_characters_on_background"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_140754) do
 
   create_table "searches", force: :cascade do |t|
     t.bigint "character_id", null: false
-    t.boolean "searching_for_connections?", default: true, null: false
+    t.boolean "searching_for_connections", default: true, null: false
     t.text "search_message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

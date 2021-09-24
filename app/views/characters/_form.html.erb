@@ -1,4 +1,4 @@
-<%= form_with(model: character) do |form| %>
+<%= form_for(character) do |form| %>
   <% if character.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(character.errors.count, "error") %> prohibited this character from being saved:</h2>
@@ -11,65 +11,93 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :character_name %>
-    <%= form.text_field :character_name %>
-  </div>
+  <section>
+    <h1>Basic Character Info</h1>
+    <div>
+      <%= form.label :character_name %>*
+      <%= form.text_field :character_name %>
+    </div>
 
-  <div>
-    <%= form.label :character_portrait_URL %>
-    <%= form.text_field :character_portrait_URL %>
-  </div>
+    <div>
+      <%= form.label :character_portrait_URL %>
+      <%= form.text_field :character_portrait_URL, placeholder: 'http://example.com/image.jpg' %>
+    </div>
 
-  <div>
-    <%= form.label :portrait_credit_artist %>
-    <%= form.text_field :portrait_credit_artist %>
-  </div>
+    <div>
+      <%= form.label :portrait_credit_artist %>
+      <%= form.text_field :portrait_credit_artist %>
+    </div>
 
-  <div>
-    <%= form.label :portrait_credit_URL %>
-    <%= form.text_field :portrait_credit_URL %>
-  </div>
+    <div>
+      <%= form.label :portrait_credit_URL %>
+      <%= form.text_field :portrait_credit_URL, placeholder: 'http://example.com/image.jpg' %>
+    </div>
 
-  <div>
-    <%= form.label :background %>
-    <%= form.text_field :background %>
-  </div>
+    <div>
+      <%= form.label :background %>*
+      <%= form.text_field :background %>
+    </div>
 
-  <div>
-    <%= form.label :alignment %>
-    <%= form.select :alignment, 
-      [["Lawful Good", 0], ["Neutral Good", 1], ["Chaotic Good", 2], 
-      ["Lawful Neutral", 3], ["True Neutral", 4], ["Chaotic Neutral", 5], 
-      ["Lawful Evil", 6], ["Neutral Evil", 7], ["Chaotic Evil", 8]] %>
-  </div>
+    <div>
+      <%= form.label :alignment %>*
+      <%= form.select :alignment, 
+        [["Lawful Good", 'lawful_good'], ["Neutral Good", 'neutral_good'], ["Chaotic Good", 'chaotic_good'], 
+        ["Lawful Neutral", 'lawful_neutral'], ["True Neutral", 'true_neutral'], ["Chaotic Neutral", 'chaotic_neutral'], 
+        ["Lawful Evil", 'lawful_evil'], ["Neutral Evil", 'neutral_evil'], ["Chaotic Evil", 'chaotic_evil']] %>
+    </div>
 
-  <div>
-    <%= form.label :race %>
-    <%= form.text_field :race %>
-  </div>
+    <div>
+      <%= form.label :race %>*
+      <%= form.text_field :race %>
+    </div>
 
-  <div>
-    <%= form.label :sex %>
-    <%= form.text_field :sex %>
-  </div>
+    <div>
+      <%= form.label :sex %>*
+      <%= form.text_field :sex %>
+    </div>
 
-  <div>
-    <%= form.label :gender %>
-    <%= form.text_field :gender %>
-  </div>
+    <div>
+      <%= form.label :gender %>
+      <%= form.text_field :gender %>
+    </div>
 
-  <div>
-    <%= form.label :sexual_orientation %>
-    <%= form.text_field :sexual_orientation %>
-  </div>
+    <div>
+      <%= form.label :sexual_orientation %>
+      <%= form.text_field :sexual_orientation %>
+    </div>
 
-  <div>
-    <%= form.label :private? %>
-    <%= form.select :private?, [["yes", true], ["no", false]] %>
-  </div>
+    <div>
+      <%= form.label :private_character %>*
+      <%= form.select :private_character, [["yes", true], ["no", false]] %>
+    </div>
+  </section>
 
+  <section>
+    <h1>Class and Level</h1>
+    <%= form.fields_for :class_and_levels do |ff| %>
+      <div>
+        <%= ff.label :character_class %>*
+        <%= ff.text_field :character_class %>
+      </div>
 
+      <div> 
+        <%= ff.label :character_subclass %>*
+        <%= ff.text_field :character_subclass %>
+      </div>
+
+      <div> 
+        <%= ff.label :character_level %>*
+        <%= ff.text_field :character_level %>
+      </div>
+
+      <div>
+        <% if ff.object.persisted? %>
+          <%= ff.label :_destroy, "Destroy" %>
+          <%= ff.check_box :_destroy %>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
 
   <div class="actions">
     <%= form.submit %>

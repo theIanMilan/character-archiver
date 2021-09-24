@@ -30,4 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  helpers:
+    submit:
+      backstory:
+        create: "Create Backstory Details"
+        update: "Update Backstory Details"
+      search:
+        create: "Create Search Details"
+        update: "Update Search Details"
+

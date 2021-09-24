@@ -16,6 +16,16 @@ class Profile < ApplicationRecord
 
   delegate :username, to: :user
 
+  def display_avatar
+    if avatar_URL.nil?
+      require 'aes' # AES encryption
+      encrypted = AES.encrypt(username, ENV['AES_KEY'])
+      "https://avatars.dicebear.com/api/pixel-art-neutral/#{encrypted}.svg" || "https://avatar.oxro.io/avatar.svg?name=#{username}"
+    else
+      avatar_URL
+    end
+  end
+
   # Override ActiveRecord method so routes will use username instead of id
   def to_param
     username

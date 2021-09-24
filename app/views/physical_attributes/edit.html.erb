@@ -1,0 +1,46 @@
+<h1>Editing Character's Physical Attributes</h1>
+
+<%= form_with(model: @physical_attribute, url: "/characters/#{@character.id}/physical_attributes/", method: 'put') do |f| %>
+    <div>
+      <%= f.label :age %>
+      <%= f.text_field :age %>
+    </div>
+
+    <div>
+      <%= f.label :height %>
+      <%= f.text_field :height %>
+    </div>
+
+    <div>
+      <%= f.label :weight %>
+      <%= f.text_field :weight %>
+    </div>
+
+    <div>
+      <%= f.label :eyes %>
+      <%= f.text_field :eyes %>
+    </div>
+
+    <div>
+      <%= f.label :skin %>
+      <%= f.text_field :skin %>
+    </div>
+
+    <div>
+      <%= f.label :hair %>
+      <%= f.text_field :hair %>
+    </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+  <br>
+<% end %>
+
+<%= link_to 'Back', :back %>
+
+<% if @physical_attribute.persisted? %>
+  <%= link_to 'Delete all Physical Attributes',  character_physical_attributes_path(@character),
+      method: :delete, data: {confirm: "Are you sure you want to delete this Character's Physical Attributes?"},
+      class: 'button-delete' %>
+<% end %>

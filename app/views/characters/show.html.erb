@@ -1,17 +1,59 @@
-<p id="notice"><%= notice %></p>
+<h1>Character</h1>
+User: <%= link_to @character.user.username, profile_path(@character.user.username) %>
+<br> <%= link_to 'Edit Character', edit_character_path(@character) %> |
+<%= link_to 'Back', :back %>
 
 <div>
-  <%= @character.character_name %>
-  <img src="<%= @character.character_portrait_URL %>">
+  <%= @character.character_name %>,
+  <%= @character.classes_string %>
+  <img src="<%= @character.display_character_portrait %>">
   <%= @character.portrait_credit_artist %>
   <%= @character.portrait_credit_URL %>
   <%= @character.background %>
-  <%= @character.alignment %>
+  <%= @character.alignment_formatted %>
   <%= @character.race %>
   <%= @character.sex %>
   <%= @character.gender %>
   <%= @character.sexual_orientation %>
 </div>
 
-<%= link_to 'Edit', edit_character_path(@character) %> |
-<%= link_to 'Back', :back %>
+<br>
+<h5>Physical Attributes</h5> | <%= link_to 'Edit', edit_character_physical_attributes_path(@character) %> 
+<% if @physical_attribute = @character.physical_attribute %>
+    <%= @physical_attribute.age %>
+    <%= @physical_attribute.height %>
+    <%= @physical_attribute.weight %>
+    <%= @physical_attribute.eyes %>
+    <%= @physical_attribute.skin %>
+    <%= @physical_attribute.hair %>
+<% else %>
+  <p><i>No information available</i></p>
+<% end %>
+
+<br>
+
+<h5>Search details</h5> | <%= link_to 'Edit', edit_character_searches_path(@character) %> 
+<% if @search = @character.search %>
+  <% if @search.searching_for_connections %>
+    <h6>Currently looking for connections</h6>
+    <%= @search.search_message %>
+  <% else %>
+    <h5>Not currently looking for connections</h5>
+  <% end %>
+<% else %>
+  <p><i>No information available</i></p>
+<% end %>
+
+<br>
+
+<h5>Backstory</h5> |  <%= link_to 'Edit', edit_character_backstories_path(@character) %> 
+<% if @backstory = @character.backstory %>
+  <%= @backstory.body %>
+  <br>
+  <%= @backstory.personality %>
+  <%= @backstory.ideals %>
+  <%= @backstory.bonds %>
+  <%= @backstory.flaws %>
+<% else %>
+  <p><i>No information available</i></p>
+<% end %>

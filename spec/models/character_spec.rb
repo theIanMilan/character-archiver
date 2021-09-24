@@ -5,6 +5,11 @@ RSpec.describe Character, type: :model do
 
   context 'with valid attributes' do
     it { is_expected.to be_valid }
+
+    it 'is valid with integers 0-8 for alignment' do
+      character.alignment = 0
+      expect(character).to be_valid
+    end
   end
 
   context 'with invalid length attributes' do
@@ -40,6 +45,16 @@ RSpec.describe Character, type: :model do
   end
 
   context 'with nil attributes' do
+    it 'is valid with no character_portrait_URL' do
+      character.character_portrait_URL = nil
+      expect(character).to be_valid
+    end
+
+    it 'is valid with no portrait_credit_URL' do
+      character.portrait_credit_URL = nil
+      expect(character).to be_valid
+    end
+
     it 'is not valid with no character_name' do
       character.character_name = nil
       expect(character).not_to be_valid
@@ -112,6 +127,35 @@ RSpec.describe Character, type: :model do
     it 'is not valid with invalid http in character_portrait_URL' do
       character.character_portrait_URL = 'twitter.com/dungeonMaster'
       expect(character).not_to be_valid
+    end
+  end
+
+  describe '#classes_string' do
+    it 'returns comma separated list with and if 3+ elements' do
+      create(:class_and_level, character: character,
+        character_class: 'Artificer', character_subclass: 'Armorer', character_level: 10)
+      create(:class_and_level, character: character,
+        character_class: 'Blood Hunter', character_subclass: 'Mutant', character_level: 1)
+      create(:class_and_level, character: character,
+        character_class: 'Sage', character_subclass: 'Abnormal', character_level: 9)
+
+      expect(character.classes_string).to eq('Armorer Artificer 10, Abnormal Sage 9, and Mutant Blood Hunter 1')
+    end
+
+    it 'returns simple string if 1 element' do
+      create(:class_and_level, character: character,
+        character_class: 'Sage', character_subclass: 'Abnormal', character_level: 9)
+
+      expect(character.classes_string).to eq('Abnormal Sage 9')
+    end
+
+    it 'returns string with and if 2 elements' do
+      create(:class_and_level, character: character,
+        character_class: 'Artificer', character_subclass: 'Armorer', character_level: 10)
+      create(:class_and_level, character: character,
+        character_class: 'Sage', character_subclass: 'Abnormal', character_level: 9)
+
+      expect(character.classes_string).to eq('Armorer Artificer 10 and Abnormal Sage 9')
     end
   end
 end

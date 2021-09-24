@@ -1,0 +1,40 @@
+<h1>Editing Character's Backstory details</h1>
+
+<%= form_with(model: @backstory, url: "/characters/#{@character.id}/backstories/", method: 'put') do |f| %>
+    <div>
+      <%= f.label :body, 'Backstory' %>
+      <%= f.text_area :body %>
+    </div>
+
+    <div>
+      <%= f.label :personality %>
+      <%= f.text_area :personality %>
+    </div>
+
+    <div>
+      <%= f.label :ideals %>
+      <%= f.text_area :ideals %>
+    </div>
+
+    <div>
+      <%= f.label :bonds %>
+      <%= f.text_area :bonds %>
+    </div>
+
+    <div>
+      <%= f.label :flaws %>
+      <%= f.text_area :flaws %>
+    </div>
+  <div>
+    <%= f.submit %>
+  </div>
+  <br>
+<% end %>
+
+<%= link_to 'Back', :back %>
+
+<% if @backstory.persisted? %>
+  <%= link_to 'Delete Backstory details',  character_backstories_path(@character),
+      method: :delete, data: {confirm: "Are you sure you want to delete this Character's Backstory details?"},
+      class: 'button-delete' %>
+<% end %>

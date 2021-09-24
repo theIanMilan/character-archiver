@@ -71,6 +71,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :request # to sign_in user by Devise
+  config.include Devise::Test::IntegrationHelpers, type: :system # to sign_in user by Devise
   config.include Warden::Test::Helpers
 
   config.after :each do

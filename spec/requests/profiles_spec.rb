@@ -23,7 +23,7 @@ RSpec.describe '/profiles', type: :request do
   describe 'GET /show' do
     it 'renders a successful response' do
       sign_in user
-      profile = create(:profile, user: user)
+      profile = create(:profile, user: user, display_name: 'Georgie145')
       get profile_url(profile)
       expect(response).to be_successful
     end
@@ -32,7 +32,7 @@ RSpec.describe '/profiles', type: :request do
   describe 'GET /edit' do
     it 'render a successful response' do
       sign_in user
-      profile = create(:profile, user: user)
+      profile = create(:profile, user: user, display_name: 'Georgie145')
       get edit_profile_url(profile)
       expect(response).to be_successful
     end
