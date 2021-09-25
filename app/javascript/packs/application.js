@@ -19,3 +19,6 @@ global.toastr = require('toastr')
 import 'bootstrap/dist/js/bootstrap'
 import "bootstrap/dist/css/bootstrap";
 import "stylesheets/application"
+
+// jQuery
+require("jquery")
