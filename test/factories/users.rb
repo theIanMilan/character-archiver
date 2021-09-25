@@ -3,7 +3,7 @@ FactoryBot.define do
     username { "#{Faker::Number.number(digits: 3)}#{Faker::Name.first_name}" }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
-    role { 1 }
+    role { 9 }
   end
 
   trait :admin do

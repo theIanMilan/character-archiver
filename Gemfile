@@ -22,6 +22,7 @@ gem 'rails_admin', '~> 2.0'
 gem 'obscenity'
 gem "auto_strip_attributes", "~> 2.6"
 gem 'aes'
+gem 'httparty'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
