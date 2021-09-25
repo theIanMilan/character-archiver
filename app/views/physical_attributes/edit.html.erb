@@ -61,7 +61,7 @@
     $("#size-help-btn").on("click", fetch_age_height);
   });
 
-  function fetch_age_height(ajax_loader) {
+  function fetch_age_height() {
     var race = $("#age-help-race").html().toLowerCase();
     var races = ["dragonborn", "dwarf", "elf", "gnome", "half-elf", "half-orc", "halfling", "human", "tiefling"]
 
@@ -77,7 +77,6 @@
           $('.ajax-loading').hide();
         },
         success: function (result, status, xhr) {
-          console.log(result)
           $("#age-help-text").html(result.age)
           $("#size-help-text").html(result.size_description)
           $("#age-help-btn").prop("disabled", true) 
