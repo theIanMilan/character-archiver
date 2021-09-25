@@ -6,6 +6,7 @@
     </div>
 
     <button id="age-help-btn" type="button">Help</button>
+    <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
     <div id="age-help"><span id="age-help-race"><%= @character.race %></span> Age: <span id="age-help-text"></span></div>
 
     <div>
@@ -13,7 +14,8 @@
       <%= f.text_field :height %>
     </div>
 
-    <button id="size-help-btn" type="button">Help</button>
+    <button id="size-help-btn" type="button">Help</button>    
+    <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
     <div id="size-help"><span id="age-help-race"><%= @character.race %></span> Size description: <span id="size-help-text"></span></div>
 
     <div>
@@ -52,43 +54,50 @@
 
 <script>
   $(document).ready(function() {
-    $("#age-help").hide();
-    $("#size-help").hide();
+    $("#age-help").hide()
+    $("#size-help").hide()
+    $(".ajax-loading").hide()
+    $("#age-help-btn").on("click", fetch_age_height)
+    $("#size-help-btn").on("click", fetch_age_height);
   });
 
-  $(document).ready(function() {
-    $("#age-help-btn").click(function (e) {
-      var race = $("#age-help-race").html().toLowerCase();
-      var races = ["dragonborn", "dwarf", "elf", "gnome", "half-elf", "half-orc", "halfling", "human", "tiefling"]
+  function fetch_age_height(ajax_loader) {
+    var race = $("#age-help-race").html().toLowerCase();
+    var races = ["dragonborn", "dwarf", "elf", "gnome", "half-elf", "half-orc", "halfling", "human", "tiefling"]
 
-      if (races.includes(race)) {
-        $.ajax({
-          type: "GET",
-          url: ("https://www.dnd5eapi.co/api/races/" + race),
-          dataType: "json",
-          success: function (result, status, xhr) {
-            console.log(result)
-            $("#age-help-text").html(result.age)
-            $("#size-help-text").html(result.size_description)
-            $("#age-help-btn").prop("disabled", true)
-            $("#size-help-btn").prop("disabled", true);
-          },
-          error: function (xhr, status, error) {
-            alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
-          }
-        })
-      } else {
-        let message = 'No information available in the D&D 5e Systems Reference Document (SRD)'
-        $("#age-help-text").html(message)
-        $("#age-help-text").addClass('italic')
-        $("#size-help-text").html(message)
-        $("#size-help-text").addClass('italic')
-        $("#age-help-btn").prop("disabled", true);
-      }
+    if (races.includes(race)) {
+      $.ajax({
+        type: "GET",
+        url: ("https://www.dnd5eapi.co/api/races/" + race),
+        dataType: "json",
+        beforeSend: function() {
+          $('.ajax-loading').show();
+        },
+        complete: function() {
+          $('.ajax-loading').hide();
+        },
+        success: function (result, status, xhr) {
+          console.log(result)
+          $("#age-help-text").html(result.age)
+          $("#size-help-text").html(result.size_description)
+          $("#age-help-btn").prop("disabled", true) 
+          $("#size-help-btn").prop("disabled", true)
+        },
+        error: function (xhr, status, error) {
+          alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+        }
+      })
+    } else {
+      let message = 'No information available in the D&D 5e Systems Reference Document (SRD)'
+      $("#age-help-text").html(message)
+      $("#age-help-text").addClass('italic')
+      $("#size-help-text").html(message)
+      $("#size-help-text").addClass('italic')
+      $("#age-help-btn").prop("disabled", true)
+      $("#size-help-btn").prop("disabled", true);
+    }
 
-      $("#age-help").show()
-      $("#size-help").show();
-    });
-  });
-
+    $("#age-help").show()
+    $("#size-help").show();
+  }
 </script>
