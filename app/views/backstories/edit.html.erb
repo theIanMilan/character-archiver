@@ -6,25 +6,33 @@
       <%= f.text_area :body %>
     </div>
 
+    <button id="traits-help-btn" type="button">Example Traits</button>
+    <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
+
     <div>
       <%= f.label :personality %>
       <%= f.text_area :personality %>
     </div>
+    <div id="personality-help" class="help-box"><ul id="personality-help-list"></ul></div>
 
     <div>
       <%= f.label :ideals %>
       <%= f.text_area :ideals %>
     </div>
+    <div id="ideals-help" class="help-box"><ul id="ideals-help-list"></ul></div>
 
     <div>
       <%= f.label :bonds %>
       <%= f.text_area :bonds %>
     </div>
+    <div id="bonds-help" class="help-box"><ul id="bonds-help-list"></ul></div>
 
     <div>
       <%= f.label :flaws %>
       <%= f.text_area :flaws %>
     </div>
+    <div id="flaws-help" class="help-box"><ul id="flaws-help-list"></ul></div>
+
   <div>
     <%= f.submit %>
   </div>
@@ -38,3 +46,45 @@
       method: :delete, data: {confirm: "Are you sure you want to delete this Character's Backstory details?"},
       class: 'button-delete' %>
 <% end %>
+
+<script>
+  $(document).ready(function() {
+    $(".help-box").hide()
+    $(".ajax-loading").hide()
+    $("#traits-help-btn").on("click", fetch_traits);
+  });
+
+  function fetch_traits(ajax_loader) {
+    $.ajax({
+      type: "GET",
+      url: ("https://www.dnd5eapi.co/api/backgrounds/acolyte"),
+      dataType: "json",
+      beforeSend: function() {
+        $('.ajax-loading').show();
+      },
+      complete: function() {
+        $('.ajax-loading').hide();
+      },
+      success: function (result, status, xhr) {
+        result.personality_traits.from.forEach(element => {
+          $("#personality-help-list").append(`<li>${element}</li>`)
+        })
+        result.ideals.from.forEach(object => {
+          $("#ideals-help-list").append(`<li>${object.desc}</li>`)
+        })
+        result.bonds.from.forEach(element => {
+          $("#bonds-help-list").append(`<li>${element}</li>`)
+        })
+        result.flaws.from.forEach(element => {
+          $("#flaws-help-list").append(`<li>${element}</li>`)
+        })
+        $("#traits-help-btn").prop("disabled", true);
+      },
+      error: function (xhr, status, error) {
+        alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+      }
+    })
+
+    $(".help-box").show();
+  }
+</script>

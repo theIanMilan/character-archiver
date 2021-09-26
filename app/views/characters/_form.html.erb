@@ -39,6 +39,21 @@
     </div>
 
     <div>
+      <%= form.label :race %>*
+      <%= form.select(:race,
+                      options_for_select(["Select Race", "Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf","Half-Orc",
+                                            "Halfling", "Human", "Tiefling"],
+                                          {selected: "Select Race", disabled: "Select Race"}),
+                      {},
+                      {class: 'form-control',
+                      id: 'character_race'}) %>
+    </div>
+
+    <button id="alignment-help-btn" type="button">Help</button>    
+    <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
+    <div id="alignment-help"><span id="alignment-help-race"></span> alignment description: <span id="alignment-help-text"></span></div>
+
+    <div>
       <%= form.label :alignment %>*
       <%= form.select :alignment, 
         [["Lawful Good", 'lawful_good'], ["Neutral Good", 'neutral_good'], ["Chaotic Good", 'chaotic_good'], 
@@ -47,23 +62,32 @@
     </div>
 
     <div>
-      <%= form.label :race %>*
-      <%= form.text_field :race %>
-    </div>
-
-    <div>
       <%= form.label :sex %>*
-      <%= form.text_field :sex %>
+      <%= form.select(:sex,
+                      options_for_select(["Select Sex assigned at birth", "Male", "Female", "Intersex", "Prefer not to say"],
+                                         {selected: "Select Sex assigned at birth", disabled: "Select Sex assigned at birth"}),
+                      {},
+                      {class: 'form-control'}) %>
     </div>
 
     <div>
       <%= form.label :gender %>
-      <%= form.text_field :gender %>
+      <%= form.select(:gender,
+                      options_for_select(["Male", "Female", "Non-binary", "Agender", "Genderfluid",
+                                            "Bigender", "Polygender", "Prefer not to say"],
+                                          "Prefer not to say"),
+                      {},
+                      {class: 'form-control'}) %>
     </div>
 
     <div>
       <%= form.label :sexual_orientation %>
-      <%= form.text_field :sexual_orientation %>
+      <%= form.select(:sexual_orientation,
+                      options_for_select(['Asexual', 'Bisexual', 'Gay or Lesbian', 'Straight', 
+                                            'Pansexual', 'Queer', 'Prefer not to say'],
+                                          'Prefer not to say'),
+                      {},
+                      {class: 'form-control'}) %>
     </div>
 
     <div>
@@ -76,9 +100,15 @@
     <h1>Class and Level</h1>
     <%= form.fields_for :class_and_levels do |ff| %>
       <div>
-        <%= ff.label :character_class %>*
-        <%= ff.text_field :character_class %>
+        <%= ff.label :character_class, class: 'label-character-class' %>*
+        <%= ff.select(:character_class,
+                      options_for_select(["Select Character Class", "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", 
+                                            "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"],
+                                          {selected: "Select Character Class", disabled: "Select Character Class"}),
+                      {},
+                      {class: 'form-control'}) %>
       </div>
+
 
       <div> 
         <%= ff.label :character_subclass %>*
@@ -87,7 +117,7 @@
 
       <div> 
         <%= ff.label :character_level %>*
-        <%= ff.text_field :character_level %>
+        <%= ff.number_field :character_level, step: 1, min: 1, max: 30 %>
       </div>
 
       <div>
@@ -103,3 +133,58 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  $(document).ready(function() {
+    $("#alignment-help").hide()
+    $(".ajax-loading").hide()
+    $("#alignment-help-btn").on("click", fetch_race_alignment)
+    $(".form-control").select2({tags: true})
+  });
+
+  function validate_race() {
+    var errorMessage = "";
+    if ($("#character_race").val() == "") {
+      errorMessage += "Select Character Race for Alignment help."
+      alert(errorMessage);
+    }
+    return errorMessage;
+  }
+
+  function fetch_race_alignment() {
+    var validated = validate_race();
+    var race = $("#character_race").val()
+    var race_lower_cased = race.toLowerCase()
+    var races = ["dragonborn", "dwarf", "elf", "gnome", "half-elf", "half-orc", "halfling", "human", "tiefling"]
+
+    if (validated.length == 0) {
+      if (races.includes(race_lower_cased)) {
+        $.ajax({
+          type: "GET",
+          url: ("https://www.dnd5eapi.co/api/races/" + race_lower_cased),
+          dataType: "json",
+          beforeSend: function() {
+            $('.ajax-loading').show();
+          },
+          complete: function() {
+            $('.ajax-loading').hide();
+          },
+          success: function (result, status, xhr) {
+            $("#alignment-help-text").html(result.alignment)
+            $("#alignment-help-text").removeClass('italic')
+          },
+          error: function (xhr, status, error) {
+            alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+          }
+        })
+      } else {
+        let message = 'No information available in the D&D 5e Systems Reference Document (SRD).'
+        $("#alignment-help-text").html(message)
+        $("#alignment-help-text").addClass('italic')
+      }
+
+      $("#alignment-help-race").html(race) // Puts Race text to help box 
+      $("#alignment-help").show();
+    }
+  }
+</script>
