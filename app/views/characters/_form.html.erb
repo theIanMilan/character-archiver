@@ -40,7 +40,13 @@
 
     <div>
       <%= form.label :race %>*
-      <%= form.text_field :race, id: 'character_race' %>
+      <%= form.select(:race,
+                      options_for_select(["Select Race", "Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf","Half-Orc",
+                                            "Halfling", "Human", "Tiefling"],
+                                          {selected: "Select Race", disabled: "Select Race"}),
+                      {},
+                      {class: 'form-control',
+                      id: 'character_race'}) %>
     </div>
 
     <button id="alignment-help-btn" type="button">Help</button>    
@@ -57,17 +63,31 @@
 
     <div>
       <%= form.label :sex %>*
-      <%= form.text_field :sex %>
+      <%= form.select(:sex,
+                      options_for_select(["Select Sex assigned at birth", "Male", "Female", "Intersex", "Prefer not to say"],
+                                         {selected: "Select Sex assigned at birth", disabled: "Select Sex assigned at birth"}),
+                      {},
+                      {class: 'form-control'}) %>
     </div>
 
     <div>
       <%= form.label :gender %>
-      <%= form.text_field :gender %>
+      <%= form.select(:gender,
+                      options_for_select(["Male", "Female", "Non-binary", "Agender", "Genderfluid",
+                                            "Bigender", "Polygender", "Prefer not to say"],
+                                          "Prefer not to say"),
+                      {},
+                      {class: 'form-control'}) %>
     </div>
 
     <div>
       <%= form.label :sexual_orientation %>
-      <%= form.text_field :sexual_orientation %>
+      <%= form.select(:sexual_orientation,
+                      options_for_select(['Asexual', 'Bisexual', 'Gay or Lesbian', 'Straight', 
+                                            'Pansexual', 'Queer', 'Prefer not to say'],
+                                          'Prefer not to say'),
+                      {},
+                      {class: 'form-control'}) %>
     </div>
 
     <div>
@@ -80,9 +100,15 @@
     <h1>Class and Level</h1>
     <%= form.fields_for :class_and_levels do |ff| %>
       <div>
-        <%= ff.label :character_class %>*
-        <%= ff.text_field :character_class %>
+        <%= ff.label :character_class, class: 'label-character-class' %>*
+        <%= ff.select(:character_class,
+                      options_for_select(["Select Character Class", "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", 
+                                            "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"],
+                                          {selected: "Select Character Class", disabled: "Select Character Class"}),
+                      {},
+                      {class: 'form-control'}) %>
       </div>
+
 
       <div> 
         <%= ff.label :character_subclass %>*
@@ -91,7 +117,7 @@
 
       <div> 
         <%= ff.label :character_level %>*
-        <%= ff.text_field :character_level %>
+        <%= ff.number_field :character_level, step: 1, min: 1, max: 30 %>
       </div>
 
       <div>
@@ -106,12 +132,6 @@
   <div class="actions">
     <%= form.submit %>
   </div>
-
-  <select class="form-control js-example-tags">
-  <option selected="selected">orange</option>
-  <option>white</option>
-  <option>purple</option>
-  </select>
 <% end %>
 
 <script>
@@ -119,10 +139,7 @@
     $("#alignment-help").hide()
     $(".ajax-loading").hide()
     $("#alignment-help-btn").on("click", fetch_race_alignment)
-  });
-
-  $(".js-example-tags").select2({
-    tags: true
+    $(".form-control").select2({tags: true})
   });
 
   function validate_race() {
