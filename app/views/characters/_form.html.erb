@@ -106,6 +106,12 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+
+  <select class="form-control js-example-tags">
+  <option selected="selected">orange</option>
+  <option>white</option>
+  <option>purple</option>
+  </select>
 <% end %>
 
 <script>
@@ -113,6 +119,10 @@
     $("#alignment-help").hide()
     $(".ajax-loading").hide()
     $("#alignment-help-btn").on("click", fetch_race_alignment)
+  });
+
+  $(".js-example-tags").select2({
+    tags: true
   });
 
   function validate_race() {
