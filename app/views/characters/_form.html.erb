@@ -39,16 +39,20 @@
     </div>
 
     <div>
+      <%= form.label :race %>*
+      <%= form.text_field :race, id: 'character_race' %>
+    </div>
+
+    <button id="alignment-help-btn" type="button">Help</button>    
+    <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
+    <div id="alignment-help"><span id="alignment-help-race"></span> alignment description: <span id="alignment-help-text"></span></div>
+
+    <div>
       <%= form.label :alignment %>*
       <%= form.select :alignment, 
         [["Lawful Good", 'lawful_good'], ["Neutral Good", 'neutral_good'], ["Chaotic Good", 'chaotic_good'], 
         ["Lawful Neutral", 'lawful_neutral'], ["True Neutral", 'true_neutral'], ["Chaotic Neutral", 'chaotic_neutral'], 
         ["Lawful Evil", 'lawful_evil'], ["Neutral Evil", 'neutral_evil'], ["Chaotic Evil", 'chaotic_evil']] %>
-    </div>
-
-    <div>
-      <%= form.label :race %>*
-      <%= form.text_field :race %>
     </div>
 
     <div>
@@ -103,3 +107,57 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  $(document).ready(function() {
+    $("#alignment-help").hide()
+    $(".ajax-loading").hide()
+    $("#alignment-help-btn").on("click", fetch_race_alignment)
+  });
+
+  function validate_race() {
+    var errorMessage = "";
+    if ($("#character_race").val() == "") {
+      errorMessage += "Select Character Race for Alignment help."
+      alert(errorMessage);
+    }
+    return errorMessage;
+  }
+
+  function fetch_race_alignment() {
+    var validated = validate_race();
+    var race = $("#character_race").val()
+    var race_lower_cased = race.toLowerCase()
+    var races = ["dragonborn", "dwarf", "elf", "gnome", "half-elf", "half-orc", "halfling", "human", "tiefling"]
+
+    if (validated.length == 0) {
+      if (races.includes(race_lower_cased)) {
+        $.ajax({
+          type: "GET",
+          url: ("https://www.dnd5eapi.co/api/races/" + race_lower_cased),
+          dataType: "json",
+          beforeSend: function() {
+            $('.ajax-loading').show();
+          },
+          complete: function() {
+            $('.ajax-loading').hide();
+          },
+          success: function (result, status, xhr) {
+            $("#alignment-help-text").html(result.alignment)
+            $("#alignment-help-text").removeClass('italic')
+          },
+          error: function (xhr, status, error) {
+            alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+          }
+        })
+      } else {
+        let message = 'No information available in the D&D 5e Systems Reference Document (SRD).'
+        $("#alignment-help-text").html(message)
+        $("#alignment-help-text").addClass('italic')
+      }
+
+      $("#alignment-help-race").html(race) // Puts Race text to help box 
+      $("#alignment-help").show();
+    }
+  }
+</script>
