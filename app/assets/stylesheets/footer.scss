@@ -1,0 +1,17 @@
+footer {
+  background-color: rgb(62, 69, 81);
+}
+
+footer * {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+#footer-socials > a > i:hover {
+  --bs-text-opacity: 1;
+  color: #6c757d;
+  transition: all 0.3s;
+}
+
+#footer-bottom {
+  background-color: rgba(0, 0, 0, 0.2);
+}

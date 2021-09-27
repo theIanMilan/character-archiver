@@ -46,8 +46,8 @@
           </li>
         <% else %>
           <div class="navbar-nav d-flex flex-row">
-            <%= button_to "Sign in", new_user_session_path, class: 'btn btn-outline-dark me-3' %>
-            <%= button_to "Register", new_user_registration_path, class: 'btn btn-warning' %>
+            <%= button_to "Sign in", new_user_session_path, class: 'btn btn-outline-dark me-3', method: 'get' %>
+            <%= button_to "Register", new_user_registration_path, class: 'btn btn-warning', method: 'get' %>
           </div>
         <% end %>
       </ul>
