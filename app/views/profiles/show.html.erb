@@ -1,12 +1,18 @@
 <h1>User Profile</h1>
 
+
+<i class="fas fa-user-plus" role="img" aria-label="Icon"></i>
+<i class="fas fa-user-minus" role="img" aria-label="Icon"></i>
+<i class="fas fa-envelope" role="img" aria-label="Icon"></i>
+
+
 <%= @profile.display_name %>
 <%= image_tag @profile.display_avatar, class: 'profile-avatar' %>
 <%= @profile.about_me %>
-<%= @profile.location %>
-<%= @profile.twitter_username %>
-<%= @profile.instagram_username %>
-<%= @profile.discord_username %>
+<i class="fas fa-map-marker" role="img" aria-label="Icon"></i> <%= @profile.location %>
+<i class="fab fa-twitter twitter-color" role="img" aria-label="Twitter Icon"></i> <%= @profile.twitter_username %>
+<i class="fab fa-instagram instagram-color" role="img" aria-label="Instagram Icon"></i> <%= @profile.instagram_username %>
+<i class="fab fa-discord discord-color" role="img" aria-label="Discord Icon"></i> <%= @profile.discord_username %>
 
 <%= link_to 'Edit', edit_profile_path(@profile.username) %> |
 <%= link_to 'Back', :back %>
