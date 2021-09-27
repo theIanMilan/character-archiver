@@ -1,0 +1,56 @@
+<header class="p-2 mb-2 border-bottom">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-between">
+      <!-- left elements -->
+      <div class="d-flex">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+          <i class="fab fa-github github-color" role="img" aria-label="Github Icon"></i>
+        </a>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><%= link_to 'Home', root_path, {class: 'nav-link px-2 link-dark', title: "Home page"} %></li>
+          <li><%= link_to 'Characters', characters_path, {class: 'nav-link px-2 link-dark', title: "Characters: List of all Characters."} %></li>
+          <li><%= link_to 'Search Board', search_board_path, {class: 'nav-link px-2 link-dark', title: 'Search Board: Characters currently searching for connections.'} %></li>
+          <li><%= link_to 'Folklore', folklore_path, {class: 'nav-link px-2 link-dark', title: "Folklore: Learn about each Characters rich backstory."} %></li>
+          <li><%= link_to 'Organizations', root_path, {class: 'nav-link px-2 link-dark', title: "Organizations: List of established social groups."} %></li>
+          <li><%= link_to 'About', about_path, {class: 'nav-link px-2 link-dark', title: "About the creator of this website."} %></li>
+        </ul>
+      </div>
+
+      <!-- right elements -->
+      <ul class="navbar-nav d-flex flex-row">    
+        <!-- Signed in? -->
+        <% if user_signed_in? %>
+          <li class="nav-item me-4 me-lg-3">
+            <a class="nav-link" href="#">
+              <i class="fas fa-envelope fa-2x" role="img" aria-label="Icon" title="Inbox"></i>
+            </a>
+          </li>
+
+          <li class="nav-item me-4 me-lg-3">
+            <a class="nav-link" href="#">
+              <i class="fas fa-bell fa-2x" role="img" aria-label="Icon" title="Notifications"></i>
+            </a>
+          </li>
+
+          <li class="nav-item me-4 me-lg-3">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= image_tag current_user.profile.display_avatar, class: 'header-profile rounded-circle' %>
+            </a>
+            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+              <li><%= link_to 'My Profile', profile_path(current_user.username), class: 'dropdown-item' %></li>
+              <li><%= link_to 'My Characters', user_characters_path(current_user.username), class: 'dropdown-item' %></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= link_to 'Edit Registration', edit_user_registration_path, class: 'dropdown-item' %></li>
+                    <li><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+            </ul>
+          </li>
+        <% else %>
+          <div class="navbar-nav d-flex flex-row">
+            <%= button_to "Sign in", new_user_session_path, class: 'btn btn-outline-dark me-3' %>
+            <%= button_to "Register", new_user_registration_path, class: 'btn btn-warning' %>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</header>

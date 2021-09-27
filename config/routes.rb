@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 }
 
   root 'pages#welcome'
+  get   '/about_us',      to: 'pages#about',    as: 'about'
   # resources :profiles, only: %i[show edit update], param: :username
   get   '/profiles/:username',      to: 'profiles#show',    as: 'profile'
   get   '/profiles/:username/edit', to: 'profiles#edit',    as: 'edit_profile'
