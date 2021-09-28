@@ -41,3 +41,8 @@
   visibility: hidden;
   opacity: 0;
 }
+
+// Offset body by fixed navbar
+.padding-nav-bar {
+  padding-top: 65px;
+}

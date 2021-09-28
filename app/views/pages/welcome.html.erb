@@ -1,5 +1,30 @@
 <section class="container">
-  <p>Welcome to the land of the Archivist!</p>
-  <i class="fas fa-scroll" role="img" aria-label="Icon"></i>
-  <i class="fas fa-feather-alt" role="img" aria-label="Icon"></i>
+<!-- Centered screenshot -->
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+  <h1 class="display-4 fw-bold">Welcome to the Land of the Archivist!</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Share your D&D Character's rich backstory with the community and develop it further by connecting with users and creating social relationships between characters!
+      <span>
+        <i class="fas fa-scroll" role="img" aria-label="Icon"></i>
+        <i class="fas fa-feather-alt" role="img" aria-label="Icon"></i>
+      </span>
+    </p>
+    
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+      <% if user_signed_in? %>
+          <%= button_to "List of all Characters", characters_path, class: 'btn btn-primary btn-lg px-4 me-sm-3', method: 'get' %>
+          <%= button_to 'My Characters', user_characters_path(current_user.username), class: 'btn btn-outline-secondary btn-lg px-4', method: 'get' %>
+      <% else %>
+          <%= button_to "Sign in", new_user_session_path, class: 'btn btn-primary btn-lg px-4 me-sm-3', method: 'get' %>
+          <%= button_to "Register", new_user_registration_path, class: 'btn btn-outline-secondary btn-lg px-4', method: 'get' %>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <div class="container px-5">
+      <%= image_tag 'clint-bustrillos-X-A-LJVAhzk-unsplash.jpg', class: "img-fluid border rounded-3 shadow-lg mb-4", alt: "Dice", loading: "lazy", width: "700", height: "500" %>
+    </div>
+  </div>
+</div>
+
 </section>
