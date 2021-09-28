@@ -23,4 +23,7 @@ Rails.application.routes.draw do
 
   get   '/search_board',            to: 'searches#search_board',     as: 'search_board'
   get   '/folklore',                to: 'backstories#folklore',      as: 'folklore'
+
+  get   '/policies',                     to: 'policies#index',               as: 'policies'
+  get   '/policies/open-gaming-license', to: 'policies#open_gaming_license', as: 'open_gaming_license'
 end
