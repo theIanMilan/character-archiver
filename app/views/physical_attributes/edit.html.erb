@@ -1,4 +1,6 @@
-<h1>Editing Character's Physical Attributes</h1>
+<% content_for :title, "Editing Physical Attributes for #{@character.character_name}" %>
+
+<h1>Editing Physical Attributes for <%= @character.character_name %></h1>
 <%= form_with(model: @physical_attribute, url: "/characters/#{@character.id}/physical_attributes/", method: 'put') do |f| %>
     <div>
       <%= f.label :age %>

@@ -1,4 +1,6 @@
-<h1>Editing Character's Search details</h1>
+<% content_for :title, "Editing Search details for #{@character.character_name}" %>
+
+<h1>Editing Search details for <%= @character.character_name %></h1>
 
 <%= form_with(model: @search, url: "/characters/#{@character.id}/searches/", method: 'put') do |f| %>
     <div>

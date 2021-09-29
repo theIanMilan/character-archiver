@@ -1,3 +1,5 @@
+<% content_for :title, "#{@character.character_name} Character Page" %>
+
 <h1>Character</h1>
 User: <%= link_to @character.user.username, profile_path(@character.user.username) %>
 <br> <%= link_to 'Edit Character', edit_character_path(@character) %> |

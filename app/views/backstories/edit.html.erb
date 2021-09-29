@@ -1,4 +1,6 @@
-<h1>Editing Character's Backstory details</h1>
+<% content_for :title, "Editing Backstory details for #{@character.character_name}" %>
+
+<h1>Editing Backstory details for <%= @character.character_name %></h1>
 
 <%= form_with(model: @backstory, url: "/characters/#{@character.id}/backstories/", method: 'put') do |f| %>
     <div>
