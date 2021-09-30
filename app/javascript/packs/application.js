@@ -11,7 +11,6 @@ require('jquery') // may be redundant. Also made available in environment.js as 
 window.$ = $
 require('select2')
 $.fn.select2.defaults.set("theme", "bootstrap");
-require('packs/scroll-top')
 
 // Toastr
 global.toastr = require('toastr')

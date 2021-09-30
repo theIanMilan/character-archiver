@@ -1,137 +1,93 @@
-<%= form_for(character) do |form| %>
-  <% if character.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(character.errors.count, "error") %> prohibited this character from being saved:</h2>
-
-      <ul>
-        <% character.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for(character) do |form| %>
+  <%= form.error_notification %>
 
   <section>
     <h1>Basic Character Info</h1>
-    <div>
-      <%= form.label :character_name %>*
-      <%= form.text_field :character_name %>
-    </div>
+    <%= form.input :character_name %>
+    <%= form.input :character_portrait_URL, placeholder: 'http://example.com/image.jpg' %>
+    <%= form.input :portrait_credit_artist %>
+    <%= form.input :portrait_credit_URL, placeholder: 'http://example.com/image.jpg' %>
+    <%= form.input :background %>
 
     <div>
-      <%= form.label :character_portrait_URL %>
-      <%= form.text_field :character_portrait_URL, placeholder: 'http://example.com/image.jpg' %>
-    </div>
-
-    <div>
-      <%= form.label :portrait_credit_artist %>
-      <%= form.text_field :portrait_credit_artist %>
-    </div>
-
-    <div>
-      <%= form.label :portrait_credit_URL %>
-      <%= form.text_field :portrait_credit_URL, placeholder: 'http://example.com/image.jpg' %>
-    </div>
-
-    <div>
-      <%= form.label :background %>*
-      <%= form.text_field :background %>
-    </div>
-
-    <div>
-      <%= form.label :race %>*
+      <%= form.label :race %>
       <%= form.select(:race,
                       options_for_select(["Select Race", "Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf","Half-Orc",
-                                            "Halfling", "Human", "Tiefling"],
-                                          {selected: "Select Race", disabled: "Select Race"}),
+                                            "Halfling", "Human", "Tiefling", character.race],
+                                          {selected: character.race, disabled: "Select Race"}),
                       {},
-                      {class: 'form-control',
+                      {class: 'form-control select2',
                       id: 'character_race'}) %>
     </div>
 
-    <button id="alignment-help-btn" type="button">Help</button>    
+    <button id="alignment-help-btn" class="btn btn-info my-2" type="button">Help</button>    
     <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
     <div id="alignment-help"><span id="alignment-help-race"></span> alignment description: <span id="alignment-help-text"></span></div>
 
-    <div>
-      <%= form.label :alignment %>*
-      <%= form.select :alignment, 
-        [["Lawful Good", 'lawful_good'], ["Neutral Good", 'neutral_good'], ["Chaotic Good", 'chaotic_good'], 
-        ["Lawful Neutral", 'lawful_neutral'], ["True Neutral", 'true_neutral'], ["Chaotic Neutral", 'chaotic_neutral'], 
-        ["Lawful Evil", 'lawful_evil'], ["Neutral Evil", 'neutral_evil'], ["Chaotic Evil", 'chaotic_evil']] %>
-    </div>
+    <%= form.input :alignment, as: :select,
+                               collection: [["Lawful Good", 'lawful_good'], ["Neutral Good", 'neutral_good'], ["Chaotic Good", 'chaotic_good'], 
+                                            ["Lawful Neutral", 'lawful_neutral'], ["True Neutral", 'true_neutral'], ["Chaotic Neutral", 'chaotic_neutral'], 
+                                            ["Lawful Evil", 'lawful_evil'], ["Neutral Evil", 'neutral_evil'], ["Chaotic Evil", 'chaotic_evil']],
+                               prompt: 'Select Alignment' %>
 
     <div>
-      <%= form.label :sex %>*
+      <%= form.label :sex %>
       <%= form.select(:sex,
-                      options_for_select(["Select Sex assigned at birth", "Male", "Female", "Intersex", "Prefer not to say"],
-                                         {selected: "Select Sex assigned at birth", disabled: "Select Sex assigned at birth"}),
+                      options_for_select(["Select Sex assigned at birth", "Prefer not to say", "Male", "Female", "Intersex", character.sex],
+                                         {selected: character.sex, disabled: "Select Sex assigned at birth"}),
                       {},
-                      {class: 'form-control'}) %>
+                      {class: 'form-control select2'}) %>
     </div>
 
     <div>
       <%= form.label :gender %>
       <%= form.select(:gender,
-                      options_for_select(["Male", "Female", "Non-binary", "Agender", "Genderfluid",
-                                            "Bigender", "Polygender", "Prefer not to say"],
-                                          "Prefer not to say"),
+                      options_for_select(["Prefer not to say", "Male", "Female", "Non-binary", "Agender", "Genderfluid",
+                                            "Bigender", "Polygender", character.gender],
+                                          character.gender),
                       {},
-                      {class: 'form-control'}) %>
+                      {class: 'form-control select2'}) %>
     </div>
 
     <div>
       <%= form.label :sexual_orientation %>
       <%= form.select(:sexual_orientation,
-                      options_for_select(['Asexual', 'Bisexual', 'Gay or Lesbian', 'Straight', 
-                                            'Pansexual', 'Queer', 'Prefer not to say'],
-                                          'Prefer not to say'),
+                      options_for_select(['Prefer not to say', 'Asexual', 'Bisexual', 'Gay or Lesbian', 'Straight', 
+                                            'Pansexual', 'Queer', character.sexual_orientation],
+                                          character.sexual_orientation),
                       {},
-                      {class: 'form-control'}) %>
+                      {class: 'form-control select2'}) %>
     </div>
 
-    <div>
-      <%= form.label :private_character %>*
-      <%= form.select :private_character, [["yes", true], ["no", false]] %>
-    </div>
+    <%= form.input :private_character, as: :select, collection: [["yes", true], ["no", false]] %>
   </section>
 
-  <section>
+  <section class="mt-4">
     <h1>Class and Level</h1>
-    <%= form.fields_for :class_and_levels do |ff| %>
+    <%= form.simple_fields_for :class_and_levels do |ff| %>
       <div>
-        <%= ff.label :character_class, class: 'label-character-class' %>*
+        <%= ff.label :character_class, class: 'label-character-class' %>
         <%= ff.select(:character_class,
                       options_for_select(["Select Character Class", "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", 
-                                            "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"],
-                                          {selected: "Select Character Class", disabled: "Select Character Class"}),
+                                            "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard", character.class_and_levels.first.character_class],
+                                          {selected: character.class_and_levels.first.character_class, disabled: "Select Character Class"}),
                       {},
-                      {class: 'form-control'}) %>
+                      {class: 'form-control select2'}) %>
       </div>
 
-
-      <div> 
-        <%= ff.label :character_subclass %>*
-        <%= ff.text_field :character_subclass %>
-      </div>
-
-      <div> 
-        <%= ff.label :character_level %>*
-        <%= ff.number_field :character_level, step: 1, min: 1, max: 30 %>
-      </div>
+      <%= ff.input :character_subclass %>
+      <%= ff.input :character_level, input_html: {step: 1, min: 1, max: 30} %>
 
       <div>
         <% if ff.object.persisted? %>
-          <%= ff.label :_destroy, "Destroy" %>
+          <%= ff.label :_destroy, "Delete Class and Level" %>
           <%= ff.check_box :_destroy %>
         <% end %>
       </div>
     <% end %>
   </section>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.button :submit, class: 'btn btn-primary my-3' %>
 <% end %>
 
 <script>
@@ -139,7 +95,10 @@
     $("#alignment-help").hide()
     $(".ajax-loading").hide()
     $("#alignment-help-btn").on("click", fetch_race_alignment)
-    $(".form-control").select2({tags: true})
+    $(".select2").select2({tags: true})
+    $('#character_race').on('change', function() {
+      $('#alignment-help-btn').prop('disabled', false)
+    })
   });
 
   function validate_race() {
@@ -159,6 +118,7 @@
 
     if (validated.length == 0) {
       if (races.includes(race_lower_cased)) {
+        $("#alignment-help-btn").prop('disabled', true)
         $.ajax({
           type: "GET",
           url: ("https://www.dnd5eapi.co/api/races/" + race_lower_cased),
