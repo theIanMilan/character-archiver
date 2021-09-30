@@ -1,29 +1,36 @@
 <% characters.each do |char| %>
-  <%= link_to character_path(char) do %>
-    <div>
-      <%= char.character_name %>,
-      <%= char.classes_string %>
-      <img src="<%= char.display_character_portrait %>" class="char-card-img">
-      <%= char.portrait_credit_artist %>
-      <%= char.portrait_credit_URL %>
-      <%= char.background %>
-      <%= char.alignment_formatted %>
-      <%= char.race %>
-      <%= char.sex %>
-      <%= char.gender %>
-      <%= char.sexual_orientation %>
-    </div>
-  <% end %>
-  <br>
-  <% if local_assigns[:backstory] %>
-    <h6>Backstory:</h6>
-    <div><%= char.backstory.body %></div>
-  <% end %>
+  <div class="col">
+    <div class="card h-100">
+      <img src="<%= char.display_character_portrait %>">
+      
+      <div class="card-header">
+        <h3 class="mb-0"><%= char.character_name %></h3>
+        <p class="mb-0"><%= char.classes_string %></p>
+      </div>
 
-  <% if local_assigns[:search] %>
-    <h6>Looking for connections:</h6>
-    <div><%= char.search.search_message %></div>
-  <% end %>
+      <div class="card-body">
+        <%= char.portrait_credit_artist %>
+        <%= char.portrait_credit_URL %>
+        <%= char.background %>
+        <%= char.alignment_formatted %>
+        <%= char.race %>
+        <%= char.sex %>
+        <%= char.gender %>
+        <%= char.sexual_orientation %>
+        <%= button_to "View", character_path(char), type: 'button', class: 'btn btn-primary', method: 'get' %>
+      </div>
+      <div class="card-footer">
+        <% if local_assigns[:backstory] %>
+          <h6>Backstory:</h6>
+          <div><%= char.backstory.body %></div>
+        <% end %>
+        <% if local_assigns[:search] %>
+          <h6>Looking for connections:</h6>
+          <div><%= char.search.search_message %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <% if characters.count.zero? %>

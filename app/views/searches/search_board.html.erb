@@ -1,5 +1,9 @@
 <% content_for :title, "Search Board | Discover D&D Characters looking to create new relationships" %>
 
-<h1>Search Board</h1> <i class="fas fa-sign" role="img" aria-label="Icon"></i>
-
-<%= render partial: "characters/character_cards", locals: {characters: @characters, search: true} %>
+<div class="container">
+  <h1>Search Board</h1> <i class="fas fa-sign" role="img" aria-label="Icon"></i>
+  
+  <div class="row row-cols-1 row-cols-sm-2 align-items-stretch g-4">
+    <%= render partial: "characters/character_cards", locals: {characters: @characters, search: true} %>
+  </div>
+</div>
