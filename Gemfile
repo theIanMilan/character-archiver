@@ -18,10 +18,10 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'devise'
 gem 'cancancan'
 gem 'rails_admin', '~> 2.0'
-# Profanity filter gem. Ceased development in 2016
-gem 'obscenity'
+gem 'obscenity' # Profanity filter gem. Ceased development in 2016
 gem "auto_strip_attributes", "~> 2.6"
-gem 'aes'
+gem 'aes' # encryption
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
