@@ -1,26 +1,41 @@
-<h2>Log ins</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :login, 'Email or Username' %><br />
-    <%= f.text_field :login, autofocus: true, autocomplete: "login" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<% content_for :title, "Character Archiver | Login and enrich your D&D Character's backstories" %>
+ 
+<div class="container col-xl-10 col-xxl-8 px-5 py-5">
+  <div class="row align-items-center g-5 py-4">
+    <div class="col-lg-7 text-center text-lg-start">
+      <%= image_tag 'lucas-santos-XIIsv6AshJY-unsplash.jpg', class: "d-block mx-lg-auto img-fluid", alt: "green and black dice on brown wooden table by Lucas Santos", loading: "lazy", width: "700", height: "500" %>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="col-md-10 mx-auto col-lg-5">
+      <h2 class="display-5 fw-bold lh-1 mb-4">Sign in</h2>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'p-3 p-md-5 border rounded-3 bg-light'}) do |f| %>
+        <div class="field mb-3">
+          <%= f.label :login, 'Email or Username' %><br />
+          <%= f.text_field :login, autofocus: true, autocomplete: "login", class: 'form-control' %>
+        </div>
+
+        <div class="field mb-3">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="field mb-3">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Sign in", class: "w-100 btn btn-lg btn-primary" %>
+        </div>
+
+        <hr class="my-3">
+        <small class="text-muted">Don't have an account?<span><%= render "users/shared/links" %></span></small>
+      <% end %>
+
+    </div>
   </div>
-<% end %>
+</div>
 
-<%= render "users/shared/links" %>
