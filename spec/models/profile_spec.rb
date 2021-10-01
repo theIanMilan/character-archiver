@@ -74,4 +74,19 @@ RSpec.describe Profile, type: :model do
       expect(profile).not_to be_valid
     end
   end
+
+  describe '#characters_count' do
+    context "when Profile's user has no characters" do
+      it 'returns 0' do
+        expect(profile.characters_count).to eq(0)
+      end
+    end
+
+    context "when Profile's user has characters" do
+      it 'returns an integer' do
+        create(:character, user: profile.user)
+        expect(profile.characters_count).to eq(1)
+      end
+    end
+  end
 end

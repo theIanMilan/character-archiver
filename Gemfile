@@ -22,6 +22,7 @@ gem 'obscenity' # Profanity filter gem. Ceased development in 2016
 gem "auto_strip_attributes", "~> 2.6"
 gem 'aes' # encryption
 gem 'simple_form'
+gem 'draper' # Decorator patterns
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -16,16 +16,8 @@ class Profile < ApplicationRecord
 
   delegate :username, to: :user
 
-  def display_avatar
-    if avatar_URL.nil?
-      require 'aes' # AES encryption
-      iv = ENV['IV_KEY']
-      encrypted = AES.encrypt(username, ENV['AES_KEY'], { iv: iv })
-      seed = encrypted[iv.length]
-      "https://avatars.dicebear.com/api/pixel-art-neutral/#{seed}.svg" || "https://avatar.oxro.io/avatar.svg?name=#{username}"
-    else
-      avatar_URL
-    end
+  def characters_count
+    user.characters.count
   end
 
   # Override ActiveRecord method so routes will use username instead of id

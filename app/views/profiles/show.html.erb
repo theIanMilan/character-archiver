@@ -18,14 +18,14 @@
             </div>
             <div class="ms-3" style="margin-top: 130px;">
               <h5><%= @profile.display_name %></h5>
-              <p><i class="fas fa-map-marker" role="img" aria-label="Icon"></i> <%= @profile.location %></p>
+              <p><%= @profile.display_location_with_icon %></p>
             </div>
           </div>
           <div class="p-4 text-black" style="background-color: #f8f9fa;">
             <div class="d-flex justify-content-end text-center py-1">
               <div>
-                <p class="mb-1 h5">2</p>
-                <p class="small text-muted mb-0">Characters</p>
+                <p class="mb-1 h5"><%= @profile.characters_count %></p>
+                <p class="small text-muted mb-0"><%= @profile.pluralize_characters %></p>
               </div>
               <div class="px-3">
                 <p class="mb-1 h5">32</p>
@@ -42,16 +42,16 @@
             <div class="mb-5">
               <p class="lead fw-normal mb-1">About</p>
               <div class="p-4" style="background-color: #f8f9fa;">
-                <p><%= @profile.about_me %></p>
-                <p class="mb-0"><i class="fab fa-twitter twitter-color" role="img" aria-label="Twitter Icon"></i> <a href="http://www.twitter.com/<%= @profile.twitter_username %>" class="link-secondary" target="_blank"><%= @profile.twitter_username %></a></p>
-                <p class="mb-0"><i class="fab fa-instagram instagram-color" role="img" aria-label="Instagram Icon"></i> <a href="http://www.instagram.com/<%= @profile.instagram_username %>" class="link-secondary" target="_blank"><%= @profile.instagram_username %></a></p>
-                <p class="mb-0"><i class="fab fa-discord discord-color" role="img" aria-label="Discord Icon"></i> <%= @profile.discord_username %></p>
+                <p><%= @profile.display_about_me %></p>
+                <%= @profile.display_twitter_paragraph %>
+                <%= @profile.display_instagram_paragraph %>
+                <%= @profile.display_discord_paragraph %>  
               </div>
             </div>
 
             <!-- Characters -->
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <p class="lead fw-normal mb-0">Characters</p>
+              <p class="lead fw-normal mb-0"><%= @profile.pluralize_characters %></p>
               <p class="mb-0"><%= link_to "Show all", user_characters_path(@profile.username), class: 'text-muted' %></p>
             </div>
 

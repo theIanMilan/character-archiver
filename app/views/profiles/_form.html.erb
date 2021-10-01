@@ -1,7 +1,7 @@
 <%= simple_form_for(profile, defaults: {wrapper_html: {class: 'mb-3'}}) do |form| %>
   <%= form.error_notification %>
 
-  <%= form.input :display_name %>
+    <%= form.input :display_name, hint: 'You can use a different display name than your username.' %>
     <%= form.input :avatar_URL %>
     <%= form.input :about_me %>
     <%= form.input :date_of_birth, as: :date, 
