@@ -10,7 +10,7 @@ class ProfileDecorator < Draper::Decorator
       require 'aes' # AES encryption
       iv = ENV['IV_KEY']
       encrypted = AES.encrypt(username, ENV['AES_KEY'], { iv: iv })
-      seed = encrypted[iv.length]
+      seed = encrypted[iv.length..]
       "https://avatars.dicebear.com/api/pixel-art-neutral/#{seed}.svg" || "https://avatar.oxro.io/avatar.svg?name=#{username}"
     else
       avatar_URL
