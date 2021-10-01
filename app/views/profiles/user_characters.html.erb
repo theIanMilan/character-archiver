@@ -1,11 +1,13 @@
 <% content_for :title, "#{@user.username}'s Characters" %>
 
-<p><%= @user.profile.display_name %>'s characters</p>
+<div class="container">
+  <p><%= @user.profile.display_name %>'s characters</p>
+  <%= link_to 'Back to User Profile', profile_path(@user.username) %> | 
+  <%= link_to 'Create New Character', new_character_path %>
+  
+  <br>
 
-<%= link_to 'Create New Character', new_character_path %>
-
-<br>
-
-<%= render partial: "characters/character_cards", locals: {characters: @user_characters} %>
-
-<%= link_to 'Back to User Profile', profile_path(@user.username) %>
+  <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 align-items-stretch g-4">
+    <%= render partial: "characters/character_cards", locals: {characters: @user_characters} %>
+  </div>
+</div>
