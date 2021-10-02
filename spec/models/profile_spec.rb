@@ -44,6 +44,11 @@ RSpec.describe Profile, type: :model do
       expect(profile).not_to be_valid
     end
 
+    it 'is not valid with invalid http avatar_URL' do
+      profile.avatar_URL = 'i.redd.it/pvjdif3371y41.png'
+      expect(profile).not_to be_valid
+    end
+
     it 'is not valid with about_me of over 500 characters' do
       profile.display_name = Faker::Lorem.paragraph_by_chars(number: 501, supplemental: false)
       expect(profile).not_to be_valid

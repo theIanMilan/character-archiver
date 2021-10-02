@@ -32,10 +32,12 @@ class Character < ApplicationRecord
 
   validates :character_name,         presence: true,
                                      obscenity: { message: 'Obscene words are not allowed.' }
-  validates :character_portrait_URL, format: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+  validates :character_portrait_URL, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+                                               message: 'is invalid without http or https.' },
                                      allow_nil: true
   validates :portrait_credit_artist, length: { maximum: 50 }
-  validates :portrait_credit_URL,    format: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+  validates :portrait_credit_URL,    format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+                                               message: 'is invalid without http or https.' },
                                      allow_nil: true
   validates :background,             presence: true,
                                      length: { maximum: 50 },

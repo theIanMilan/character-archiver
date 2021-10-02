@@ -40,6 +40,13 @@ describe ProfileDecorator do
         expect(decorator.display_avatar).to include('https://avatars.dicebear.com/api/pixel-art-neutral/')
       end
     end
+
+    context 'with script tag' do
+      it 'removes the script tag' do
+        user.profile.avatar_URL = 'https://i.redd.it/pvjdif3371y41.png<script>alert(1)</script>'
+        expect(decorator.display_avatar).not_to include('<script>')
+      end
+    end
   end
 
   describe '#display_location_with_icon' do
@@ -58,6 +65,13 @@ describe ProfileDecorator do
     context 'with no location' do
       it 'returns nil' do
         expect(decorator.display_location_with_icon).to eq(nil)
+      end
+    end
+
+    context 'with script tag' do
+      it 'removes the script tag' do
+        user.profile.location = 'Zimbabwe<script>alert(1)</script>'
+        expect(decorator.display_location_with_icon).not_to include('<script>')
       end
     end
   end
@@ -99,6 +113,13 @@ describe ProfileDecorator do
         expect(decorator.display_twitter_paragraph).to eq(nil)
       end
     end
+
+    context 'with script tag' do
+      it 'removes the script tag' do
+        user.profile.twitter_username = 'alan04<script>alert(1)</script>'
+        expect(decorator.display_twitter_paragraph).not_to include('<script>')
+      end
+    end
   end
 
   describe '#display_instagram_paragraph' do
@@ -123,6 +144,13 @@ describe ProfileDecorator do
         expect(decorator.display_instagram_paragraph).to eq(nil)
       end
     end
+
+    context 'with script tag' do
+      it 'removes the script tag' do
+        user.profile.instagram_username = 'alan04<script>alert(1)</script>'
+        expect(decorator.display_instagram_paragraph).not_to include('<script>')
+      end
+    end
   end
 
   describe '#display_discord_paragraph' do
@@ -141,6 +169,13 @@ describe ProfileDecorator do
     context 'with no discord_username' do
       it 'returns nil' do
         expect(decorator.display_location_with_icon).to eq(nil)
+      end
+    end
+
+    context 'with script tag' do
+      it 'removes the script tag' do
+        user.profile.discord_username = 'alan04<script>alert(1)</script>'
+        expect(decorator.display_discord_paragraph).not_to include('<script>')
       end
     end
   end

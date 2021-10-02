@@ -35,6 +35,7 @@ class CharactersController < ApplicationController
       redirect_to character_path(@character)
     else
       flash.alert = 'Failed: Error in updating Character.'
+      render 'edit'
     end
   end
 

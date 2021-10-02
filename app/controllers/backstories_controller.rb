@@ -16,6 +16,7 @@ class BackstoriesController < ApplicationController
       redirect_to character_path(@character)
     else
       flash.alert = 'Failed: Error in updating Backstory details.'
+      render 'edit'
     end
   end
 

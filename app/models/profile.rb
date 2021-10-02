@@ -4,6 +4,9 @@ class Profile < ApplicationRecord
   validates :display_name,        presence: true,
                                   length: { maximum: 50 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
+  validates :avatar_URL,          format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+                                            message: 'is invalid without http or https.' },
+                                  allow_nil: true
   validates :about_me,            length: { maximum: 500 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
   validates :location,            length: { maximum: 75 },

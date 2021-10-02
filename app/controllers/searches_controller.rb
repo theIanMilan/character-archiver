@@ -17,6 +17,7 @@ class SearchesController < ApplicationController
       redirect_to character_path(@character)
     else
       flash.alert = 'Failed: Error in updating Search details.'
+      render 'edit'
     end
   end
 

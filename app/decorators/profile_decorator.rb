@@ -13,7 +13,7 @@ class ProfileDecorator < Draper::Decorator
       seed = encrypted[iv.length..]
       "https://avatars.dicebear.com/api/pixel-art-neutral/#{seed}.svg" || "https://avatar.oxro.io/avatar.svg?name=#{username}"
     else
-      avatar_URL
+      helpers.sanitize(avatar_URL)
     end
   end
 
