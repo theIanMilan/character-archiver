@@ -1,61 +1,173 @@
 <% content_for :title, "#{@character.character_name} Character Page" %>
 
-<h1>Character</h1>
-User: <%= link_to @character.user.username, profile_path(@character.user.username) %>
-<br> <%= link_to 'Edit Character', edit_character_path(@character) %> |
-<%= link_to 'Back', :back %>
+<div class="container">
+  <div class="row d-flex flex-md-row-reverse align-items-start g-5">
+    <!-- Character Profile -->
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
 
-<div>
-  <%= @character.character_name %>,
-  <%= @character.classes_string %>
-  <img src="<%= @character.display_character_portrait %>">
-  <%= @character.portrait_credit_artist %>
-  <%= @character.portrait_credit_URL %>
-  <%= @character.background %>
-  <%= @character.alignment_formatted %>
-  <%= @character.race %>
-  <%= @character.sex %>
-  <%= @character.gender %>
-  <%= @character.sexual_orientation %>
+        <!-- Details -->
+        <section class="border border-secondary mb-3 rounded">
+          <!-- Avatar and User -->
+          <section>
+            <h4 class="fw-bold p-3 mb-0 text-center text-white bg-primary"><%= @character.character_name %></h4>
+            <img src="<%= @character.display_character_portrait %>" class="img-fluid img-thumbnail">
+            
+            <div class="row p-1 mx-0 border-top border-secondary text-center">
+              <%= button_to 'Edit Character', edit_character_path(@character), method: 'get', class: "btn btn-primary p-1" %>
+            </div>
+
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Artist credit</div>
+              <div class="col">
+                <a href="<%= @character.portrait_credit_URL %>"><%= @character.portrait_credit_artist %></a>
+              </div>
+            </div>
+            
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">User</div>
+              <div class="col fw-bold"><%= link_to @character.user.username, profile_path(@character.user.username) %></div>
+            </div>
+          </section>
+
+          <!-- Character Info -->
+          <section>
+            <h5 class="fw-bold p-1 mb-0 text-center text-white bg-primary">Character Info</h5>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Total Level</div>
+              <div class="col">20</div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Classes and Levels</div>
+              <div class="col"><%= @character.classes_string %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Race</div>
+              <div class="col"><%= @character.race %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Background</div>
+              <div class="col"><%= @character.background %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Alignment</div>
+              <div class="col"><%= @character.alignment_formatted %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Sex</div>
+              <div class="col"><%= @character.sex %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Gender</div>
+              <div class="col"><%= @character.gender %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Sexual Orientation</div>
+              <div class="col"><%= @character.sexual_orientation %></div>
+            </div>
+          </section>
+
+          <!-- Physical Attributes -->
+          <section>
+            <h5 class="fw-bold p-1 mb-0 text-center text-white bg-primary">Physical Attributes</h5>
+            <div class="row p-1 mx-0 border-top border-secondary text-center">
+              <%= button_to 'Edit Physical Attributes', edit_character_physical_attributes_path(@character), method: 'get', class: "btn btn-primary p-1" %>
+            </div>
+
+            <% if @physical_attribute = @character.physical_attribute %>
+              <div class="row p-1 mx-0 border-top border-secondary">
+                <div class="ms-1 col fw-bold">Age</div>
+                <div class="col"><%= @physical_attribute.age %></div>
+              </div>
+
+              <div class="row p-1 mx-0 border-top border-secondary">
+                <div class="ms-1 col fw-bold">Height</div>
+                <div class="col"><%= @physical_attribute.height %></div>
+              </div>
+
+              <div class="row p-1 mx-0 border-top border-secondary">
+                <div class="ms-1 col fw-bold">Weight</div>
+                <div class="col"><%= @physical_attribute.weight %></div>
+              </div>
+
+              <div class="row p-1 mx-0 border-top border-secondary">
+                <div class="ms-1 col fw-bold">Eyes</div>
+                <div class="col"><%= @physical_attribute.eyes %></div>
+              </div>
+
+              <div class="row p-1 mx-0 border-top border-secondary">
+                <div class="ms-1 col fw-bold">Skin</div>
+                <div class="col"><%= @physical_attribute.skin %></div>
+              </div>
+
+              <div class="row p-1 mx-0 border-top border-secondary">
+                <div class="ms-1 col fw-bold">Hair</div>
+                <div class="col"><%= @physical_attribute.hair %></div>
+              </div>
+            <% else %>
+              <div class="row p-1 mx-0 border-top border-secondary text-center">
+                <p><i>No information available</i></p>
+              </div>
+            <% end %>
+          </section>
+        </section>
+
+        <!-- Search -->
+        <section class="p-4 mb-3 bg-light rounded">
+          <h4>Search details <span class="fs-5"><%= link_to 'Edit', edit_character_searches_path(@character) %></span></h4>
+          <p class="mb-0">
+              <% if @search = @character.search %>
+                <% if @search.searching_for_connections %>
+                  <%= @search.search_message %>
+                <% else %>
+                  <h5>Not currently looking for connections</h5>
+                <% end %>
+              <% else %>
+                <p><i>No information available</i></p>
+              <% end %>
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Backstory -->
+    <div class="col-md-8">
+      <section class="mb-4">
+        <h2 class="pb-4 mb-4 border-bottom">
+          Description <span class="fs-5"><%= link_to 'Edit', edit_character_backstories_path(@character) %></span>
+        </h2>
+
+        <% if @backstory = @character.backstory %>
+          <h4>Personality</h4>
+          <%= @backstory.personality %>
+          <h4 class="mt-3">Ideals</h4>
+          <%= @backstory.ideals %>
+          <h4 class="mt-3">Bonds</h4>
+          <%= @backstory.bonds %>
+          <h4 class="mt-3">Flaws</h4>
+          <%= @backstory.flaws %>
+        <% else %>
+          <p><i>No information available</i></p>
+        <% end %>
+      </section>
+
+      <section class="mb-4">
+        <h2 class="pb-4 mb-4 mt-2 border-bottom">
+          Biography
+        </h2>
+
+        <% if @backstory = @character.backstory %>
+          <%= @backstory.body %>
+          <br>
+          <%= @backstory.personality %>
+          <%= @backstory.ideals %>
+          <%= @backstory.bonds %>
+          <%= @backstory.flaws %>
+        <% else %>
+          <p><i>No information available</i></p>
+        <% end %>
+      </section>
+    </div>
+  </div>
 </div>
-
-<br>
-<h5>Physical Attributes</h5> | <%= link_to 'Edit', edit_character_physical_attributes_path(@character) %> 
-<% if @physical_attribute = @character.physical_attribute %>
-    <%= @physical_attribute.age %>
-    <%= @physical_attribute.height %>
-    <%= @physical_attribute.weight %>
-    <%= @physical_attribute.eyes %>
-    <%= @physical_attribute.skin %>
-    <%= @physical_attribute.hair %>
-<% else %>
-  <p><i>No information available</i></p>
-<% end %>
-
-<br>
-
-<h5>Search details</h5> | <%= link_to 'Edit', edit_character_searches_path(@character) %> 
-<% if @search = @character.search %>
-  <% if @search.searching_for_connections %>
-    <h6>Currently looking for connections</h6>
-    <%= @search.search_message %>
-  <% else %>
-    <h5>Not currently looking for connections</h5>
-  <% end %>
-<% else %>
-  <p><i>No information available</i></p>
-<% end %>
-
-<br>
-
-<h5>Backstory</h5> |  <%= link_to 'Edit', edit_character_backstories_path(@character) %> 
-<% if @backstory = @character.backstory %>
-  <%= @backstory.body %>
-  <br>
-  <%= @backstory.personality %>
-  <%= @backstory.ideals %>
-  <%= @backstory.bonds %>
-  <%= @backstory.flaws %>
-<% else %>
-  <p><i>No information available</i></p>
-<% end %>
