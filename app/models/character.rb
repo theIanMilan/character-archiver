@@ -56,6 +56,13 @@ class Character < ApplicationRecord
                                      obscenity: { message: 'Obscene words are not allowed.' }
   validates :private_character,      inclusion: [true, false]
 
+  def total_levels
+    class_and_levels.reduce(0) do |acc, ele|
+      acc += ele.character_level
+      acc
+    end
+  end
+
   def classes_string
     str = ''
     records = class_and_levels.order('character_level DESC')

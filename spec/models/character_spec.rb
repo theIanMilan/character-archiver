@@ -130,6 +130,24 @@ RSpec.describe Character, type: :model do
     end
   end
 
+  describe '#total_levels' do
+    context 'with 1 class_and_levels record' do
+      it 'returns that one character_level' do
+        class_and_level = create(:class_and_level, character: character, character_level: 10)
+        expect(character.total_levels).to eq(class_and_level.character_level)
+      end
+    end
+
+    context 'with multiple class_and_levels records' do
+      it 'returns sum of character_levels' do
+        create(:class_and_level, character: character, character_level: 10)
+        create(:class_and_level, character: character, character_level: 4)
+        create(:class_and_level, character: character, character_level: 2)
+        expect(character.total_levels).to eq((10 + 4 + 2))
+      end
+    end
+  end
+
   describe '#classes_string' do
     it 'returns comma separated list with and if 3+ elements' do
       create(:class_and_level, character: character,
