@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_20_140754) do
+ActiveRecord::Schema.define(version: 2021_10_03_220554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,21 @@ ActiveRecord::Schema.define(version: 2021_09_20_140754) do
     t.index ["character_class", "character_id"], name: "index_class_and_levels_on_character_class_and_character_id", unique: true
     t.index ["character_id"], name: "index_class_and_levels_on_character_id"
     t.index ["character_subclass", "character_id"], name: "idx_class_and_levels_on_char_subclass_and_char_id", unique: true
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.string "symbol_URL"
+    t.string "type"
+    t.string "base_of_operations"
+    t.text "goals"
+    t.text "intro"
+    t.text "quote"
+    t.text "organization_history"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_organizations_on_user_id"
   end
 
   create_table "physical_attributes", force: :cascade do |t|
@@ -111,5 +126,6 @@ ActiveRecord::Schema.define(version: 2021_09_20_140754) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "organizations", "users"
   add_foreign_key "profiles", "users"
 end

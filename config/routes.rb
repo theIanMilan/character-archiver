@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resource :searches, only: %i[edit update destroy]
     resource :backstories, only: %i[edit update destroy]
   end
+  resources :organizations
 
   get   '/search_board',            to: 'searches#search_board',     as: 'search_board'
   get   '/folklore',                to: 'backstories#folklore',      as: 'folklore'
