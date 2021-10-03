@@ -1,24 +1,35 @@
-# README
+## Live Demo
+View the live app [at heroku.](https://character-archiver.herokuapp.com/)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Status: Active
+Currently still in early development.
 
-Things you may want to cover:
+## Introduction
 
-* Ruby version
+Social media for D&D characters for creating social relationships and sharing their rich backstories.
 
-* System dependencies
+## Screenshots
 
-* Configuration
+<p float = 'left'>
+    <img src="https://user-images.githubusercontent.com/66746718/135760792-61d6d035-63c1-4755-adc1-098736d57fea.png" alt="Character Page" width="1000" height="500">
+</p>
 
-* Database creation
+## App Architecture/ ERD:
+_To be added_
 
-* Database initialization
+## Technologies
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby v2.7.3
+* Ruby on Rails v6.1.4
+* CSS and SCSS
+* Bootstrap5
+* PostgresQL
+* `Devise` gem for authentication
+* `Cancancan` gem for authorization
+* `toastr` gem for notifications
+* `rails_admin` gem for admin dashboard
+* `obscenity` gem
+* `auto_strip_attributes` gem
+* `aes` gem
+* `simple_form` gem
+* `draper` gem
