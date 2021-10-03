@@ -1,8 +1,10 @@
+[![Generic badge](https://img.shields.io/badge/Status-In%20Early%20Development-red.svg)](https://shields.io/)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/theIanMilan/character-archiver/graphs/commit-activity)
+[![Website character-archiver.herokuapp.com](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://character-archiver.herokuapp.com/)
+[![Ruby](https://badgen.net/badge/icon/ruby?icon=ruby&label)](https://https://ruby-lang.org/)
+
 ## Live Demo
 View the live app [at heroku.](https://character-archiver.herokuapp.com/)
-
-## Status: Active
-Currently still in early development.
 
 ## Introduction
 
