@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:search_board]
   before_action :set_character, only: %i[edit update destroy]
   before_action :set_search, only: %i[edit update destroy]
 

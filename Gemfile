@@ -28,10 +28,12 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'guard-livereload', '~> 2.5', require: false
   gem 'rack-livereload'
-  gem 'factory_bot_rails'
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'brakeman'
 end
+
+# Moved temporarily for seeding in production
+gem 'factory_bot_rails'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

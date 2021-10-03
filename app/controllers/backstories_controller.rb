@@ -1,4 +1,5 @@
 class BackstoriesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:folklore]
   before_action :set_character, only: %i[edit update destroy]
   before_action :set_backstory, only: %i[edit update destroy]
 

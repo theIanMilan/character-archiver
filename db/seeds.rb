@@ -1,6 +1,6 @@
 require 'faker'
 require 'factory_bot_rails'
-require 'byebug'
+# require 'byebug'
 
 User.create!([
   {email: 'theIanMilan@character-archiver.com', username: 'TheDungeonKeeper', password: 'password', role: 0},
