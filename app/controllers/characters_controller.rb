@@ -2,7 +2,7 @@ class CharactersController < ApplicationController
   before_action :set_character, only: %i[show edit update destroy]
 
   def index
-    @characters = Character.all
+    @characters = Character.order('updated_at DESC')
   end
 
   def show; end
@@ -35,6 +35,7 @@ class CharactersController < ApplicationController
       redirect_to character_path(@character)
     else
       flash.alert = 'Failed: Error in updating Character.'
+      render 'edit'
     end
   end
 

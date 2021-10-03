@@ -11,6 +11,7 @@ class PhysicalAttributesController < ApplicationController
       redirect_to character_path(@character)
     else
       flash.alert = 'Failed: Error in updating Physical Attributes.'
+      render 'edit'
     end
   end
 

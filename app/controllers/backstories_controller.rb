@@ -4,7 +4,7 @@ class BackstoriesController < ApplicationController
 
   def folklore
     array_of_ids = Backstory.all.pluck(:character_id)
-    @characters = Character.where(id: array_of_ids)
+    @characters = Character.where(id: array_of_ids).order('updated_at DESC')
   end
 
   def edit; end
@@ -16,6 +16,7 @@ class BackstoriesController < ApplicationController
       redirect_to character_path(@character)
     else
       flash.alert = 'Failed: Error in updating Backstory details.'
+      render 'edit'
     end
   end
 

@@ -51,3 +51,4 @@ jobs:
         DATABASE_PASSWORD: 'test'
         RAILS_TEST_KEY: ${{ secrets.RAILS_TEST_KEY }}
         AES_KEY: ${{ secrets.AES_KEY }}
+        IV_KEY: ${{ secrets.IV_KEY }}

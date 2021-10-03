@@ -44,6 +44,11 @@ RSpec.describe Profile, type: :model do
       expect(profile).not_to be_valid
     end
 
+    it 'is not valid with invalid http avatar_URL' do
+      profile.avatar_URL = 'i.redd.it/pvjdif3371y41.png'
+      expect(profile).not_to be_valid
+    end
+
     it 'is not valid with about_me of over 500 characters' do
       profile.display_name = Faker::Lorem.paragraph_by_chars(number: 501, supplemental: false)
       expect(profile).not_to be_valid
@@ -72,6 +77,21 @@ RSpec.describe Profile, type: :model do
     it 'is not valid with invalid instagram_username format' do
       profile.instagram_username = 'abacus.gregory!'
       expect(profile).not_to be_valid
+    end
+  end
+
+  describe '#characters_count' do
+    context "when Profile's user has no characters" do
+      it 'returns 0' do
+        expect(profile.characters_count).to eq(0)
+      end
+    end
+
+    context "when Profile's user has characters" do
+      it 'returns an integer' do
+        create(:character, user: profile.user)
+        expect(profile.characters_count).to eq(1)
+      end
     end
   end
 end

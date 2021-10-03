@@ -43,7 +43,7 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile = User.find_by(username: params[:username]).profile
+    @profile = User.find_by(username: params[:username]).profile.decorate
   end
 
   def profile_params

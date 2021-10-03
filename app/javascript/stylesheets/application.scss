@@ -1,10 +1,28 @@
 @import 'toastr';
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@100;300;400;700&display=swap');
 
-html {
-  background-color: red;
-};
+:root {
+  --primary-font: 'Montserrat', sans-serif;
+  --secondary-font: 'Lato', sans-serif;
+}
 
-// GLOBAL STYLES
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+* {
+  font-family: var(--secondary-font);
+}
+
+// GLOBAL ELEMENT STYLES
+
+// GLOBAL CLASS STYLES
 .bold {
   font-weight: bold;
  }
@@ -16,3 +34,15 @@ html {
  .underline {
   text-decoration: underline;
  }
+
+ .hide {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+// Offset body by fixed navbar
+.padding-nav-bar {
+  padding-top: 65px;
+}

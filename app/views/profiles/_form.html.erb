@@ -1,57 +1,31 @@
-<%= form_with(model: profile) do |form| %>
-  <% if profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+<%= simple_form_for(profile, defaults: {wrapper_html: {class: 'mb-3'}}) do |form| %>
+  <%= form.error_notification %>
 
-      <ul>
-        <% profile.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :display_name %>
-    <%= form.text_field :display_name %>
-  </div>
-
-  <div>
-    <%= form.label :avatar_URL %>
-    <%= form.text_field :avatar_URL %>
-  </div>
-
-  <div>
-    <%= form.label :about_me %>
-    <%= form.text_field :about_me %>
-  </div>
-
-  <div>
-    <%= form.label :date_of_birth %>
-    <%= form.date_field :date_of_birth %>
-  </div>
-
-  <div>
-    <%= form.label :location %>
-    <%= form.text_field :location %>
-  </div>
-
-  <div>
+    <%= form.input :display_name, hint: 'You can use a different display name than your username.' %>
+    <%= form.input :avatar_URL %>
+    <%= form.input :about_me %>
+    <%= form.input :date_of_birth, as: :date, 
+                                   start_year: Date.today.year - 90,
+                                   end_year: Date.today.year - 12 %>
+    <%= form.input :location %>
+  
+  <div class="mb-2">
+    <i class="fab fa-twitter twitter-color" role="img" aria-label="Twitter Icon"></i>
     <%= form.label :twitter_username %>
-    <%= form.text_field :twitter_username %>
+    <%= form.input_field :twitter_username, class: 'form-control' %>
   </div>
   
-  <div>
+  <div class="mb-2">
+    <i class="fab fa-instagram instagram-color" role="img" aria-label="Instagram Icon"></i>
     <%= form.label :instagram_username %>
-    <%= form.text_field :instagram_username %>
+    <%= form.input_field :instagram_username, class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="mb-2">
+    <i class="fab fa-discord discord-color" role="img" aria-label="Discord Icon"></i>
     <%= form.label :discord_username %>
-    <%= form.text_field :discord_username %>
+    <%= form.input_field :discord_username, class: 'form-control' %>
   </div>  
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.button :submit, class: 'btn btn-primary my-3' %>
 <% end %>

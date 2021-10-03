@@ -10,7 +10,7 @@ require("channels")
 require('jquery') // may be redundant. Also made available in environment.js as a global plugin
 window.$ = $
 require('select2')
-$.fn.select2.defaults.set( "theme", "bootstrap" );
+$.fn.select2.defaults.set("theme", "bootstrap");
 
 // Toastr
 global.toastr = require('toastr')
@@ -20,4 +20,5 @@ import 'bootstrap/dist/js/bootstrap'
 import "bootstrap/dist/css/bootstrap"
 import 'select2/dist/css/select2.css'
 import 'select2-bootstrap-theme/dist/select2-bootstrap'
+import "@fortawesome/fontawesome-free/css/all"
 import "stylesheets/application"

@@ -1,6 +1,10 @@
-<h1>Editing Profile</h1>
+<% content_for :title, "Editing Profile for #{@profile.username}" %>
 
-<%= render 'form', {profile: @profile} %>
-
-<%= link_to 'Show', profile_path(@profile.username) %> |
-<%= link_to 'Back', :back %>
+<div class="container">
+  <h1>Editing Profile</h1>
+  
+  <%= render 'form', {profile: @profile} %>
+  
+  <%= link_to 'User Profile', profile_path(@profile.username) %> |
+  <%= link_to 'Back', :back %>
+</div>

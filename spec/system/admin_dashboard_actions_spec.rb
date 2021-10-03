@@ -11,11 +11,13 @@ RSpec.describe 'AdminDashboardActions', type: :system do
 
   it 'logs in as admin through login page' do
     visit root_path
-    click_on 'Sign in'
+    find('#header-sign-in').click
 
     find('#user_login').click.set(admin.email)
     find('#user_password').click.set(admin.password)
-    click_on 'Log in'
+    within '#new_user' do
+      click_on 'Sign in'
+    end
 
     expect(page).to have_content('Site Administration')
   end

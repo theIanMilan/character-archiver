@@ -4,6 +4,9 @@ class Profile < ApplicationRecord
   validates :display_name,        presence: true,
                                   length: { maximum: 50 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
+  validates :avatar_URL,          format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+                                            message: 'is invalid without http or https.' },
+                                  allow_nil: true
   validates :about_me,            length: { maximum: 500 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
   validates :location,            length: { maximum: 75 },
@@ -16,14 +19,8 @@ class Profile < ApplicationRecord
 
   delegate :username, to: :user
 
-  def display_avatar
-    if avatar_URL.nil?
-      require 'aes' # AES encryption
-      encrypted = AES.encrypt(username, ENV['AES_KEY'])
-      "https://avatars.dicebear.com/api/pixel-art-neutral/#{encrypted}.svg" || "https://avatar.oxro.io/avatar.svg?name=#{username}"
-    else
-      avatar_URL
-    end
+  def characters_count
+    user.characters.count
   end
 
   # Override ActiveRecord method so routes will use username instead of id
