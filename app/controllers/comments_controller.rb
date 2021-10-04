@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
       redirect_to profile_path(@profile.username) and return
     end
     flash.alert = 'Failed: Error in creating Character.'
-    redirect_to profile_path(@profile.username)
+    redirect_to profile_path(@profile.username) # Render produces an error
   end
 
   def destroy
