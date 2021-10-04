@@ -38,10 +38,14 @@ class BackstoriesController < ApplicationController
   end
 
   def search_params
-    params.require(:backstory).permit(:body,
+    params.require(:backstory).permit(:intro,
+                                      :quote_body,
+                                      :quote_author,
+                                      :appearance,
                                       :personality,
                                       :ideals,
                                       :bonds,
-                                      :flaws)
+                                      :flaws,
+                                      :biography)
   end
 end

@@ -17,11 +17,15 @@ ActiveRecord::Schema.define(version: 2021_10_04_101443) do
 
   create_table "backstories", force: :cascade do |t|
     t.bigint "character_id"
-    t.text "body"
+    t.text "intro"
+    t.text "quote_body"
+    t.string "quote_author"
+    t.text "appearance"
     t.text "personality"
     t.text "ideals"
     t.text "bonds"
     t.text "flaws"
+    t.text "biography"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["character_id"], name: "index_backstories_on_character_id"

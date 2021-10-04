@@ -16,7 +16,7 @@ RSpec.describe 'Create or Edit Backstory', type: :system do
 
       it 'redirects to its character page with details' do
         expect(page).to have_current_path(character_path(character))
-        expect(page).to have_content('dVVV')
+        expect(page).to have_text('dVVV')
       end
 
       it 'creates a Backstory record' do
@@ -26,7 +26,7 @@ RSpec.describe 'Create or Edit Backstory', type: :system do
     end
 
     context 'with invalid details' do
-      before { create_character_backstory(character, Faker::Lorem.paragraph_by_chars(number: 4_001, supplemental: false)) }
+      before { create_character_backstory(character, Faker::Lorem.paragraph_by_chars(number: 10_001, supplemental: false)) }
 
       it 'does not create a Backstory record' do
         expect(Backstory.count).to eq 0
@@ -51,11 +51,11 @@ RSpec.describe 'Create or Edit Backstory', type: :system do
     context 'with invalid details' do
       before do
         create_character_backstory(character, 'dVVV')
-        update_character_backstory(character, Faker::Lorem.paragraph_by_chars(number: 4_001, supplemental: false))
+        update_character_backstory(character, Faker::Lorem.paragraph_by_chars(number: 10_001, supplemental: false))
       end
 
       it 'does not update details in Backstory record' do
-        expect(Backstory.first.body).to eq('dVVV')
+        expect(Backstory.first.biography).to eq('dVVV')
       end
     end
   end
