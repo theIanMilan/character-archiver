@@ -21,7 +21,7 @@
               <p><%= @profile.display_location_with_icon %></p>
             </div>
           </div>
-          <div class="p-4 text-black" style="background-color: #f8f9fa;">
+          <div class="p-2 text-black" style="background-color: #f8f9fa;">
             <div class="d-flex justify-content-end text-center py-1">
               <div>
                 <p class="mb-1 h5"><%= @profile.characters_count %></p>
@@ -60,10 +60,15 @@
 
             <!-- Comments -->
             <div class="mb-5">
-              <p class="lead fw-normal mb-1">Comments</p>
+              <p class="lead fw-normal my-1 py-2 border-top">Comments</p>
               <div class="p-4" style="background-color: #f8f9fa">
-                <p>No comments yet.</p>
-                <%= link_to 'Add Comment', edit_profile_path(@profile.username), class: 'btn btn-outline-dark profile-edit' %>
+                <% if @profile.comments.present? %>
+                  <%= render @profile.comments %>
+                <% else %>
+                  <p><em>No comments yet.</em></p>
+                <% end %>
+                
+                <%= render 'comments/form' %>
               </div>
             </div>
           </div>

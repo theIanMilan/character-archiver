@@ -9,12 +9,11 @@ Rails.application.routes.draw do
   root 'pages#welcome'
   get   '/home',          to: 'pages#welcome',  as: 'home'
   get   '/about_us',      to: 'pages#about',    as: 'about'
-  # resources :profiles, only: %i[show edit update], param: :username
-  get   '/profiles/:username',      to: 'profiles#show',    as: 'profile'
-  get   '/profiles/:username/edit', to: 'profiles#edit',    as: 'edit_profile'
-  put   '/profiles/:username',      to: 'profiles#update'
-  patch '/profiles/:username',      to: 'profiles#update'
-  get   '/profiles/:username/characters', to: 'profiles#user_characters', as: 'user_characters'
+  resources :profiles, only: %i[show edit update], param: :username do
+    resources :comments, only: %i[new create destroy]
+  end
+  
+  get   '/profiles/:profile_username/characters', to: 'profiles#user_characters', as: 'user_characters'
 
   resources :characters do
     resource :physical_attributes, only: %i[edit update destroy]
