@@ -1,39 +1,46 @@
 <header class="navbar-nav fixed-top navbar-light bg-light p-2 border-bottom">
     <div class="container-fluid">
-      <div class="w-100 d-flex flex-wrap align-items-center justify-content-between">
+      <nav class="navbar navbar-expand-lg d-flex flex-wrap align-items-center justify-content-between">
         <!-- left elements -->
-        <div class="d-flex">
-          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-            <i class="fab fa-github github-color" role="img" aria-label="Github Icon"></i>
+
+          <a href="/" class="navbar-brand d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+            <i class="fab fa-github github-color fa-2x" role="img" aria-label="Github Icon"></i>
           </a>
-          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><%= link_to 'Home', root_path, {class: 'nav-link px-2 link-dark', title: "Home page"} %></li>
-            <li><%= link_to 'Characters', characters_path, {class: 'nav-link px-2 link-dark', title: "Characters: List of all Characters."} %></li>
-            <li><%= link_to 'Search Board', search_board_path, {class: 'nav-link px-2 link-dark', title: 'Search Board: Characters currently searching for connections.'} %></li>
-            <li><%= link_to 'Folklore', folklore_path, {class: 'nav-link px-2 link-dark', title: "Folklore: Learn about each Characters rich backstory."} %></li>
-            <li><%= link_to 'Organizations', organizations_path, {class: 'nav-link px-2 link-dark', title: "Organizations: List of established social groups."} %></li>
-            <li><%= link_to 'About', about_path, {class: 'nav-link px-2 link-dark', title: "About the creator of this website."} %></li>
-          </ul>
-        </div>
+
+          <button class="navbar-toggler me-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div id="navbarCollapse" class="navbar-collapse collapse">
+            <ul class="navbar-nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <%= link_to 'Home', home_path, {class: 'nav-item nav-link px-2 link-dark', title: "Home page" } %>
+              <%= link_to 'Characters', characters_path, {class: 'nav-item nav-link px-2 link-dark', title: "Characters: List of all Characters."} %>
+              <%= link_to 'Search Board', search_board_path, {class: 'nav-item nav-link px-2 link-dark', title: 'Search Board: Characters currently searching for connections.'} %>
+              <%= link_to 'Folklore', folklore_path, {class: 'nav-item nav-link px-2 link-dark', title: "Folklore: Learn about each Characters rich backstory."} %>
+              <%= link_to 'Organizations', organizations_path, {class: 'nav-item nav-link px-2 link-dark', title: "Organizations: List of established social groups."} %>
+              <%= link_to 'About', about_path, {class: 'nav-item nav-link px-2 link-dark', title: "About the creator of this website."} %>
+            </ul>
+          </div>
+
         <!-- right elements -->
-        <ul class="navbar-nav d-flex flex-row">
+        <ul class="navbar-nav d-flex flex-row ms-auto">
           <!-- Signed in? -->
           <% if user_signed_in? %>
-            <li class="nav-item me-4 me-lg-3">
+            <li class="nav-item me-3 me-lg-3">
               <a class="nav-link" href="#">
                 <i class="fas fa-envelope fa-2x" role="img" aria-label="Icon" title="Inbox"></i>
               </a>
             </li>
-            <li class="nav-item me-4 me-lg-3">
+            <li class="nav-item me-3 me-lg-3">
               <a class="nav-link" href="#">
                 <i class="fas fa-bell fa-2x" role="img" aria-label="Icon" title="Notifications"></i>
               </a>
             </li>
-            <li class="nav-item me-4 me-lg-3">
+            <li class="nav-item me-lg-3">
               <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <%= image_tag current_user.profile.decorate.display_avatar, class: 'header-profile rounded-circle' %>
               </a>
-              <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+              <ul class="position-absolute dropdown-menu dropdown-menu-end text-small" aria-labelledby="dropdownUser1" style="">
                 <li><%= link_to 'My Profile', profile_path(current_user.username), class: 'dropdown-item' %></li>
                 <li><%= link_to 'My Characters', user_characters_path(current_user.username), class: 'dropdown-item' %></li>
                 <li><hr class="dropdown-divider"></li>
@@ -48,6 +55,19 @@
             </div>
           <% end %>
         </ul>
-      </div>
+      </nav>
     </div>
 </header>
+
+<script>
+  // Set active class on navbar
+  var pathname = window.location.pathname,
+  pages = ['home', 'characters', 'search_board', 'folklore', 'organizations', 'about'];
+
+  $(document).ready(function () {
+    $('.nav-item.nav-link').each(function(i) {
+      if (pathname.includes(pages[i])) $(this).addClass('active');
+      else if (this.className.includes('active')) $(this).removeClass('active');
+    });
+  });
+</script>

@@ -28,7 +28,7 @@
     <%= render 'layouts/header' %>
 
     <!-- Content -->
-    <div class="flex-shrink-0">
+    <div class="my-4 flex-shrink-0">
       <%= yield %>
     </div>
 
@@ -38,23 +38,22 @@
       $(document).ready(function () {
       $('.scroll-top').on("click", scrollToTop)
       $(window).on("scroll", toggleScrollTop)
-    });
+      });
 
-    function scrollToTop() {
-      $('html, body').stop().animate({ scrollTop: 0 }, 500);
-      return false;
-    }
-
-    function toggleScrollTop() {
-      // when user scrolls down 20px from document, show button
-      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-        $('.scroll-top').addClass('scroll-top-show');
-      } else {
-        $('.scroll-top').removeClass('scroll-top-show');
+      function scrollToTop() {
+        $('html, body').stop().animate({ scrollTop: 0 }, 500);
+        return false;
       }
-    }
-    </script>
 
+      function toggleScrollTop() {
+        // when user scrolls down 20px from document, show button
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+          $('.scroll-top').addClass('scroll-top-show');
+        } else {
+          $('.scroll-top').removeClass('scroll-top-show');
+        }
+      }
+    </script>
 
     <!-- Fixed footer -->
     <%= render 'layouts/footer' %>
