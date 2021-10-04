@@ -133,7 +133,7 @@
 
     <!-- Backstory -->
     <div class="col-md-8">
-      <section class="mb-4">
+      <section id="description-section" class="mb-4">
         <h2 class="pb-4 mb-4 border-bottom">
           Description <span class="fs-5"><%= link_to 'Edit', edit_character_backstories_path(@character) %></span>
         </h2>
@@ -152,13 +152,13 @@
         <% end %>
       </section>
 
-      <section class="mb-4">
+      <section id="biography-section" class="mb-4">
         <h2 class="pb-4 mb-4 mt-2 border-bottom">
           Biography
         </h2>
 
         <% if @backstory = @character.backstory %>
-          <%= @backstory.body %>
+          <%= @backstory.biography %>
         <% else %>
           <p><i>No information available</i></p>
         <% end %>
