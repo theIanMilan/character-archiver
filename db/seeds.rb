@@ -86,3 +86,5 @@ char4 = FactoryBot.create(:character, character_portrait_URL: 'https://i.pinimg.
 char4.class_and_levels.create(character_class: 'Rogue',
                               character_subclass: 'Swashbuckler',
                               character_level: rand(3..12))
+
+FactoryBot.create(:comment, user: user2, profile: user1.profile)
