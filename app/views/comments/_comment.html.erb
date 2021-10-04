@@ -1,0 +1,22 @@
+<div class="container border-bottom mb-2 pb-1">
+  <div class="row">
+    <div class="col-md-12 d-flex align-items-center justify-content-between">
+      <div class="pt-1"><%= link_to comment.user.username %></div>
+      <div class='d-flex flex-column d-sm-block'>
+        <%= link_to 'Delete', [comment.profile, comment],
+          method: :delete, data: {confirm: "Are you sure?"},
+          class: 'badge btn btn-danger my-1 me-2' %>
+        <span><%= comment.created_at.strftime('%x %-I:%M %p')  %></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-1">
+    <div class="col-lg-2 col-xl-1 d-flex justify-content-center d-sm-block">
+      <img src="<%= comment.user.profile.decorate.display_avatar %>" alt="Profile Photo" class="float-left img-fluid img-thumbnail me-2 mb-2" style="width: 75px; z-index: 1">
+    </div>
+    <div class="col-lg-10 col-xl-11">
+      <span class="text-break mb-0"><%= comment.body %></span>
+    </div>
+  </div>
+</div>

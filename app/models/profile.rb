@@ -1,5 +1,6 @@
 class Profile < ApplicationRecord
   belongs_to :user
+  has_many :comments, dependent: :destroy
 
   validates :display_name,        presence: true,
                                   length: { maximum: 50 },
