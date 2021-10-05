@@ -2,12 +2,20 @@ class Profile < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
+  auto_strip_attributes :display_name, squish: true
+  auto_strip_attributes :avatar_URL, squish: true
+  auto_strip_attributes :about_me, squish: true
+  auto_strip_attributes :location, squish: true
+  auto_strip_attributes :instagram_username, squish: true
+  auto_strip_attributes :twitter_username, squish: true
+  auto_strip_attributes :discord_username, squish: true
+
   validates :display_name,        presence: true,
                                   length: { maximum: 50 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
   validates :avatar_URL,          format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
                                             message: 'is invalid without http or https.' },
-                                  allow_nil: true
+                                  allow_blank: true
   validates :about_me,            length: { maximum: 500 },
                                   obscenity: { message: 'Obscene words are not allowed.' }
   validates :location,            length: { maximum: 75 },

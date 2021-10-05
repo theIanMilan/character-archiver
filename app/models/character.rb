@@ -34,11 +34,11 @@ class Character < ApplicationRecord
                                      obscenity: { message: 'Obscene words are not allowed.' }
   validates :character_portrait_URL, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
                                                message: 'is invalid without http or https.' },
-                                     allow_nil: true
+                                     allow_blank: true
   validates :portrait_credit_artist, length: { maximum: 50 }
   validates :portrait_credit_URL,    format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
                                                message: 'is invalid without http or https.' },
-                                     allow_nil: true
+                                     allow_blank: true
   validates :background,             presence: true,
                                      length: { maximum: 50 },
                                      obscenity: { message: 'Obscene words are not allowed.' }
