@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[new create destroy]
   end
   
-  get   '/profiles/:profile_username/characters', to: 'profiles#user_characters', as: 'user_characters'
+  get   '/profiles/:username/characters', to: 'profiles#user_characters', as: 'user_characters'
 
   resources :characters do
     resource :physical_attributes, only: %i[edit update destroy]
