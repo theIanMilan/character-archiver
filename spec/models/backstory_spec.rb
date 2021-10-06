@@ -5,6 +5,23 @@ RSpec.describe Backstory, type: :model do
 
   context 'with valid attributes' do
     it { is_expected.to be_valid }
+  end
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:character) }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:intro) }
+    it { is_expected.to validate_length_of(:intro) }
+    it { is_expected.to validate_length_of(:quote_body) }
+    it { is_expected.to validate_length_of(:appearance) }
+    it { is_expected.to validate_length_of(:personality) }
+    it { is_expected.to validate_length_of(:ideals) }
+    it { is_expected.to validate_length_of(:bonds) }
+    it { is_expected.to validate_length_of(:flaws) }
+    it { is_expected.to validate_presence_of(:biography) }
+    it { is_expected.to validate_length_of(:biography) }
 
     it 'is valid with no profane words' do
       expect(backstory.intro).not_to be_profane
@@ -16,38 +33,6 @@ RSpec.describe Backstory, type: :model do
       expect(backstory.bonds).not_to be_profane
       expect(backstory.flaws).not_to be_profane
       expect(backstory.biography).not_to be_profane
-    end
-  end
-
-  context 'with invalid attributes' do
-    it 'is not valid with personality of over 4_000 characters' do
-      backstory.personality = Faker::Lorem.paragraph_by_chars(number: 4_001, supplemental: false)
-      expect(backstory).not_to be_valid
-    end
-
-    it 'is not valid with ideals of over 4_000 characters' do
-      backstory.ideals = Faker::Lorem.paragraph_by_chars(number: 4_001, supplemental: false)
-      expect(backstory).not_to be_valid
-    end
-
-    it 'is not valid with bonds of over 4_000 characters' do
-      backstory.bonds = Faker::Lorem.paragraph_by_chars(number: 4_001, supplemental: false)
-      expect(backstory).not_to be_valid
-    end
-
-    it 'is not valid with flaws of over 4_000 characters' do
-      backstory.flaws = Faker::Lorem.paragraph_by_chars(number: 4_001, supplemental: false)
-      expect(backstory).not_to be_valid
-    end
-
-    it 'is not valid with no biography' do
-      backstory.biography = nil
-      expect(backstory).not_to be_valid
-    end
-
-    it 'is not valid with biography of over 10_000 characters' do
-      backstory.biography = Faker::Lorem.paragraph_by_chars(number: 10_001, supplemental: false)
-      expect(backstory).not_to be_valid
     end
   end
 end

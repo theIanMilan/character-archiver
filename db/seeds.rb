@@ -3,14 +3,14 @@ require 'factory_bot_rails'
 # require 'byebug'
 
 User.create!([
-  {email: 'theIanMilan@character-archiver.com', username: 'TheDungeonKeeper', password: 'password', role: 0},
+  {email: 'theIanMilan@character-archiver.com', username: 'theArchivist', password: 'password', role: 0},
   {email: 'user1@example.com', username: 'commoner', password: 'password' },
   {email: 'user2@example.com', username: 'DrowHighborn', password: 'password' }
 ])
 
 user1 = User.find(2)
 user1_profile = user1.profile
-user1_profile.avatar_URL = 'https://i.redd.it/pvjdif3371y41.png'
+user1_profile[:avatar_URL] = 'https://i.redd.it/pvjdif3371y41.png'
 user1_profile.save!
 
 user2 = User.find(3)
@@ -33,7 +33,7 @@ char = user1.characters.create(character_name: 'Theo Reinhardt',
 char.class_and_levels.create(character_class: 'Wizard',
                              character_subclass: 'Abjuration',
                              character_level: 8)
-char.create_backstory(body: 'Theo, a former member of the Orc Clan, Rivashek, is trying to forget his past and living a more civilized life. But he feels he has to face his clan members sooner or later.',
+char.create_backstory(biography: 'Theo, a former member of the Orc Clan, Rivashek, is trying to forget his past and living a more civilized life. But he feels he has to face his clan members sooner or later.',
                       personality: 'Bookish and innocently prude. Is awkward in social situations.',
                       flaws: 'Is easily distracted by the promise of information.',
                       bonds: 'Working to preserve a great library at his current city.',

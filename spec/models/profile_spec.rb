@@ -4,79 +4,38 @@ RSpec.describe Profile, type: :model do
   subject(:profile) { build(:profile) }
 
   context 'with valid attributes' do
-    it 'is valid with twitter_username using _' do
-      profile.twitter_username = 'ab_bbjb_n'
-      expect(profile).to be_valid
-    end
+    it { is_expected.to be_valid }
+    it { is_expected.to allow_value(nil).for(:avatar_URL) }
+    it { is_expected.to allow_value(nil).for(:twitter_username) }
+    it { is_expected.to allow_value(nil).for(:instagram_username) }
+    it { is_expected.to allow_value(nil).for(:discord_username) }
+  end
 
-    it 'is valid with instagram_username using . and _' do
-      profile.instagram_username = 'period_icity.lights'
-      expect(profile).to be_valid
-    end
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:display_name) }
+    it { is_expected.to validate_length_of(:display_name) }
+    it { is_expected.to allow_value('http://').for(:avatar_URL) }
+    it { is_expected.not_to allow_value('twitter.com').for(:avatar_URL) }
+    it { is_expected.to allow_value('').for(:avatar_URL) }
+    it { is_expected.to validate_length_of(:about_me) }
+    it { is_expected.to validate_length_of(:twitter_username) }
+    it { is_expected.to allow_value('janeAusten_1').for(:twitter_username) }
+    it { is_expected.not_to allow_value('jane.austin').for(:twitter_username) }
+    it { is_expected.to validate_length_of(:instagram_username) }
+    it { is_expected.to allow_value('jane.Austen_1').for(:instagram_username) }
+    it { is_expected.not_to allow_value('jane.aust***n').for(:instagram_username) }
+    it { is_expected.to validate_length_of(:discord_username) }
+    it { is_expected.to allow_value('LilyPads3#6786').for(:discord_username) }
+    it { is_expected.not_to allow_value('Journeys#76788').for(:discord_username) }
 
     it 'is valid with no profane words' do
       expect(profile.display_name).not_to be_profane
       expect(profile.about_me).not_to be_profane
       expect(profile.location).not_to be_profane
-    end
-  end
-
-  context 'with nil attributes' do
-    it 'is not valid with nil display_name' do
-      profile.display_name = nil
-      expect(profile).not_to be_valid
-    end
-
-    it 'is valid with nil twitter_username' do
-      profile.twitter_username = nil
-      expect(profile).to be_valid
-    end
-
-    it 'is valid with nil instagram_username' do
-      profile.instagram_username = nil
-      expect(profile).to be_valid
-    end
-  end
-
-  context 'with invalid attributes' do
-    it 'is not valid with display name of over 50 characters' do
-      profile.display_name = Faker::Internet.username(specifier: 51..51)
-      expect(profile).not_to be_valid
-    end
-
-    it 'is not valid with invalid http avatar_URL' do
-      profile.avatar_URL = 'i.redd.it/pvjdif3371y41.png'
-      expect(profile).not_to be_valid
-    end
-
-    it 'is not valid with about_me of over 500 characters' do
-      profile.display_name = Faker::Lorem.paragraph_by_chars(number: 501, supplemental: false)
-      expect(profile).not_to be_valid
-    end
-
-    it 'is not valid with location of over 75 characters' do
-      profile.location = Faker::Internet.username(specifier: 76)
-      expect(profile).not_to be_valid
-    end
-
-    it 'is not valid with twitter_username of over 15 characters' do
-      profile.twitter_username = Faker::Internet.username(specifier: 16)
-      expect(profile).not_to be_valid
-    end
-
-    it 'is not valid with invalid twitter_username format' do
-      profile.twitter_username = 'abacus.gregory'
-      expect(profile).not_to be_valid
-    end
-
-    it 'is not valid with instagram_username of over 30 characters' do
-      profile.instagram_username = Faker::Internet.username(specifier: 31)
-      expect(profile).not_to be_valid
-    end
-
-    it 'is not valid with invalid instagram_username format' do
-      profile.instagram_username = 'abacus.gregory!'
-      expect(profile).not_to be_valid
     end
   end
 

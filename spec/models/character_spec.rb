@@ -10,123 +10,40 @@ RSpec.describe Character, type: :model do
       character.alignment = 0
       expect(character).to be_valid
     end
-  end
 
-  context 'with invalid length attributes' do
-    it 'is not valid with portrait credit artist of over 50 characters' do
-      character.portrait_credit_artist = Faker::Internet.username(specifier: 51..51)
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with background of over 50 characters' do
-      character.background = Faker::Internet.username(specifier: 51..51)
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with race of over 30 characters' do
-      character.race = Faker::Internet.username(specifier: 31)
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with sex of over 20 characters' do
-      character.sex = Faker::Internet.username(specifier: 21)
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with gender of over 30 characters' do
-      character.gender = Faker::Internet.username(specifier: 31)
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with sexual orientation of over 30 characters' do
-      character.sexual_orientation = Faker::Internet.username(specifier: 31)
-      expect(character).not_to be_valid
-    end
-  end
-
-  context 'with nil attributes' do
-    it 'is valid with no character_portrait_URL' do
-      character.character_portrait_URL = nil
+    it 'is valid with alignment names' do
+      character.alignment = 'chaotic_neutral'
       expect(character).to be_valid
     end
-
-    it 'is valid with no portrait_credit_URL' do
-      character.portrait_credit_URL = nil
-      expect(character).to be_valid
-    end
-
-    it 'is not valid with no character_name' do
-      character.character_name = nil
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with no background' do
-      character.background = nil
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with no alignment' do
-      character.alignment = nil
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with no race' do
-      character.race = nil
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with no sex' do
-      character.sex = nil
-      expect(character).not_to be_valid
-    end
   end
 
-  context 'with obscene text' do
-    it 'is not valid with obscene text in display_name' do
-      character.character_name = 'Mister.Shitface'
-      expect(character).not_to be_valid
-    end
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:character_name) }
+    it { is_expected.to allow_value('http://').for(:character_portrait_URL) }
+    it { is_expected.not_to allow_value('twitter.com').for(:character_portrait_URL) }
+    it { is_expected.to allow_value('').for(:character_portrait_URL) }
+    it { is_expected.to validate_length_of(:portrait_credit_artist) }
+    it { is_expected.to allow_value('http://').for(:portrait_credit_URL) }
+    it { is_expected.not_to allow_value('twitter.com').for(:portrait_credit_URL) }
+    it { is_expected.to allow_value('').for(:portrait_credit_URL) }
+    it { is_expected.to validate_presence_of(:background) }
+    it { is_expected.to validate_length_of(:background) }
+    it { is_expected.to validate_presence_of(:alignment) }
+    it { is_expected.to define_enum_for(:alignment).with_values(%w[lawful_good neutral_good chaotic_good lawful_neutral true_neutral chaotic_neutral lawful_evil neutral_evil chaotic_evil]) }
+    it { is_expected.to validate_presence_of(:race) }
+    it { is_expected.to validate_length_of(:race) }
+    it { is_expected.to validate_presence_of(:sex) }
+    it { is_expected.to validate_length_of(:sex) }
+    it { is_expected.to validate_length_of(:gender) }
+    it { is_expected.to validate_length_of(:sexual_orientation) }
 
-    it 'is not valid with obscene text in background' do
-      character.background = 'fucker'
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with obscene text in race' do
-      character.race = 'tits'
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with obscene text in sex' do
-      character.sex = 'bitch'
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with obscene text in gender' do
-      character.gender = 'biatch'
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with obscene text in sexual_orientation' do
-      character.sexual_orientation = 'faggot'
-      expect(character).not_to be_valid
-    end
-  end
-
-  context 'with other invalid attributes' do
-    it 'is not valid with invalid alignment' do
-      expect { character.alignment = 'True Evil' }.to raise_error(ArgumentError)
-      expect { character.alignment = '10' }.to raise_error(ArgumentError)
-    end
-
-    it 'is not valid with invalid http portrait_credit_URL' do
-      character.portrait_credit_URL = 'twitter.com/dungeonMaster'
-      expect(character).not_to be_valid
-    end
-
-    it 'is not valid with invalid http in character_portrait_URL' do
-      character.character_portrait_URL = 'twitter.com/dungeonMaster'
-      expect(character).not_to be_valid
+    it 'is not obscene' do
+      expect(character.character_name).not_to be_profane
+      expect(character.background).not_to be_profane
+      expect(character.race).not_to be_profane
+      expect(character.sex).not_to be_profane
+      expect(character.gender).not_to be_profane
+      expect(character.sexual_orientation).not_to be_profane
     end
   end
 

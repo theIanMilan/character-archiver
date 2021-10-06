@@ -7,40 +7,17 @@ RSpec.describe User, type: :model do
     it { is_expected.to be_valid }
   end
 
-  context 'with invalid attributes' do
-    it 'is not valid with duplicate username' do
-      create(:user, username: 'IAMLegend')
-      expect(build(:user, username: 'iamLEGEND')).not_to be_valid
-    end
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity } # devise ensures all emails stored as lowercase
+    it { is_expected.to validate_presence_of(:username) }
+    it { is_expected.to validate_uniqueness_of(:username) }
+    it { is_expected.to allow_value('Jane.Austen09_127').for(:username) }
+    it { is_expected.not_to allow_value('J@nny#').for(:username) }
+    it { is_expected.to validate_presence_of(:password) }
 
-    it 'is not valid with username with invalid characters' do
-      user.username = 'Regina@George'
-      expect(user).not_to be_valid
-    end
-
-    it 'is not valid without a username' do
-      user.username = nil
-      expect(user).not_to be_valid
-    end
-
-    it 'is not valid with duplicate email' do
-      create(:user, email: '1234NewEmail@example.com')
-      expect(build(:user, email: '1234NewEmail@example.com')).not_to be_valid
-    end
-
-    it 'is not valid without an email' do
-      user.email = nil
-      expect(user).not_to be_valid
-    end
-
-    it 'is not valid without a password' do
-      user.password = nil
-      expect(user).not_to be_valid
-    end
-
-    it 'is not valid with obscene text in username' do
-      user.username = 'blueballs'
-      expect(user).not_to be_valid
+    it 'is not obscene' do
+      expect(user.username).not_to be_profane
     end
   end
 end
