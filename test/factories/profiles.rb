@@ -8,6 +8,6 @@ FactoryBot.define do
     location { Faker::Address.country }
     twitter_username { Faker::Internet.username(specifier: 8..10, separators: '_') }
     instagram_username { Faker::Internet.username(specifier: 8..10, separators: ['.', '_']) }
-    discord_username { "#{Faker::Internet.username(specifier: 8..10, separators: '.')}##{Faker::Number.number(digits: 10)}" }
+    discord_username { "#{Faker::Internet.username(specifier: 8..10, separators: '_')}##{Faker::Number.number(digits: 4)}" }
   end
 end

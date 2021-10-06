@@ -11,9 +11,9 @@ class User < ApplicationRecord
   enum role: { admin: 0, supermoderator: 1, moderator: 2, basic: 9 }
 
   validates :email,    presence: true,
-                       uniqueness: true
+                       uniqueness: { case_sensitive: false }
   validates :username, presence: true,
-                       uniqueness: { case_sensitive: false },
+                       uniqueness: true,
                        # only allow letter, number, underscore and punctuation. i.e. prevent @
                        format: { with: /\A[a-zA-Z0-9_.]*\z/, multiline: false },
                        obscenity: { message: 'Obscene words are not allowed.' }

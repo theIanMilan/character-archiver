@@ -9,75 +9,44 @@ RSpec.describe ClassAndLevel, type: :model do
     it { is_expected.to be_valid }
   end
 
-  context 'with invalid character_class' do
-    it 'is not valid without character_class' do
-      class_and_level.character_class = nil
-      expect(class_and_level).not_to be_valid
-    end
+  describe 'associations' do
+    it { is_expected.to belong_to(:character) }
+  end
 
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:character_class) }
+    it { is_expected.to validate_length_of(:character_class) }
+    it { is_expected.to allow_value('Figh er123_.').for(:character_class) }
+    it { is_expected.not_to allow_value('Fight er!!').for(:character_class) }
+    it { is_expected.to validate_presence_of(:character_subclass) }
+    it { is_expected.to validate_length_of(:character_subclass) }
+    it { is_expected.to allow_value('Fighte r123_.').for(:character_subclass) }
+    it { is_expected.not_to allow_value('Fig hter!!').for(:character_subclass) }
+    it { is_expected.to validate_presence_of(:character_level) }
+    it { is_expected.to validate_numericality_of(:character_level) }
+
+    # should_matcher for uniqueness triggers and fails #total_level_less_than30. Opted for ordinary RSpec
+    # it { is_expected.to validate_uniqueness_of(:character_subclass).scoped_to(:character_id).with_message('must be unique for the same character') }
     it 'is not valid with duplicate character_class' do
       create(:class_and_level, character: character, character_class: 'fighter')
       class_and_level.character_class = 'fighter'
       expect(class_and_level).not_to be_valid
     end
 
-    it 'is not valid with character_class length of over 30' do
-      class_and_level.character_class = Faker::Internet.username(specifier: 31..31)
-      expect(class_and_level).not_to be_valid
-    end
-
-    it 'is not valid with invalid character_class format' do
-      class_and_level.character_class = 'Fighter_!'
-      expect(class_and_level).not_to be_valid
-    end
-
-    it 'is not valid with obscene text in character_class' do
-      class_and_level.character_class = 'bimbo'
-      expect(class_and_level).not_to be_valid
-    end
-  end
-
-  context 'with invalid character_subclass' do
-    it 'is not valid without character_subclass' do
-      class_and_level.character_subclass = nil
-      expect(class_and_level).not_to be_valid
-    end
-
+    # it { is_expected.to validate_uniqueness_of(:character_class).scoped_to(:character_id).with_message('must be unique for the same character') }
     it 'is not valid with duplicate character_subclass' do
       create(:class_and_level, character: character, character_subclass: 'thief')
       class_and_level.character_subclass = 'thief'
       expect(class_and_level).not_to be_valid
     end
 
-    it 'is not valid with character_subclass length of over 30' do
-      class_and_level.character_subclass = Faker::Internet.username(specifier: 31..31)
-      expect(class_and_level).not_to be_valid
-    end
-
-    it 'is not valid with invalid character_subclass format' do
-      class_and_level.character_subclass = "Fighter_@'Hero'!"
-      expect(class_and_level).not_to be_valid
-    end
-
-    it 'is not valid with obscene text in character_subclass' do
-      class_and_level.character_subclass = 'bullshit'
-      expect(class_and_level).not_to be_valid
+    it 'is not obscene' do
+      expect(class_and_level.character_class).not_to be_profane
+      expect(class_and_level.character_subclass).not_to be_profane
     end
   end
 
-  context 'with invalid character_level' do
-    it 'is not valid without character_level' do
-      class_and_level.character_level = nil
-      expect(class_and_level).not_to be_valid
-    end
-
-    it 'is not valid with out of acceptable range character_level' do
-      class_and_level.character_level = 31
-      expect(class_and_level).not_to be_valid
-      class_and_level.character_level = 0
-      expect(class_and_level).not_to be_valid
-    end
-
+  describe '#total_level_less_than30' do
     it 'is not valid when addtl character_level makes total level over 30' do
       multiclass_char = create(:character_with_multiple_classes, classes_count: 4)
       over30 = build(:class_and_level, character: multiclass_char, character_level: 29)

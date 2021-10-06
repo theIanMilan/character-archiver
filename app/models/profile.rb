@@ -25,6 +25,9 @@ class Profile < ApplicationRecord
                                   format: { with: /\A[a-zA-Z0-9_]*\z/, multiline: false }
   validates :instagram_username,  length: { maximum: 30 },
                                   format: { with: /\A[a-zA-Z0-9_.]*\z/, multiline: false }
+  # https://discord.com/developers/docs/resources/user#usernames-and-nicknames
+  validates :discord_username,    length: { maximum: 32 },
+                                  format: { with: /\A((?!(discordtag|everyone|here)#)((?!@|#|:|```).{2,32})#\d{4})*\z/, multiline: false }
 
   delegate :username, to: :user
 

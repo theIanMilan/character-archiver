@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :backstory do
     association :character
-    intro { Faker::TvShows::SiliconValley.quote }
+    intro { Faker::Quote.matz }
     quote_body { Faker::Quote.famous_last_words }
     quote_author { Faker::TvShows::Simpsons.character }
     appearance { Faker::TvShows::Community.quotes }
