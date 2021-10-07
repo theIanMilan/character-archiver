@@ -13,7 +13,7 @@
     <%= f.button :submit, class: 'btn btn-primary my-3' %>
   <% end %>
   
-  <%= link_to 'Back', :back %>
+  <%= link_to 'Back', :back, class: 'me-3' %>
   
   <% if @search.persisted? %>
     <%= link_to 'Delete Search details',  character_searches_path(@character),

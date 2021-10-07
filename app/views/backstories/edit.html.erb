@@ -11,27 +11,28 @@
       <%= f.input :quote_author, label_html: {class: 'mt-3'} %>
       <%= f.input :appearance, label_html: {class: 'mt-3'}, placeholder: 'Describe your character.' %>
 
-      <button id="traits-help-btn" class="btn btn-info my-2" type="button">Example Traits</button>
-      <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
-      
+      <div class="mt-3">
+        <button id="traits-help-btn" class="btn btn-info my-2" type="button">Example Traits</button>
+        <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
+      </div>
       <%= f.input :personality, label_html: {class: 'mt-3'} %>
-      <div id="personality-help" class="help-box"><ul id="personality-help-list"></ul></div>
+      <div id="personality-help" class="mt-3 help-box"><ul id="personality-help-list"></ul></div>
   
       <%= f.input :ideals, label_html: {class: 'mt-3'} %>
-      <div id="ideals-help" class="help-box"><ul id="ideals-help-list"></ul></div>
+      <div id="ideals-help" class="mt-3 help-box"><ul id="ideals-help-list"></ul></div>
   
       <%= f.input :bonds, label_html: {class: 'mt-3'} %>
-      <div id="bonds-help" class="help-box"><ul id="bonds-help-list"></ul></div>
+      <div id="bonds-help" class="mt-3 help-box"><ul id="bonds-help-list"></ul></div>
   
       <%= f.input :flaws, label_html: {class: 'mt-3'} %>
-      <div id="flaws-help" class="help-box"><ul id="flaws-help-list"></ul></div>
+      <div id="flaws-help" class="mt-3 help-box"><ul id="flaws-help-list"></ul></div>
   
       <%= f.input :biography, label_html: {class: 'mt-3'}, placeholder: "Tell your character's story" %>
 
       <%= f.button :submit, class: 'btn btn-primary my-3' %>
   <% end %>
   
-  <%= link_to 'Back', :back %>
+  <%= link_to 'Back', :back, class: 'me-3' %>
   
   <% if @backstory.persisted? %>
     <%= link_to 'Delete Backstory details',  character_backstories_path(@character),
