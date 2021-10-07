@@ -5,8 +5,9 @@ class SearchesController < ApplicationController
 
   def search_board
     @searches = Search.where(searching_for_connections: true)
-    array_of_ids = @searches.pluck(:character_id)
-    @characters = Character.where(id: array_of_ids).order('updated_at DESC')
+    ids = @searches.order('updated_at DESC').pluck(:character_id)
+    chars = Character.where(id: ids)
+    @characters = ids.map { |id| chars.detect { |char| char.id == id } }
   end
 
   def edit; end
