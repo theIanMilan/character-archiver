@@ -1,35 +1,76 @@
 <% characters.each do |char| %>
-  <div class="col">
-    <div class="card h-100">
-      <img src="<%= char.display_character_portrait %>">
-      
-      <div class="card-header">
-        <h3 class="mb-0"><%= char.character_name %></h3>
-        <p class="mb-0"><%= char.classes_string %></p>
+  <div class="card mb-4">
+    <div class="row no-gutters">
+      <div class="col-sm-6 col-lg-3 pe-sm-0 d-flex align-items-center">
+        <img src="<%= char.display_character_portrait %>" class="card-img" alt="Character portrait" loading="lazy">
       </div>
 
-      <div class="card-body">
-        <%= char.portrait_credit_artist %>
-        <%= char.portrait_credit_URL %>
-        <%= char.background %>
-        <%= char.alignment_formatted %>
-        <%= char.race %>
-        <%= char.sex %>
-        <%= char.gender %>
-        <%= char.sexual_orientation %>
-        <%= button_to "View", character_path(char), type: 'button', class: 'btn btn-primary', method: 'get' %>
-      </div>
-      <div class="card-footer">
-        <% if local_assigns[:backstory] %>
-          <h6>Backstory:</h6>
-          <div><%= char.backstory.intro %></div>
-        <% end %>
-        <% if local_assigns[:search] %>
-          <h6>Looking for connections:</h6>
-          <div><%= char.search.search_message %></div>
-        <% end %>
+      <div class="col-sm-6 col-lg-9 ps-sm-0">
+        <div class="card-header">
+          <div class="d-flex justify-items-between">
+            <h3 class="mb-0 me-auto"><%= char.character_name %></h3>
+            <span><%= button_to "View", character_path(char), type: 'button', class: 'btn btn-primary', method: 'get' %></span>
+          </div>
+          <p class="mb-0"><%= char.classes_string %></p>
+        </div>
+
+        <div class="card-body">
+            <div class="row p-1 mx-0">
+              <div class="ms-1 col fw-bold">Artist credit</div>
+              <div class="col">
+                <a href="<%= char.portrait_credit_URL %>"><%= char.portrait_credit_artist %></a>
+              </div>
+            </div>
+
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">User</div>
+              <div class="col fw-bold"><%= link_to char.user.username, profile_path(char.user.username) %></div>
+            </div>
+
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Race</div>
+              <div class="col"><%= char.race %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Background</div>
+              <div class="col"><%= char.background %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Alignment</div>
+              <div class="col"><%= char.alignment_formatted %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Sex</div>
+              <div class="col"><%= char.sex %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Gender</div>
+              <div class="col"><%= char.gender %></div>
+            </div>
+            <div class="row p-1 mx-0 border-top border-secondary">
+              <div class="ms-1 col fw-bold">Sexual Orientation</div>
+              <div class="col"><%= char.sexual_orientation %></div>
+            </div>
+        </div>
       </div>
     </div>
+
+    
+
+    <% if local_assigns[:search] %>
+      <div class="row no-gutters m-4">
+        <h5 class="border-bottom border-secondary pb-2">Looking for connections:</h5>
+        <div><%= char.search.search_message %></div>
+      </div>
+    <% end %>
+
+    <% if local_assigns[:backstory] %>
+      <div class="row no-gutters m-4">
+        <h5 class="border-bottom border-secondary pb-2">Backstory:</h5>
+        <div><%= char.backstory.intro %></div>
+      </div>
+    <% end %>
+
   </div>
 <% end %>
 
