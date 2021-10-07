@@ -4,8 +4,9 @@ class BackstoriesController < ApplicationController
   before_action :set_backstory, only: %i[edit update destroy]
 
   def folklore
-    array_of_ids = Backstory.all.pluck(:character_id)
-    @characters = Character.where(id: array_of_ids).order('updated_at DESC')
+    ids = Backstory.order('updated_at DESC').pluck(:character_id)
+    chars = Character.where(id: ids)
+    @characters = ids.map { |id| chars.detect { |char| char.id == id } }
   end
 
   def edit; end
