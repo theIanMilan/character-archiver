@@ -2,13 +2,15 @@
 
 <div class="container">
   <h1>Characters</h1>
-  <i class="fas fa-campground" role="img" aria-label="Icon"></i>
-  
-  <%= link_to 'Create New Character', new_character_path %>
+
+  <p>
+    <i class="fas fa-campground" role="img" aria-label="Icon"></i>
+    <%= link_to 'Create New Character', new_character_path %>
+  </p>
   
   <br>
   
-  <div class="row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 align-items-stretch g-4">
+  <div class="row row-cols-lg-2 g-4">
     <%= render partial: "character_cards", locals: {characters: @characters} %>
   </div>
 </div>
