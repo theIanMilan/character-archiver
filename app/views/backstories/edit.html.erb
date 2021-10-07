@@ -6,7 +6,7 @@
   <%= simple_form_for(@backstory, url: "/characters/#{@character.id}/backstories/", method: 'put') do |f| %>
       <%= f.error_notification %>
       
-      <%= f.input :intro, label_html: {class: 'mt-3'}, placeholder: 'Excerpt introducing your character.' %>
+      <%= f.input :intro, label_html: {class: 'mt-3'}, placeholder: "#{@character.character_name} is..." %>
       <%= f.input :quote_body, label_html: {class: 'mt-3'} %>
       <%= f.input :quote_author, label_html: {class: 'mt-3'} %>
       <%= f.input :appearance, label_html: {class: 'mt-3'}, placeholder: 'Describe your character.' %>

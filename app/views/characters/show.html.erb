@@ -133,13 +133,30 @@
 
     <!-- Backstory -->
     <div class="col-md-8">
+      <section id="intro-section" class="mb-4">
+        <h1 class="mb-3">
+          <%= @character.character_name %>
+          <span class="fs-5"><%= link_to 'Edit Backstory', edit_character_backstories_path(@character) %></span>
+        </h1>
+        <% if @backstory = @character.backstory %>
+          <div id='quote-box' class="w-75 offset-1 border rounded p-3 pb-2 mb-3" style="border-color: #9db1c65e;">
+            <div class="fst-italic pb-1 mb-1 border-bottom"><%= @backstory.quote_body %></div>
+            <div class="ms-3">– <%= @backstory.quote_author %></div>
+          </div>
+
+          <div><%= @backstory.intro %></div>
+        <% end %>
+      </section>
+
       <section id="description-section" class="mb-4">
         <h2 class="pb-4 mb-4 border-bottom">
-          Description <span class="fs-5"><%= link_to 'Edit', edit_character_backstories_path(@character) %></span>
+          Description
         </h2>
 
         <% if @backstory = @character.backstory %>
-          <h4>Personality</h4>
+          <h4>Appearance</h4>
+          <%= @backstory.appearance %>
+          <h4 class="mt-3">Personality</h4>
           <%= @backstory.personality %>
           <h4 class="mt-3">Ideals</h4>
           <%= @backstory.ideals %>
