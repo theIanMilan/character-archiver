@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if current_user.admin?
       rails_admin_path
     else
-      profile_path(current_user.username)
+      stored_location_for(resource) || root_path
     end
   end
 
