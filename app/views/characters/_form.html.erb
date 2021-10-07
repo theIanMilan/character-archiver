@@ -20,15 +20,20 @@
                       id: 'character_race'}) %>
     </div>
 
-    <button id="alignment-help-btn" class="btn btn-info my-2" type="button">Help</button>    
-    <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
-    <div id="alignment-help"><span id="alignment-help-race"></span> alignment description: <span id="alignment-help-text"></span></div>
+    <div class="d-flex">
+      <%= form.input :alignment, as: :select,
+                                 collection: [["Lawful Good", 'lawful_good'], ["Neutral Good", 'neutral_good'], ["Chaotic Good", 'chaotic_good'],
+                                              ["Lawful Neutral", 'lawful_neutral'], ["True Neutral", 'true_neutral'], ["Chaotic Neutral", 'chaotic_neutral'],
+                                              ["Lawful Evil", 'lawful_evil'], ["Neutral Evil", 'neutral_evil'], ["Chaotic Evil", 'chaotic_evil']],
+                                 prompt: 'Select Alignment',
+                                 wrapper_html: { class: 'flex-grow-1' }  %>
+      <div class="align-self-end">
+        <button id="alignment-help-btn" class="btn btn-outline-secondary mx-2" type='button' title="Get help based on Character's race"><i class="far fa-question-circle"></i></button>
+        <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
+      </div>
+    </div>
 
-    <%= form.input :alignment, as: :select,
-                               collection: [["Lawful Good", 'lawful_good'], ["Neutral Good", 'neutral_good'], ["Chaotic Good", 'chaotic_good'], 
-                                            ["Lawful Neutral", 'lawful_neutral'], ["True Neutral", 'true_neutral'], ["Chaotic Neutral", 'chaotic_neutral'], 
-                                            ["Lawful Evil", 'lawful_evil'], ["Neutral Evil", 'neutral_evil'], ["Chaotic Evil", 'chaotic_evil']],
-                               prompt: 'Select Alignment' %>
+    <div id="alignment-help" class="mb-2"><span id="alignment-help-race"></span> alignment description: <span id="alignment-help-text"></span></div>
 
     <div>
       <%= form.label :sex %>
