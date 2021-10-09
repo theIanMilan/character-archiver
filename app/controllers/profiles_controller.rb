@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
 
   def user_characters
     @user = User.find_by(username: params[:username])
-    @user_characters = @user.characters
+    @user_characters = @user.characters.order('updated_at DESC')
   end
 
   def new
