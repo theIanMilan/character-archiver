@@ -38,7 +38,7 @@
             </li>
             <li class="nav-item me-lg-3">
               <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <%= image_tag current_user.profile.decorate.display_avatar, class: 'header-profile rounded-circle' %>
+                <%= image_tag current_user.profile.decorate.display_avatar, class: 'header-profile rounded-circle', style: "object-fit: cover;" %>
               </a>
               <ul class="position-absolute dropdown-menu dropdown-menu-end text-small" aria-labelledby="dropdownUser1" style="">
                 <li><%= link_to 'My Profile', profile_path(current_user.username), class: 'dropdown-item' %></li>

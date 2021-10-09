@@ -13,7 +13,7 @@
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-              <img src="<%= @profile.display_avatar %>" alt="Profile Photo" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+              <img src="<%= @profile.display_avatar %>" alt="Profile Photo" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; height: 150px; z-index: 1; object-fit: cover;">
                 <%= link_to 'Edit profile', edit_profile_path(@profile.username), class: 'btn btn-outline-dark profile-edit' %>
             </div>
             <div class="ms-3" style="margin-top: 130px;">
