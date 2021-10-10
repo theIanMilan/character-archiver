@@ -9,6 +9,8 @@ View the live app [at heroku.](https://character-archiver.herokuapp.com/)
 ## Introduction
 
 Social media for D&D characters for creating social relationships and sharing their rich backstories.
+<br>
+Makes use of the [D&D 5e API](https://www.dnd5eapi.co/) and [DiceBear Avatars API](https://avatars.dicebear.com/)
 
 ## Screenshots
 
