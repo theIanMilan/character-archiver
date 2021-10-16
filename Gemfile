@@ -5,7 +5,7 @@ ruby '2.7.3'
 
 gem 'rails', '~> 6.1.4'
 gem 'pg'
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.5.1'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
@@ -16,7 +16,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'devise'
-gem 'cancancan'
+gem 'pundit', '~> 2.1.1'
 gem 'rails_admin', '~> 2.0'
 gem 'obscenity' # Profanity filter gem. Ceased development in 2016
 gem "auto_strip_attributes", "~> 2.6"
