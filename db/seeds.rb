@@ -2,6 +2,7 @@ require 'faker'
 require 'factory_bot_rails'
 # require 'byebug'
 
+# User creation
 User.create!([
   {email: 'theIanMilan@character-archiver.com', username: 'theArchivist', password: 'password', role: 0},
   {email: 'user1@example.com', username: 'commoner', password: 'password' },
@@ -19,6 +20,7 @@ user2 = User.find(3)
 FactoryBot.reload
 2.times { FactoryBot.create(:character_with_multiple_classes, classes_count: 4) }
 
+# Character Creation
 char = user1.characters.create(character_name: 'Theo Reinhardt',
                                character_portrait_URL: 'https://i.redd.it/gh43ukmi4sp11.jpg',
                                portrait_credit_artist: 'killtasticles', 
@@ -33,7 +35,8 @@ char = user1.characters.create(character_name: 'Theo Reinhardt',
 char.class_and_levels.create(character_class: 'Wizard',
                              character_subclass: 'Abjuration',
                              character_level: 8)
-char.create_backstory(biography: 'Theo, a former member of the Orc Clan, Rivashek, is trying to forget his past and living a more civilized life. But he feels he has to face his clan members sooner or later.',
+char.create_backstory(intro: 'Theodore Reinhardt is a half-orc wizard in the group Elemelons. He is currently investigating the conflict between the Hill Giants.'
+                      biography: 'Theo, a former member of the Orc Clan, Rivashek, is trying to forget his past and living a more civilized life. But he feels he has to face his clan members sooner or later.',
                       personality: 'Bookish and innocently prude. Is awkward in social situations.',
                       flaws: 'Is easily distracted by the promise of information.',
                       bonds: 'Working to preserve a great library at his current city.',
@@ -46,6 +49,33 @@ char.create_physical_attribute(hair: 'Shaggy moss green',
                                age: 28,
                                height: '180 cm',
                                weight: '171 lbs')
+
+kopi = user1.characters.create(character_name: 'Walden Hillock',
+                               character_portrait_URL: 'https://cdn.discordapp.com/attachments/690194960405889091/895631256451170374/unknown.png',
+                               portrait_credit_artist: 'franshookie_art', 
+                               portrait_credit_URL: 'https://www.artstation.com/franshookie-art',
+                               background: 'Azorius',
+                               alignment: 'lawful_good',
+                               race: 'Loxodon',
+                               sex: 'Male',
+                               gender: 'Male',
+                               sexual_orientation: 'Prefer not to say',
+                               private_character: false)
+kopi.class_and_levels.create(character_class: 'Ranger',
+                             character_subclass: 'Hunter Conclave',
+                             character_level: 8)
+kopi.create_backstory(intro: "Walden Hillock is a loxodon Ranger."
+                      biography: "I'm a loxodon and all my life has been in the senate as an assistant for the longest time. I grew weary and now I long for adventure. I have now saved enough vacation leaves and now I set off.",
+                      personality: 'Ready and eager for adventure.',
+                      flaws: "I don't know how horrible the real world is.",
+                      bonds: 'Share a good story with.',
+                      ideals: 'Life is too long for more pencil pushing.')                             
+kopi.create_physical_attribute(hair: 'Loxodon',
+                               skin: 'Gray',
+                               eyes: 'Brown',
+                               age: 275,
+                               height: '8 feet',
+                               weight: '250 lbs')
 
 char1 = FactoryBot.create(:character, character_portrait_URL: 'https://64.media.tumblr.com/c457bbb848101717e87b8519003ac80f/tumblr_nck6ur4pBf1tdrmq5o1_500.jpg',
                                       portrait_credit_artist: 'WOO HYUNG LEE', 
@@ -87,4 +117,5 @@ char4.class_and_levels.create(character_class: 'Rogue',
                               character_subclass: 'Swashbuckler',
                               character_level: rand(3..12))
 
+# Comments
 FactoryBot.create(:comment, user: user2, profile: user1.profile)
