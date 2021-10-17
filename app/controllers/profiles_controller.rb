@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show user_characters]
   before_action :set_profile, only: %i[show edit update]
+  after_action :verify_authorized, except: :user_characters
 
   def show; end
 
@@ -9,25 +10,7 @@ class ProfilesController < ApplicationController
     @user_characters = @user.characters.order('updated_at DESC')
   end
 
-  def new
-    @profile = Profile.new
-  end
-
   def edit; end
-
-  def create
-    @profile = Profile.new(profile_params)
-
-    respond_to do |format|
-      if @profile.save
-        format.html { redirect_to profile_path(@profile.username), notice: 'Profile was successfully created.' }
-        format.json { render :show, status: :created, location: profile_path(@profile.username) }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   def update
     respond_to do |format|
@@ -45,6 +28,7 @@ class ProfilesController < ApplicationController
 
   def set_profile
     @profile = User.find_by(username: params[:username]).profile.decorate
+    authorize @profile
   end
 
   def profile_params
