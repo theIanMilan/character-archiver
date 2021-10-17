@@ -13,9 +13,11 @@
             <h4 class="fw-bold p-3 mb-0 text-center text-white bg-primary"><%= @character.character_name %></h4>
             <img src="<%= @character.display_character_portrait %>" class="img-fluid img-thumbnail">
             
-            <div class="row p-1 mx-0 border-top border-secondary text-center">
-              <%= button_to 'Edit Character', edit_character_path(@character), method: 'get', class: "btn btn-primary p-1" %>
-            </div>
+            <% if policy(@character).update? %>
+              <div class="row p-1 mx-0 border-top border-secondary text-center">
+                <%= button_to 'Edit Character', edit_character_path(@character), method: 'get', class: "btn btn-primary p-1" %>
+              </div>
+            <% end %>
 
             <div class="row p-1 mx-0 border-top border-secondary">
               <div class="ms-1 col fw-bold">Artist credit</div>
