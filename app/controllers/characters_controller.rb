@@ -1,6 +1,8 @@
 class CharactersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_character, only: %i[show edit update destroy]
+  # Pundit
+  after_action :verify_authorized, except: %i[index show]
 
   def index
     @characters = Character.order('updated_at DESC')
@@ -10,16 +12,20 @@ class CharactersController < ApplicationController
 
   def new
     @character = current_user.characters.new
+    authorize @character
     @character.class_and_levels.build
     # For adding fields on the fly, use JS. No built-in Rails support
     # When generating new fields, remember to ensure keys of the associated array
     # is unique - current JS date is a commond choice.
   end
 
-  def edit; end
+  def edit
+    authorize @character
+  end
 
   def create
     @character = current_user.characters.new(character_params)
+    authorize @character
 
     if @character.save
       flash.notice = 'Character was successfully created.'
@@ -31,6 +37,8 @@ class CharactersController < ApplicationController
   end
 
   def update
+    authorize @character
+
     if @character.update(character_params)
       flash.notice = 'Character was successfully updated.'
       redirect_to character_path(@character)
@@ -41,6 +49,8 @@ class CharactersController < ApplicationController
   end
 
   def destroy
+    authorize @character
+
     @character.destroy
     flash[:notice] = 'Task successfully deleted!'
     redirect_to character_path(@character)
