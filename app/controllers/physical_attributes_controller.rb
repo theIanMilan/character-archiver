@@ -1,6 +1,7 @@
 class PhysicalAttributesController < ApplicationController
   before_action :set_character, only: %i[edit update destroy]
   before_action :set_physical_attribute, only: %i[edit update destroy]
+  after_action :verify_authorized
 
   def edit; end
 
@@ -29,6 +30,7 @@ class PhysicalAttributesController < ApplicationController
 
   def set_physical_attribute
     @physical_attribute = PhysicalAttribute.find_or_initialize_by(character_id: @character.id)
+    authorize @physical_attribute
   end
 
   def physical_attribute_params

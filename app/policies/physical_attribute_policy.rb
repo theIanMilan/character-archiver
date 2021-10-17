@@ -1,0 +1,2 @@
+class PhysicalAttributePolicy < CharacterCommonPolicy
+end

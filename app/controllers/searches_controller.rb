@@ -2,6 +2,7 @@ class SearchesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:search_board]
   before_action :set_character, only: %i[edit update destroy]
   before_action :set_search, only: %i[edit update destroy]
+  after_action :verify_authorized, except: :search_board
 
   def search_board
     @searches = Search.where(searching_for_connections: true)
@@ -37,6 +38,7 @@ class SearchesController < ApplicationController
 
   def set_search
     @search = Search.find_or_initialize_by(character_id: @character.id)
+    authorize @search
   end
 
   def search_params

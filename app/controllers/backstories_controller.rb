@@ -2,6 +2,7 @@ class BackstoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:folklore]
   before_action :set_character, only: %i[edit update destroy]
   before_action :set_backstory, only: %i[edit update destroy]
+  after_action :verify_authorized, except: :folklore
 
   def folklore
     ids = Backstory.order('updated_at DESC').pluck(:character_id)
@@ -36,6 +37,7 @@ class BackstoriesController < ApplicationController
 
   def set_backstory
     @backstory = Backstory.find_or_initialize_by(character_id: @character.id)
+    authorize @backstory
   end
 
   def search_params
