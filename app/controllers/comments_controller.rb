@@ -4,6 +4,8 @@ class CommentsController < ApplicationController
   def create
     @comment = @profile.comments.build(comment_params)
     @comment[:user_id] = current_user.id
+    authorize @comment
+
     if @comment.save
       flash.notice = 'Character was successfully created.'
       redirect_to profile_path(@profile.username) and return
@@ -14,6 +16,8 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = @profile.comments.find(params[:id])
+    authorize @comment
+
     @comment.destroy
     flash[:notice] = 'Comment successfully deleted!'
     redirect_to profile_path(@profile.username)

@@ -3,9 +3,11 @@
     <div class="col-md-12 d-flex align-items-center justify-content-between">
       <div class="pt-1"><%= link_to comment.user.username, profile_path(comment.user.username) %></div>
       <div class='d-flex flex-column d-sm-block'>
-        <%= link_to 'Delete', [comment.profile, comment],
-          method: :delete, data: {confirm: "Are you sure?"},
-          class: 'badge btn btn-danger my-1 me-2' %>
+        <% if policy(comment).destroy? %>
+          <%= link_to 'Delete', [comment.profile, comment],
+            method: :delete, data: {confirm: "Are you sure?"},
+            class: 'badge btn btn-danger my-1 me-2' %>
+        <% end %>
         <span><%= comment.created_at.strftime('%x %-I:%M %p')  %></span>
       </div>
     </div>
