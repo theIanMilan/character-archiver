@@ -214,6 +214,8 @@ GEM
       nio4r (~> 2.0)
     pundit (2.1.1)
       activesupport (>= 3.0.0)
+    pundit-matchers (1.7.0)
+      rspec-rails (>= 3.0.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-livereload (0.3.17)
@@ -411,6 +413,7 @@ DEPENDENCIES
   pg
   puma (~> 5.5.1)
   pundit (~> 2.1.1)
+  pundit-matchers (~> 1.7.0)
   rack-livereload
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)
