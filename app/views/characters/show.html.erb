@@ -72,11 +72,13 @@
           <!-- Physical Attributes -->
           <section>
             <h5 class="fw-bold p-1 mb-0 text-center text-white bg-primary">Physical Attributes</h5>
-            <div class="row p-1 mx-0 border-top border-secondary text-center">
-              <%= button_to 'Edit Physical Attributes', edit_character_physical_attributes_path(@character), method: 'get', class: "btn btn-primary p-1" %>
-            </div>
-
             <% if @physical_attribute = @character.physical_attribute %>
+              <% if policy(@physical_attribute).update? %>
+                <div class="row p-1 mx-0 border-top border-secondary text-center">
+                  <%= button_to 'Edit Physical Attributes', edit_character_physical_attributes_path(@character), method: 'get', class: "btn btn-primary p-1" %>
+                </div>
+              <% end %>
+
               <div class="row p-1 mx-0 border-top border-secondary">
                 <div class="ms-1 col fw-bold">Age</div>
                 <div class="col"><%= @physical_attribute.age %></div>
@@ -116,7 +118,13 @@
 
         <!-- Search -->
         <section class="p-4 mb-3 bg-light rounded">
-          <h4>Search details <span class="fs-5"><%= link_to 'Edit', edit_character_searches_path(@character) %></span></h4>
+          <h4>Search details 
+          <% if @search = @character.search %>
+            <% if policy(@search).update? %>
+              <span class="fs-5"><%= link_to 'Edit', edit_character_searches_path(@character) %></span>
+            <% end %>
+          <% end %>
+          </h4>
           <p class="mb-0">
               <% if @search = @character.search %>
                 <% if @search.searching_for_connections %>
@@ -138,9 +146,11 @@
       <section id="intro-section" class="mb-4">
         <h1 class="mb-3">
           <%= @character.character_name %>
-          <span class="fs-5"><%= link_to 'Edit Backstory', edit_character_backstories_path(@character) %></span>
+          <% if @backstory = @character.backstory %>
+            <% if policy(@backstory).update? %>
+              <span class="fs-5"><%= link_to 'Edit Backstory', edit_character_backstories_path(@character) %></span>
+            <% end %>
         </h1>
-        <% if @backstory = @character.backstory %>
           <div id='quote-box' class="w-75 offset-1 border rounded p-3 pb-2 mb-3" style="border-color: #9db1c65e;">
             <div class="fst-italic pb-1 mb-1 border-bottom"><%= @backstory.quote_body %></div>
             <div class="ms-3">– <%= @backstory.quote_author %></div>
