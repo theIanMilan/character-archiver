@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root 'pages#welcome'
   get   '/home',          to: 'pages#welcome',  as: 'home'
   get   '/about_us',      to: 'pages#about',    as: 'about'
+  resources :contacts, only: [:new, :create]
   resources :profiles, only: %i[show edit update], param: :username do
     resources :comments, only: %i[new create destroy]
   end

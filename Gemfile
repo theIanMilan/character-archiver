@@ -23,6 +23,7 @@ gem "auto_strip_attributes", "~> 2.6"
 gem 'aes' # encryption
 gem 'simple_form'
 gem 'draper' # Decorator patterns
+gem 'mail_form', '~> 1.9.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
