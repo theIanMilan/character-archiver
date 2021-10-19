@@ -13,8 +13,8 @@
       <%= form.label :race %>
       <%= form.select(:race,
                       options_for_select(["Select Race", "Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf","Half-Orc",
-                                            "Halfling", "Human", "Tiefling", character.race],
-                                          {selected: character.race, disabled: "Select Race"}),
+                                            "Halfling", "Human", "Tiefling"],
+                                          {selected: character.race || nil, disabled: "Select Race"}),
                       {},
                       {class: 'form-control select2',
                       id: 'character_race'}) %>
@@ -38,8 +38,8 @@
     <div>
       <%= form.label :sex %>
       <%= form.select(:sex,
-                      options_for_select(["Select Sex assigned at birth", "Prefer not to say", "Male", "Female", "Intersex", character.sex],
-                                         {selected: character.sex, disabled: "Select Sex assigned at birth"}),
+                      options_for_select(["Select Sex assigned at birth", "Prefer not to say", "Male", "Female", "Intersex"],
+                                         {selected: character.sex || nil, disabled: "Select Sex assigned at birth"}),
                       {},
                       {class: 'form-control select2'}) %>
     </div>
@@ -48,8 +48,8 @@
       <%= form.label :gender %>
       <%= form.select(:gender,
                       options_for_select(["Prefer not to say", "Male", "Female", "Non-binary", "Agender", "Genderfluid",
-                                            "Bigender", "Polygender", character.gender],
-                                          character.gender),
+                                            "Bigender", "Polygender"],
+                                          character.gender || nil),
                       {},
                       {class: 'form-control select2'}) %>
     </div>
@@ -58,8 +58,8 @@
       <%= form.label :sexual_orientation %>
       <%= form.select(:sexual_orientation,
                       options_for_select(['Prefer not to say', 'Asexual', 'Bisexual', 'Gay or Lesbian', 'Straight', 
-                                            'Pansexual', 'Queer', character.sexual_orientation],
-                                          character.sexual_orientation),
+                                            'Pansexual', 'Queer'],
+                                          character.sexual_orientation || nil),
                       {},
                       {class: 'form-control select2'}) %>
     </div>
@@ -69,27 +69,14 @@
 
   <section class="mt-4">
     <h1>Class and Level</h1>
-    <%= form.simple_fields_for :class_and_levels do |ff| %>
-      <div>
-        <%= ff.label :character_class, class: 'label-character-class' %>
-        <%= ff.select(:character_class,
-                      options_for_select(["Select Character Class", "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", 
-                                            "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard", character.class_and_levels.first.character_class],
-                                          {selected: character.class_and_levels.first.character_class, disabled: "Select Character Class"}),
-                      {},
-                      {class: 'form-control select2'}) %>
-      </div>
-
-      <%= ff.input :character_subclass %>
-      <%= ff.input :character_level, input_html: {step: 1, min: 1, max: 30} %>
-
-      <div>
-        <% if ff.object.persisted? %>
-          <%= ff.label :_destroy, "Delete Class and Level" %>
-          <%= ff.check_box :_destroy %>
-        <% end %>
-      </div>
+    <%= form.simple_fields_for :class_and_levels, @class_and_level do |ff| %>
+      <%= render partial: 'class_and_level_fields', locals: { f: ff } %>
     <% end %>
+
+    <div>
+      <br>
+      <%= link_to_add_association "Add Additional Class and Level", form, :class_and_levels %>
+    </div>
   </section>
 
   <%= form.button :submit, class: 'btn btn-primary my-3' %>

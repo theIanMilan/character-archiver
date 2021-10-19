@@ -24,6 +24,7 @@ gem 'aes' # encryption
 gem 'simple_form'
 gem 'draper' # Decorator patterns
 gem 'mail_form', '~> 1.9.0'
+gem 'cocoon'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
