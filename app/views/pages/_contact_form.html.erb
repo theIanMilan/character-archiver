@@ -1,60 +1,51 @@
-<form id="contact-form" name="contact-form" action="mail.php" method="POST">
-    <!--Grid row-->
+<%= simple_form_for @contact, url: home_path do |f| %>
     <div class="row py-2">
-        <!--Grid column-->
         <div class="col-md-6 py-2">
             <div class="md-form mb-0">
-                <label for="name" class="">Name*</label>
-                <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name">
+              <%= f.input :name, class: 'form-control', placeholder: 'Enter your name' %>
             </div>
         </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
+        
         <div class="col-md-6 py-2">
             <div class="md-form mb-0">
-                <label for="email" class="">Email*</label>
-                <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email">
+              <%= f.input :email, class: 'form-control', placeholder: 'Enter your email' %>
             </div>
         </div>
-        <!--Grid column-->
     </div>
-    <!--Grid row-->
 
-    <!--Grid row-->
     <div class="row py-2">
         <div class="col-md-12">
             <div class="md-form mb-0">
-                <label for="subject" class="">Subject*</label>
-                <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter your subject">
+              <%= f.input :subject, class: 'form-control', placeholder: 'Enter your subject' %>
             </div>
         </div>
     </div>
-    <!--Grid row-->
 
-    <!--Grid row-->
     <div class="row py-2">
-        <!--Grid column-->
         <div class="col-md-12">
             <div class="md-form">
-                <label for="message">Message*</label>
-                <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="Enter your message"></textarea>                
+              <%= f.input :message, as: :text, input_html: { 'rows' => 5 }, class: 'form-control', placeholder: 'Enter your message' %>
             </div>
         </div>
     </div>
-    <!--Grid row-->
 
-    <!--Grid row-->
     <div class="row py-2">
         <div class="col-md-12">
             <div class="md-form mb-0">
-                <label for="security" class="">Security Question*: This is the Land of the ___ ?</label>
-                <input type="text" id="security" name="security" class="form-control" placeholder="Enter your answer">
+              <%= f.input :security_question, label: 'This is the Land of the ___ ?', class: 'form-control', placeholder: 'Enter your answer' %>
             </div>
         </div>
     </div>
-    <!--Grid row-->
-</form>
-<div class="text-center text-md-left py-4">
-    <a id="contact-button" class="btn btn-primary rounded-pill">Submit</a>
-</div>
+
+    <div class="row py-2 d-none">
+        <div class="col-md-12">
+            <div class="md-form mb-0">
+              <%= f.input :nickname, class: 'form-control', hint: 'Leave this form blank!' %>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center text-md-left py-4">
+      <%= f.button :submit, 'Submit message', class: 'btn btn-primary rounded-pill' %>
+    </div>
+<% end %>
