@@ -1,31 +1,37 @@
 <%= simple_form_for(profile, defaults: {wrapper_html: {class: 'mb-3'}}) do |form| %>
   <%= form.error_notification %>
 
-    <%= form.input :display_name, hint: 'You can use a different display name than your username.' %>
-    <%= form.input :avatar_URL, hint: 'Please note that Avatar Image will automatically be contained to a 1:1 ratio.' %>
-    <%= form.input :about_me %>
-    <%= form.input :date_of_birth, as: :date, 
-                                   start_year: Date.today.year - 90,
-                                   end_year: Date.today.year - 12 %>
-    <%= form.input :location %>
+    <%= form.input :display_name, placeholder: 'Enter name to be displayed on your profile...',
+                                  hint: 'You can use a different display name than your username.',
+                                  wrapper_html: { class: 'mb-2 col-sm-9 col-md-7 col-lg-5' } %>
+    <%= form.input :date_of_birth, placeholder: 'Select Date...',
+                                    as: :string,
+                                    input_html: { class: 'datepicker' },
+                                    wrapper_html: { class: 'mb-2 col-sm-9 col-md-7 col-lg-5'} %>
+    <%= form.input :location, wrapper_html: { class: 'mb-2 col-sm-9 col-md-7 col-lg-5' } %>
   
-  <div class="mb-2">
+  <div class="mb-2 col-sm-9 col-md-7 col-lg-5">
     <i class="fab fa-twitter twitter-color" role="img" aria-label="Twitter Icon"></i>
     <%= form.label :twitter_username %>
     <%= form.input_field :twitter_username, class: 'form-control' %>
   </div>
   
-  <div class="mb-2">
+  <div class="mb-2 col-sm-9 col-md-7 col-lg-5">
     <i class="fab fa-instagram instagram-color" role="img" aria-label="Instagram Icon"></i>
     <%= form.label :instagram_username %>
     <%= form.input_field :instagram_username, class: 'form-control' %>
   </div>
 
-  <div class="mb-2">
+  <div class="mb-2 col-sm-9 col-md-7 col-lg-5">
     <i class="fab fa-discord discord-color" role="img" aria-label="Discord Icon"></i>
     <%= form.label :discord_username %>
     <%= form.input_field :discord_username, class: 'form-control' %>
   </div>  
 
+  <%= form.input :avatar_URL, hint: 'Images with a ratio of 1:1 are preferred.' %>
+  <%= form.input :about_me, placeholder: 'Tell something about yourself!' %>
+
   <%= form.button :submit, class: 'btn btn-primary my-3' %>
 <% end %>
+
+<%= javascript_pack_tag 'flatpickr' %>

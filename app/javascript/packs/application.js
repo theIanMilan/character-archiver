@@ -12,6 +12,7 @@ window.$ = $
 require('select2')
 $.fn.select2.defaults.set("theme", "bootstrap");
 require("@nathanvda/cocoon")
+const flatpickr = require("flatpickr")
 
 // Toastr
 global.toastr = require('toastr')
@@ -22,4 +23,5 @@ import "bootstrap/dist/css/bootstrap"
 import 'select2/dist/css/select2.css'
 import 'select2-bootstrap-theme/dist/select2-bootstrap'
 import "@fortawesome/fontawesome-free/css/all"
+import 'flatpickr/dist/flatpickr.css'
 import "stylesheets/application"
