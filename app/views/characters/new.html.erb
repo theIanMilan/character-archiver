@@ -1,8 +1,3 @@
 <% content_for :title, "Creating a new Character" %>
 
-<div class="container">
-  <h1>New Character</h1>
-  
-  <%= render 'form', character: @character %>
-  <%= link_to 'Back', :back %>
-</div>
+<%= render partial: 'two-column', locals: { title: 'Creating New Character' } %>
