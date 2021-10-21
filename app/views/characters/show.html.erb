@@ -37,11 +37,11 @@
             <h5 class="fw-bold p-1 mb-0 text-center text-white bg-primary">Character Info</h5>
             <div class="row p-1 mx-0 border-top border-secondary">
               <div class="ms-1 col fw-bold">Total Levels</div>
-              <div class="col"><%= @character.total_levels %></div>
+              <div class="col"><%= @character.class_and_levels.total_levels %></div>
             </div>
             <div class="row p-1 mx-0 border-top border-secondary">
               <div class="ms-1 col fw-bold">Classes and Levels</div>
-              <div class="col"><%= @character.classes_string %></div>
+              <div class="col"><%= @character.class_and_levels.classes_string %></div>
             </div>
             <div class="row p-1 mx-0 border-top border-secondary">
               <div class="ms-1 col fw-bold">Race</div>

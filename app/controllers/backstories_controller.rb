@@ -6,7 +6,7 @@ class BackstoriesController < ApplicationController
 
   def folklore
     ids = Backstory.order('updated_at DESC').pluck(:character_id)
-    chars = Character.where(id: ids)
+    chars = Character.includes(:user).includes(:backstory).where(id: ids)
     @characters = ids.map { |id| chars.detect { |char| char.id == id } }
   end
 

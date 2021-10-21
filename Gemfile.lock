@@ -84,6 +84,9 @@ GEM
       msgpack (~> 1.0)
     brakeman (5.1.1)
     builder (3.2.4)
+    bullet (6.1.5)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.1.3)
     capybara (3.35.3)
       addressable
@@ -366,6 +369,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
+    uniform_notifier (1.14.2)
     vcr (6.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -402,6 +406,7 @@ DEPENDENCIES
   auto_strip_attributes (~> 2.6)
   bootsnap (>= 1.4.4)
   brakeman
+  bullet
   byebug
   capybara (>= 3.26)
   cocoon

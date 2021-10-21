@@ -31,6 +31,7 @@ group :development, :test do
   gem 'guard-livereload', '~> 2.5', require: false
   gem 'rack-livereload'
   gem 'brakeman'
+  gem 'bullet' # eager loading alert
 end
 
 # Moved temporarily for seeding in production

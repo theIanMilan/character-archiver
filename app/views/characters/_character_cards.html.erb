@@ -11,7 +11,7 @@
             <h3 class="mb-0 me-auto"><%= char.character_name %></h3>
             <span><%= button_to "View", character_path(char), type: 'button', class: 'btn btn-primary', method: 'get' %></span>
           </div>
-          <p class="mb-0"><%= char.classes_string %></p>
+          <p class="mb-0"><%= char.class_and_levels.classes_string %></p>
         </div>
 
         <div class="card-body">

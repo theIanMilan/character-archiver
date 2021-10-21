@@ -7,7 +7,7 @@ class SearchesController < ApplicationController
   def search_board
     @searches = Search.where(searching_for_connections: true)
     ids = @searches.order('updated_at DESC').pluck(:character_id)
-    chars = Character.where(id: ids)
+    chars = Character.includes(:user).includes(:search).where(id: ids)
     @characters = ids.map { |id| chars.detect { |char| char.id == id } }
   end
 

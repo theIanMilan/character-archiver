@@ -3,7 +3,9 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[show edit update]
   after_action :verify_authorized, except: :user_characters
 
-  def show; end
+  def show
+    @comments = @profile.comments.includes(:user)
+  end
 
   def user_characters
     @user = User.find_by(username: params[:username])
