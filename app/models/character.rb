@@ -56,47 +56,11 @@ class Character < ApplicationRecord
                                      obscenity: { message: 'Obscene words are not allowed.' }
   validates :private_character,      inclusion: [true, false]
 
-  def total_levels
-    class_and_levels.reduce(0) do |acc, ele|
-      acc += ele.character_level
-      acc
-    end
-  end
-
-  def classes_string
-    str = ''
-    records = class_and_levels.order('character_level DESC')
-
-    case records.count
-    when 1
-      # Subclass Class Level
-      classes_string_substring(records[0])
-    when 2
-      # Subclass Class Level and Subclass Class Level
-      str << classes_string_substring(records[0])
-      str << ' and ' << classes_string_substring(records[1])
-      str
-    else
-      # Subclass Class Level, Subclass Class Level, and Subclass Class Level
-      records.each_with_index do |data, idx|
-        str << 'and ' if idx == (class_and_levels.count - 1)
-        str << classes_string_substring(data) << ', '
-      end
-      str[0...-2]
-    end
-  end
-
   def alignment_formatted
     alignment.sub('_', ' ').titlecase
   end
 
   def display_character_portrait
     character_portrait_URL || 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Unknown-human-picture.png'
-  end
-
-  private
-
-  def classes_string_substring(record)
-    "#{record.character_subclass.titlecase} #{record.character_class.titlecase} #{record.character_level}"
   end
 end

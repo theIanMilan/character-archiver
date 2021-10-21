@@ -46,6 +46,53 @@ RSpec.describe ClassAndLevel, type: :model do
     end
   end
 
+  describe '.total_levels' do
+    context 'with 1 class_and_levels record' do
+      it 'returns that one character_level' do
+        class_and_level = create(:class_and_level, character: character, character_level: 10)
+        expect(character.class_and_levels.total_levels).to eq(class_and_level.character_level)
+      end
+    end
+
+    context 'with multiple class_and_levels records' do
+      it 'returns sum of character_levels' do
+        create(:class_and_level, character: character, character_level: 10)
+        create(:class_and_level, character: character, character_level: 4)
+        create(:class_and_level, character: character, character_level: 2)
+        expect(character.class_and_levels.total_levels).to eq((10 + 4 + 2))
+      end
+    end
+  end
+
+  describe '.classes_string' do
+    it 'returns comma separated list with and if 3+ elements' do
+      create(:class_and_level, character: character,
+        character_class: 'Artificer', character_subclass: 'Armorer', character_level: 10)
+      create(:class_and_level, character: character,
+        character_class: 'Blood Hunter', character_subclass: 'Mutant', character_level: 1)
+      create(:class_and_level, character: character,
+        character_class: 'Sage', character_subclass: 'Abnormal', character_level: 9)
+
+      expect(character.class_and_levels.classes_string).to eq('Armorer Artificer 10, Mutant Blood Hunter 1, and Abnormal Sage 9')
+    end
+
+    it 'returns simple string if 1 element' do
+      create(:class_and_level, character: character,
+        character_class: 'Sage', character_subclass: 'Abnormal', character_level: 9)
+
+      expect(character.class_and_levels.classes_string).to eq('Abnormal Sage 9')
+    end
+
+    it 'returns string with and if 2 elements' do
+      create(:class_and_level, character: character,
+        character_class: 'Artificer', character_subclass: 'Armorer', character_level: 10)
+      create(:class_and_level, character: character,
+        character_class: 'Sage', character_subclass: 'Abnormal', character_level: 9)
+
+      expect(character.class_and_levels.classes_string).to eq('Armorer Artificer 10 and Abnormal Sage 9')
+    end
+  end
+
   describe '#total_level_less_than30' do
     it 'is not valid when addtl character_level makes total level over 30' do
       multiclass_char = create(:character_with_multiple_classes, classes_count: 4)
