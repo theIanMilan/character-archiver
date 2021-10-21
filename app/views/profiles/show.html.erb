@@ -65,7 +65,7 @@
               <p class="lead fw-normal my-1 py-2 border-top">Comments</p>
               <div class="p-4" style="background-color: #f8f9fa">
                 <% if @profile.comments.present? %>
-                  <%= render @profile.comments %>
+                  <%= render @comments %>
                 <% else %>
                   <p><em>No comments yet.</em></p>
                 <% end %>

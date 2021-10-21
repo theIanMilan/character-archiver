@@ -5,7 +5,7 @@ class CharactersController < ApplicationController
   after_action :verify_authorized, except: %i[index show]
 
   def index
-    @characters = Character.order('updated_at DESC')
+    @characters = Character.includes(:user).order('updated_at DESC')
   end
 
   def show; end
