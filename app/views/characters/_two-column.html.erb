@@ -1,0 +1,13 @@
+<div class="container col-xl-10 col-xxl-8 px-5 py-5">
+  <div class="row g-5 py-4">
+    <h1 class="text-center display-5 fw-bold lh-1 mb-4"><%= title %> <%= @character.character_name %></h1>
+
+    <div class="col-md-10 mx-auto my-0 col-lg-5 mt-lg-5">
+      <img src="<%= @character.display_character_portrait %>" class="img-fluid img-thumbnail">
+    </div>
+
+    <div class="col-lg-7 text-center text-lg-start mt-4">
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>
