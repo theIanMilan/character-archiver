@@ -18,7 +18,7 @@ var jQuery = require('jquery')
 global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
 
-require('select2')
+require('select2/dist/js/select2.full')
 $.fn.select2.defaults.set("theme", "bootstrap");
 
 // Toastr

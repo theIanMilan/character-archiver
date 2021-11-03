@@ -1,4 +1,4 @@
-<%= simple_form_for(@character) do |form| %>
+<%= simple_form_for(@character, defaults: { label_html: { class: 'float-start' }}) do |form| %>
   <%= form.error_notification %>
 
   <section>
@@ -9,7 +9,7 @@
     <%= form.input :portrait_credit_URL, placeholder: 'http://example.com/image.jpg' %>
     <%= form.input :background %>
 
-    <div>
+    <div class="d-flex flex-column align-items-start">
       <%= form.label :race %>
       <%= form.select(:race,
                       options_for_select(["Select Race", "Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf","Half-Orc",
@@ -17,7 +17,7 @@
                                           {selected: @character.race || nil, disabled: "Select Race"}),
                       {},
                       {class: 'form-control select2',
-                      id: 'character_race'}) %>
+                       id: 'character_race'}) %>
     </div>
 
     <div class="d-flex">
@@ -28,7 +28,15 @@
                                  prompt: 'Select Alignment',
                                  wrapper_html: { class: 'flex-grow-1' }  %>
       <div class="align-self-end">
-        <button id="alignment-help-btn" class="btn btn-outline-secondary mx-2" type='button' title="Get help based on Character's race"><i class="far fa-question-circle"></i></button>
+        <button id="alignment-help-btn"
+                class="btn btn-outline-secondary mx-2"
+                type="button" 
+                title="Get alignment suggestion based on Character's race"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top">
+          <i class="far fa-question-circle"></i>
+          <span>Get suggestion</span>
+        </button>
         <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
       </div>
     </div>
@@ -88,8 +96,14 @@
   $(document).ready(function() {
     $("#alignment-help").hide()
     $(".ajax-loading").hide()
-    $("#alignment-help-btn").on("click", fetch_race_alignment)
-    $(".select2").select2({tags: true})
+    $("#alignment-help-btn").on("click", fetch_race_alignment);
+    $('#alignment-help-btn').tooltip();
+    $(".select2").select2({
+      tags: true,
+      width: '100%',
+      selectionCssClass: 'text-left'
+    })
+
     $('#character_race').on('change', function() {
       $('#alignment-help-btn').prop('disabled', false)
     })
