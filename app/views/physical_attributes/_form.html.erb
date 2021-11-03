@@ -1,10 +1,16 @@
-<%= simple_form_for(@physical_attribute, defaults: { label_html: { class: 'float-sm-start' }, input_html: { class: 'mb-3' }}, url: "/characters/#{@character.id}/physical_attributes/", method: 'put' ) do |f| %>
+<%= simple_form_for(@physical_attribute, defaults: { label_html: { class: 'float-start' }, input_html: { class: 'mb-3' }}, url: "/characters/#{@character.id}/physical_attributes/", method: 'put' ) do |f| %>
   <%= f.error_notification %>
   
   <div class="d-flex">
     <%= f.input :age, wrapper_html: { class: 'flex-grow-1' } %>
     <div class="align-self-end">
-      <button id="age-help-btn" class="btn btn-outline-secondary mx-2 mb-3" type='button' title="Get help based on Character's race"><i class="far fa-question-circle"></i></button>
+      <button id="age-help-btn"
+              class="btn btn-outline-secondary mx-2 mb-3"
+              type='button'
+              title="Get age suggestion based on Character's race">
+        <i class="far fa-question-circle"></i>
+        <span>Get suggestion</span>
+      </button>
       <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
     </div>
   </div>
@@ -14,12 +20,18 @@
   <div class="d-flex">
     <%= f.input :height, wrapper_html: { class: 'flex-grow-1' } %>
     <div class="align-self-end">
-      <button id="size-help-btn" class="btn btn-outline-secondary mx-2 mb-3" type='button' title="Get help based on Character's race"><i class="far fa-question-circle"></i></button>
+      <button id="size-help-btn"
+              class="btn btn-outline-secondary mx-2 mb-3"
+              type='button'
+              title="Get height suggestion based on Character's race">
+        <i class="far fa-question-circle"></i>
+        <span>Get suggestion</span>
+      </button>
       <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
     </div>
   </div>
 
-  <div id="size-help" class="mb-2"><span id="size-help-race"><%= @character.race %></span> Size description: <span id="size-help-text"></span></div>
+  <div id="size-help" class="mb-2"><span id="size-help-race"><%= @character.race %></span> Size: <span id="size-help-text"></span></div>
 
   <%= f.input :weight %>
   <%= f.input :eyes %>
@@ -45,6 +57,8 @@
     $(".ajax-loading").hide()
     $("#age-help-btn").on("click", fetch_age_height)
     $("#size-help-btn").on("click", fetch_age_height);
+    $('#age-help-btn').tooltip();
+    $('#size-help-btn').tooltip();
   });
 
   function fetch_age_height() {

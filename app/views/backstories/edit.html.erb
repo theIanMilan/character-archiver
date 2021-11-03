@@ -12,7 +12,15 @@
       <%= f.input :appearance, label_html: {class: 'mt-3'}, placeholder: 'Describe your character.' %>
 
       <div class="mt-3">
-        <button id="traits-help-btn" class="btn btn-info my-2" type="button">Example Traits</button>
+        <button id="traits-help-btn"
+                class="btn btn-info my-2"
+                type="button"
+                title="Get example traits from the D&D 5e Systems Reference Document"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top">
+          <i class="far fa-question-circle"></i>
+          <span>Generate example traits</span>
+        </button>
         <%= image_tag('ajax-loader.gif', class: 'ajax-loading') %>
       </div>
       <%= f.input :personality, label_html: {class: 'mt-3'} %>
@@ -46,6 +54,7 @@
     $(".help-box").hide()
     $(".ajax-loading").hide()
     $("#traits-help-btn").on("click", fetch_traits);
+    $('#traits-help-btn').tooltip();
   });
 
   function fetch_traits(ajax_loader) {
