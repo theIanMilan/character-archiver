@@ -7,4 +7,6 @@
   <div class="container">
     <%= render partial: "characters/character_cards", locals: {characters: @characters, backstory: true} %>
   </div>
+
+  <%= render partial: 'pagy/bootstrap_nav', locals: {pagy: @pagy} %>
 </div>

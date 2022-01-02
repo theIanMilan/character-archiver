@@ -13,4 +13,6 @@
   <div class="row row-cols-lg-2 g-4">
     <%= render partial: "character_cards", locals: {characters: @characters} %>
   </div>
+
+  <%= render partial: 'pagy/bootstrap_nav', locals: {pagy: @pagy} %>
 </div>

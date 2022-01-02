@@ -7,4 +7,6 @@
   <div class="row row-cols-lg-2">
     <%= render partial: "characters/character_cards", locals: {characters: @characters, search: true} %>
   </div>
+
+  <%= render partial: 'pagy/bootstrap_nav', locals: {pagy: @pagy} %>
 </div>

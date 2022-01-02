@@ -3,12 +3,12 @@ class SearchesController < ApplicationController
   before_action :set_character, only: %i[edit update destroy]
   before_action :set_search, only: %i[edit update destroy]
   after_action :verify_authorized, except: :search_board
+  include Pagy::Frontend
 
   def search_board
-    @searches = Search.where(searching_for_connections: true)
-    ids = @searches.order('updated_at DESC').pluck(:character_id)
-    chars = Character.includes(:user).includes(:search).where(id: ids)
-    @characters = ids.map { |id| chars.detect { |char| char.id == id } }
+    sorted_chars = Character.joins(:search).where('searches.searching_for_connections = true').order('searches.updated_at DESC')
+    @characters = sorted_chars.includes(%i[user search])
+    @pagy, @characters = pagy(@characters, items: 6)
   end
 
   def edit; end
