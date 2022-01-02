@@ -8,4 +8,6 @@
   <div class="row row-cols-lg-2 g-4 mt-2">
     <%= render partial: "characters/character_cards", locals: {characters: @user_characters} %>
   </div>
+
+  <%= render partial: 'pagy/bootstrap_nav', locals: {pagy: @pagy} %>
 </div>
