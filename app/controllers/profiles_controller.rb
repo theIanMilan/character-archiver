@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
   def user_characters
     @user = User.find_by(username: params[:username])
     @user_characters = @user.characters.order('updated_at DESC')
+    @pagy, @user_characters = pagy(@user_characters, items: 10)
   end
 
   def edit; end
