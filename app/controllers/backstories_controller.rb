@@ -3,11 +3,12 @@ class BackstoriesController < ApplicationController
   before_action :set_character, only: %i[edit update destroy]
   before_action :set_backstory, only: %i[edit update destroy]
   after_action :verify_authorized, except: :folklore
+  include BackstoriesHelper
 
   def folklore
-    ids = Backstory.order('updated_at DESC').pluck(:character_id)
-    chars = Character.includes(:user).includes(:backstory).where(id: ids)
-    @characters = ids.map { |id| chars.detect { |char| char.id == id } }
+    sorted_chars = Character.joins(:backstory).merge(Backstory.order(updated_at: :desc))
+    @characters = sorted_chars.includes(%i[user backstory])
+    @pagy, @characters = pagy(@characters, items: 5)
   end
 
   def edit; end

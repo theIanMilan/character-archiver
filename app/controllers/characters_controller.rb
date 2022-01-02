@@ -3,9 +3,11 @@ class CharactersController < ApplicationController
   before_action :set_character, only: %i[show edit update destroy]
   # Pundit
   after_action :verify_authorized, except: %i[index show]
+  include CharactersHelper
 
   def index
     @characters = Character.includes(:user).order('updated_at DESC')
+    @pagy, @characters = pagy(@characters, items: 10)
   end
 
   def show; end
