@@ -8,14 +8,15 @@ View the live app [at heroku.](https://character-archiver.herokuapp.com/)
 
 ## Introduction
 
-Social media for D&D characters for creating social relationships and sharing their rich backstories.
-<br>
+The plan for this web app is for it to become a Social media app for D&D characters for creating social relationships and sharing their rich backstories.
+Currently, only Character creation is available serving as a sort of Wiki-style page for user's D&D characters.
+<br><br>
 Makes use of the [D&D 5e API](https://www.dnd5eapi.co/) and [DiceBear Avatars API](https://avatars.dicebear.com/)
 
 ## Screenshots
 
 <p float = 'left'>
-    <img src="https://user-images.githubusercontent.com/66746718/135760792-61d6d035-63c1-4755-adc1-098736d57fea.png" alt="Character Page" width="1000" height="500">
+    <img src="https://repository-images.githubusercontent.com/401065261/c0d1a366-6a17-43ed-bbeb-0b6f646227bd" alt="Character Page" width="1000" height="500">
 </p>
 
 ## App Architecture/ ERD:
